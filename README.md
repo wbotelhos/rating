@@ -33,13 +33,13 @@ Rating uses the know as "True Bayesian Estimate" inspired on [IMDb rating](http:
 
 `WR`: weighted rating
 
-`R`:  average for the resource (mean) = (Rating)
+`R`:  average for the resource
 
-`v`:  number of votes for the movie = (votes)
+`v`:  number of votes for the resource
 
 `m`:  average of the number of votes
 
-`C`:  the mean vote across the whole report
+`C`:  the average rating based on all resources
 
 ## Install
 
