@@ -9,11 +9,12 @@ RSpec.describe Rating::Extension, ':after_create' do
     it 'creates a record with zero values just to be easy to make the count' do
       rating = Rating::Rating.find_by(resource: user)
 
-      expect(rating.average).to  eq 0
-      expect(rating.estimate).to eq 0
-      expect(rating.resource).to eq user
-      expect(rating.sum).to      eq 0
-      expect(rating.total).to    eq 0
+      expect(rating.average).to   eq 0
+      expect(rating.estimate).to  eq 0
+      expect(rating.resource).to  eq user
+      expect(rating.scopeable).to eq nil
+      expect(rating.sum).to       eq 0
+      expect(rating.total).to     eq 0
     end
   end
 end

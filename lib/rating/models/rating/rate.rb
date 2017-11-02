@@ -6,19 +6,20 @@ module Rating
 
     after_save :update_rating
 
-    belongs_to :author  , polymorphic: true
-    belongs_to :resource, polymorphic: true
+    belongs_to :author   , polymorphic: true
+    belongs_to :resource , polymorphic: true
+    belongs_to :scopeable, polymorphic: true
 
     validates :author, :resource, :value, presence: true
     validates :value, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
 
     validates :author_id, uniqueness: {
       case_sensitive: false,
-      scope:          %i[author_type resource_id resource_type]
+      scope:          %i[author_type resource_id resource_type scopeable_id scopeable_type]
     }
 
-    def self.create(author:, resource:, value:)
-      record = find_or_initialize_by(author: author, resource: resource)
+    def self.create(author:, resource:, scopeable: nil, value:)
+      record = find_or_initialize_by(author: author, resource: resource, scopeable: scopeable)
 
       return record if record.persisted? && value == record.value
 
@@ -28,14 +29,14 @@ module Rating
       record
     end
 
-    def self.rate_for(author:, resource:)
-      find_by author: author, resource: resource
+    def self.rate_for(author:, resource:, scopeable: nil)
+      find_by author: author, resource: resource, scopeable: scopeable
     end
 
     private
 
     def update_rating
-      ::Rating::Rating.update_rating resource
+      ::Rating::Rating.update_rating resource, scopeable
     end
   end
 end

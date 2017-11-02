@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/wbotelhos/rating.svg)](https://travis-ci.org/wbotelhos/rating)
 [![Gem Version](https://badge.fury.io/rb/rating.svg)](https://badge.fury.io/rb/rating)
 
-A true Bayesian rating system with cache enabled.
+A true Bayesian rating system with scope and cache enabled.
 
 ## JS Rating?
 
@@ -71,7 +71,7 @@ class User < ApplicationRecord
 end
 ```
 
-Now this model can vote or be voted.
+Now this model can vote or receive votes.
 
 ### rate
 
@@ -174,6 +174,103 @@ Article.order_by_rating :average, :asc
 ```
 
 It will return a collection of resource ordered by `Rating` table data.
+
+### Scope
+
+All methods support scope query, since you may want to vote on items of a resource instead the resource itself.
+Let's say an article belongs to one or more categories and you want to vote on some categories of this article.
+
+```ruby
+category_1 = Category.first
+category_2 = Category.second
+author     = User.last
+resource   = Article.last
+```
+
+In this situation you should scope the vote of article with some category:
+
+**rate**
+
+```ruby
+author.rate resource, 3, scopeable: category_1
+author.rate resource, 5, scopeable: category_2
+```
+
+Now `article` has a rating for `category_1` and another one for `category_2`.
+
+**rating**
+
+Recovering the rating values for article, we have:
+
+```ruby
+author.rating
+# nil
+```
+
+But using the scope to make the right query:
+
+```ruby
+author.rating scope: category_1
+# { average: 3, estimate: 3, sum: 3, total: 1 }
+
+author.rating scope: category_2
+# { average: 5, estimate: 5, sum: 5, total: 1 }
+```
+
+**rated**
+
+On the same way you can find your rates with a scoped query:
+
+```ruby
+user.rated scope: category_1
+# { value: 3, scopeable: category_1 }
+```
+
+**rates**
+
+The resource still have the power to consult its rates:
+
+```ruby
+article.rates scope: category_1
+# { value: 3, scopeable: category_1 }
+
+article.rates scope: category_2
+# { value: 3, scopeable: category_2 }
+```
+
+**order_by_rating**
+
+To order the rating you do the same thing:
+
+```ruby
+Article.order_by_rating scope: category_1
+```
+
+### Records
+
+Maybe you want to recover all records with or without scope, so you can add the suffix `_records` on relations:
+
+```ruby
+category_1 = Category.first
+category_2 = Category.second
+author     = User.last
+resource   = Article.last
+
+author.rate resource, 1
+author.rate resource, 3, scopeable: category_1
+author.rate resource, 5, scopeable: category_2
+
+author.rating_records
+# { average: 1, estimate: 1, scopeable: nil       , sum: 1, total: 1 },
+# { average: 3, estimate: 3, scopeable: category_1, sum: 3, total: 1 },
+# { average: 5, estimate: 5, scopeable: category_2, sum: 5, total: 1 }
+
+user.rated_records
+# { value: 1 }, { value: 3, scopeable: category_1 }, { value: 5, scopeable: category_2 }
+
+article.rates_records
+# { value: 1 }, { value: 3, scopeable: category_1 }, { value: 5, scopeable: category_2 }
+```
 
 ## Love it!
 

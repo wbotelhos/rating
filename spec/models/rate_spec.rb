@@ -9,6 +9,7 @@ RSpec.describe Rating::Rate do
 
   it { is_expected.to belong_to :author }
   it { is_expected.to belong_to :resource }
+  it { is_expected.to belong_to :scopeable }
 
   it { is_expected.to validate_presence_of :author }
   it { is_expected.to validate_presence_of :resource }
@@ -20,7 +21,7 @@ RSpec.describe Rating::Rate do
 
   specify do
     expect(object).to validate_uniqueness_of(:author_id)
-      .scoped_to(%i[author_type resource_id resource_type])
+      .scoped_to(%i[author_type resource_id resource_type scopeable_id scopeable_type])
       .case_insensitive
   end
 end

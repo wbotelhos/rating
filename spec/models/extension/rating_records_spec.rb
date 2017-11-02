@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Rating::Rating, ':update_rating' do
+RSpec.describe Rating::Extension, '.rating' do
   let!(:category) { create :category }
 
   let!(:user_1) { create :user }
@@ -22,25 +22,7 @@ RSpec.describe Rating::Rating, ':update_rating' do
     create :rating_rate, author: user_2, resource: article_1, scopeable: category, value: 2
   end
 
-  context 'with no scopeable' do
-    it 'updates the rating data of the given resource' do
-      record = described_class.find_by(resource: article_1)
-
-      expect(record.average).to  eq 50.50000000000001
-      expect(record.estimate).to eq 42.50000000000001
-      expect(record.sum).to      eq 101
-      expect(record.total).to    eq 2
-    end
-  end
-
-  context 'with scopeable' do
-    it 'updates the rating data of the given resource respecting the scope' do
-      record = described_class.find_by(resource: article_1, scopeable: category)
-
-      expect(record.average).to  eq 1.5
-      expect(record.estimate).to eq 1.5
-      expect(record.sum).to      eq 3
-      expect(record.total).to    eq 2
-    end
+  it 'returns all rating of this resource' do
+    expect(article_1.rating_records).to match_array Rating::Rating.where(resource: article_1)
   end
 end

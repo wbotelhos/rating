@@ -8,6 +8,7 @@ RSpec.describe Rating::Rating do
   it { expect(object).to be_valid }
 
   it { is_expected.to belong_to :resource }
+  it { is_expected.to belong_to :scopeable }
 
   it { is_expected.to validate_presence_of :average }
   it { is_expected.to validate_presence_of :estimate }

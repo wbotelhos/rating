@@ -8,14 +8,14 @@ require 'rating/version'
 
 Gem::Specification.new do |spec|
   spec.author      = 'Washington Botelho'
-  spec.description = 'A true Bayesian rating system with cache enabled.'
+  spec.description = 'A true Bayesian rating system with scope and cache enabled.'
   spec.email       = 'wbotelhos@gmail.com'
   spec.files       = Dir['lib/**/*'] + %w[CHANGELOG.md LICENSE README.md]
   spec.homepage    = 'https://github.com/wbotelhos/rating'
   spec.license     = 'MIT'
   spec.name        = 'rating'
   spec.platform    = Gem::Platform::RUBY
-  spec.summary     = 'A true Bayesian rating system with cache enabled.'
+  spec.summary     = 'A true Bayesian rating system with scope and cache enabled.'
   spec.test_files  = Dir['spec/**/*']
   spec.version     = Rating::VERSION
 

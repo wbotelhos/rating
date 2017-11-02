@@ -3,36 +3,56 @@
 require 'rails_helper'
 
 RSpec.describe Rating::Extension, ':rated' do
-  let!(:user)    { create :user }
-  let!(:article) { create :article }
+  let!(:category) { create :category }
 
-  before { user.rate article, 3 }
+  let!(:user_1) { create :user }
+  let!(:user_2) { create :user }
 
-  it 'returns rates made by the caller' do
-    expect(user.rated).to eq [Rating::Rate.find_by(resource: article)]
+  let!(:article_1) { create :article }
+  let!(:article_2) { create :article }
+  let!(:article_3) { create :article }
+
+  let!(:rate_1) { create :rating_rate, author: user_1, resource: article_1, value: 100 }
+  let!(:rate_2) { create :rating_rate, author: user_1, resource: article_2, value: 11 }
+  let!(:rate_3) { create :rating_rate, author: user_1, resource: article_3, value: 10 }
+  let!(:rate_4) { create :rating_rate, author: user_2, resource: article_1, value: 1 }
+
+  let!(:rate_5) { create :rating_rate, author: user_1, resource: article_1, scopeable: category, value: 1 }
+  let!(:rate_6) { create :rating_rate, author: user_2, resource: article_1, scopeable: category, value: 2 }
+
+  context 'with no scope' do
+    it 'returns rates made by this author' do
+      expect(user_1.rated).to match_array [rate_1, rate_2, rate_3]
+    end
+  end
+
+  context 'with no scope' do
+    it 'returns scoped rates made by this author' do
+      expect(user_1.rated(scope: category)).to eq [rate_5]
+    end
   end
 
   context 'when destroy author' do
     before do
-      expect(Rating::Rate.where(author: user).count).to eq 1
+      expect(Rating::Rate.where(author: user_1).count).to eq 4
 
-      user.destroy!
+      user_1.destroy!
     end
 
-    it 'destroys rates of this author' do
-      expect(Rating::Rate.where(author: user).count).to eq 0
+    it 'destroys rates of that author' do
+      expect(Rating::Rate.where(author: user_1).count).to eq 0
     end
   end
 
   context 'when destroy resource rated by author' do
     before do
-      expect(Rating::Rate.where(resource: article).count).to eq 1
+      expect(Rating::Rate.where(resource: article_1).count).to eq 4
 
-      article.destroy!
+      article_1.destroy!
     end
 
-    it 'destroys rates for that resource' do
-      expect(Rating::Rate.where(resource: article).count).to eq 0
+    it 'destroys rates of that resource' do
+      expect(Rating::Rate.where(resource: article_1).count).to eq 0
     end
   end
 end
