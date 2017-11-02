@@ -66,12 +66,10 @@ GEM
     loofah (2.1.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.6.6)
-      mime-types (>= 1.16, < 4)
+    mail (2.7.0)
+      mini_mime (>= 0.1.1)
     method_source (0.9.0)
-    mime-types (3.1)
-      mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0521)
+    mini_mime (0.1.4)
     mini_portile2 (2.3.0)
     minitest (5.10.3)
     nio4r (2.1.0)
@@ -116,18 +114,11 @@ GEM
     rainbow (2.2.2)
       rake
     rake (12.2.1)
-    rspec (3.7.0)
-      rspec-core (~> 3.7.0)
-      rspec-expectations (~> 3.7.0)
-      rspec-mocks (~> 3.7.0)
     rspec-core (3.7.0)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
-    rspec-html-matchers (0.9.1)
-      nokogiri (~> 1)
-      rspec (>= 3.0.0.a, < 4)
     rspec-mocks (3.7.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
@@ -177,11 +168,10 @@ DEPENDENCIES
   factory_bot_rails
   pry-byebug
   rating!
-  rspec-html-matchers
   rspec-rails
   rubocop-rspec
   shoulda-matchers
   sqlite3
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
