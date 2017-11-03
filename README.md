@@ -272,6 +272,15 @@ article.rates_records
 # { value: 1 }, { value: 3, scopeable: category_1 }, { value: 5, scopeable: category_2 }
 ```
 
+### As
+
+If you have a model that will only be able to rate but not to receive a rate, configure it as `author`.
+An author model still can be rated, but won't genarate a Rating record with all values as zero to be easier to display.
+
+```ruby
+rating as: :author
+```
+
 ## Love it!
 
 Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Gratipay](https://gratipay.com/rating). Thanks! (:

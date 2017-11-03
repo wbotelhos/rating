@@ -31,8 +31,8 @@ module Rating
     end
 
     module ClassMethods
-      def rating
-        after_create { Rating.find_or_create_by resource: self }
+      def rating(as: nil)
+        after_create -> { Rating.find_or_create_by resource: self }, unless: -> { as == :author }
 
         has_many :rating_records,
           as:         :resource,
