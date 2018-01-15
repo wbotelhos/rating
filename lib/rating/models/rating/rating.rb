@@ -10,6 +10,11 @@ module Rating
     validates :average, :estimate, :resource, :sum, :total, presence: true
     validates :average, :estimate, :sum, :total, numericality: true
 
+    validates :resource_id, uniqueness: {
+      case_sensitive: false,
+      scope:          %i[resource_type scopeable_id scopeable_type]
+    }
+
     class << self
       def averager_data(resource, scopeable)
         total_count    = how_many_resource_received_votes_sql?(distinct: false, scopeable: scopeable)

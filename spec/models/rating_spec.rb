@@ -15,4 +15,10 @@ RSpec.describe Rating::Rating do
   it { is_expected.to validate_presence_of :resource }
   it { is_expected.to validate_presence_of :sum }
   it { is_expected.to validate_presence_of :total }
+
+  it do
+    expect(object).to validate_uniqueness_of(:resource_id)
+      .scoped_to(%i[resource_type scopeable_id scopeable_type])
+      .case_insensitive
+  end
 end
