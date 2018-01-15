@@ -23,7 +23,7 @@ module Rating
             (#{total_count} / CAST(#{distinct_count} AS float)) count_avg,
             COALESCE(AVG(value), 0)                             rating_avg
           FROM #{rate_table_name}
-          WHERE resource_type = :resource_type and #{scope_type_query(scopeable)}
+          WHERE resource_type = :resource_type AND #{scope_type_query(scopeable)}
         ).squish
 
         execute_sql [sql, values]
@@ -43,9 +43,9 @@ module Rating
 
       def values_data(resource, scopeable)
         scope_query = if scopeable.nil?
-                        'scopeable_type is NULL and scopeable_id is NULL'
+                        'scopeable_type is NULL AND scopeable_id is NULL'
                       else
-                        'scopeable_type = ? and scopeable_id = ?'
+                        'scopeable_type = ? AND scopeable_id = ?'
                       end
 
         sql = %(
@@ -54,10 +54,10 @@ module Rating
             COALESCE(SUM(value), 0) rating_sum,
             COUNT(1)                rating_count
           FROM #{rate_table_name}
-          WHERE resource_type = ? and resource_id = ? and #{scope_query}
+          WHERE resource_type = ? AND resource_id = ? AND #{scope_query}
         ).squish
 
-        values = [sql, resource.class.base_class.name, resource.id]
+        values =  [sql, resource.class.base_class.name, resource.id]
         values += [scopeable.class.base_class.name, scopeable.id] unless scopeable.nil?
 
         execute_sql values
@@ -97,7 +97,7 @@ module Rating
         %((
           SELECT #{count}
           FROM #{rate_table_name}
-          WHERE resource_type = :resource_type and #{scope_type_query(scopeable)}
+          WHERE resource_type = :resource_type AND #{scope_type_query(scopeable)}
         ))
       end
 
