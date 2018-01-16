@@ -66,7 +66,7 @@ rake db:migrate
 Just add the callback `rating` to your model:
 
 ```ruby
-class User < ApplicationRecord
+class Author < ApplicationRecord
   rating
 end
 ```
@@ -78,7 +78,7 @@ Now this model can vote or receive votes.
 You can vote on some resource:
 
 ```ruby
-author   = User.last
+author   = Author.last
 resource = Article.last
 
 author.rate(resource, 3)
@@ -109,7 +109,7 @@ It will return a `Rating` object that keeps:
 You can retrieve the rate of some author gave to some resource:
 
 ```ruby
-author   = User.last
+author   = Author.last
 resource = Article.last
 
 author.rate_for resource
@@ -128,7 +128,7 @@ It will return a `Rate` object that keeps:
 Maybe you want just to know if some author already rated some resource and receive `true` or `false`:
 
 ```ruby
-author   = User.last
+author   = Author.last
 resource = Article.last
 
 author.rated? resource
@@ -151,7 +151,7 @@ It will return a collection of `Rate` object.
 In the same way you can retrieve all rates that some author received:
 
 ```ruby
-author = User.last
+author = Author.last
 
 author.rated
 ```
@@ -183,7 +183,7 @@ Let's say an article belongs to one or more categories and you want to vote on s
 ```ruby
 category_1 = Category.first
 category_2 = Category.second
-author     = User.last
+author     = Author.last
 resource   = Article.last
 ```
 
@@ -196,24 +196,24 @@ author.rate resource, 3, scopeable: category_1
 author.rate resource, 5, scopeable: category_2
 ```
 
-Now `article` has a rating for `category_1` and another one for `category_2`.
+Now `resource` has a rating for `category_1` and another one for `category_2`.
 
 **rating**
 
-Recovering the rating values for article, we have:
+Recovering the rating values for resource, we have:
 
 ```ruby
-author.rating
+resource.rating
 # nil
 ```
 
 But using the scope to make the right query:
 
 ```ruby
-author.rating scope: category_1
+resource.rating scope: category_1
 # { average: 3, estimate: 3, sum: 3, total: 1 }
 
-author.rating scope: category_2
+resource.rating scope: category_2
 # { average: 5, estimate: 5, sum: 5, total: 1 }
 ```
 
@@ -222,7 +222,7 @@ author.rating scope: category_2
 On the same way you can find your rates with a scoped query:
 
 ```ruby
-user.rated scope: category_1
+author.rated scope: category_1
 # { value: 3, scopeable: category_1 }
 ```
 
@@ -253,7 +253,7 @@ Maybe you want to recover all records with or without scope, so you can add the 
 ```ruby
 category_1 = Category.first
 category_2 = Category.second
-author     = User.last
+author     = Author.last
 resource   = Article.last
 
 author.rate resource, 1
@@ -265,7 +265,7 @@ author.rating_records
 # { average: 3, estimate: 3, scopeable: category_1, sum: 3, total: 1 },
 # { average: 5, estimate: 5, scopeable: category_2, sum: 5, total: 1 }
 
-user.rated_records
+author.rated_records
 # { value: 1 }, { value: 3, scopeable: category_1 }, { value: 5, scopeable: category_2 }
 
 article.rates_records
@@ -275,7 +275,7 @@ article.rates_records
 ### As
 
 If you have a model that will only be able to rate but not to receive a rate, configure it as `author`.
-An author model still can be rated, but won't genarate a Rating record with all values as zero to be easier to display.
+An author model still can be rated, but won't genarate a Rating record with all values as zero to warm up the cache.
 
 ```ruby
 rating as: :author
