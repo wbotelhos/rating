@@ -144,39 +144,39 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
         end
       end
     end
+  end
 
-    context 'filtering by :total' do
-      context 'as asc' do
-        it 'works' do
-          result = Article.order_by_rating(:total, :asc)
+  context 'filtering by :total' do
+    context 'as asc' do
+      it 'works' do
+        result = Article.order_by_rating(:total, :asc)
 
-          expect(result[0..1]).to match_array [article_2, article_3]
-          expect(result.last).to  eq article_1
-        end
-
-        context 'with scope' do
-          it 'works' do
-            expect(Article.order_by_rating(:total, :asc, scope: category)).to eq [
-              article_1
-            ]
-          end
-        end
+        expect(result[0..1]).to match_array [article_2, article_3]
+        expect(result.last).to  eq article_1
       end
 
-      context 'as desc' do
+      context 'with scope' do
         it 'works' do
-          result = Article.order_by_rating(:total, :desc)
-
-          expect(result.first).to eq article_1
-          expect(result[1..2]).to match_array [article_2, article_3]
+          expect(Article.order_by_rating(:total, :asc, scope: category)).to eq [
+            article_1
+          ]
         end
+      end
+    end
 
-        context 'with scope' do
-          it 'works' do
-            expect(Article.order_by_rating(:total, :desc, scope: category)).to eq [
-              article_1
-            ]
-          end
+    context 'as desc' do
+      it 'works' do
+        result = Article.order_by_rating(:total, :desc)
+
+        expect(result.first).to eq article_1
+        expect(result[1..2]).to match_array [article_2, article_3]
+      end
+
+      context 'with scope' do
+        it 'works' do
+          expect(Article.order_by_rating(:total, :desc, scope: category)).to eq [
+            article_1
+          ]
         end
       end
     end
