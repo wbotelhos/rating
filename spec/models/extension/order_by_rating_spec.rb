@@ -5,21 +5,21 @@ require 'rails_helper'
 RSpec.describe Rating::Extension, ':order_by_rating' do
   let!(:category) { create :category }
 
-  let!(:user_1) { create :user }
-  let!(:user_2) { create :user }
+  let!(:author_1) { create :author }
+  let!(:author_2) { create :author }
 
   let!(:article_1) { create :article }
   let!(:article_2) { create :article }
   let!(:article_3) { create :article }
 
   before do
-    create :rating_rate, author: user_1, resource: article_1, value: 100
-    create :rating_rate, author: user_1, resource: article_2, value: 11
-    create :rating_rate, author: user_1, resource: article_3, value: 10
-    create :rating_rate, author: user_2, resource: article_1, value: 1
+    create :rating_rate, author: author_1, resource: article_1, value: 100
+    create :rating_rate, author: author_1, resource: article_2, value: 11
+    create :rating_rate, author: author_1, resource: article_3, value: 10
+    create :rating_rate, author: author_2, resource: article_1, value: 1
 
-    create :rating_rate, author: user_1, resource: article_1, scopeable: category, value: 1
-    create :rating_rate, author: user_2, resource: article_1, scopeable: category, value: 2
+    create :rating_rate, author: author_1, resource: article_1, scopeable: category, value: 1
+    create :rating_rate, author: author_2, resource: article_1, scopeable: category, value: 2
   end
 
   context 'with default filters' do
@@ -184,12 +184,12 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
 
   context 'with other resource' do
     it 'works' do
-      expect(User.order_by_rating(:total, :desc)).to match_array [user_1, user_2]
+      expect(Author.order_by_rating(:total, :desc)).to match_array [author_1, author_2]
     end
 
     context 'with scope' do
       it 'returns empty since creation has no scope' do
-        expect(User.order_by_rating(:total, :desc, scope: category)).to eq []
+        expect(Author.order_by_rating(:total, :desc, scope: category)).to eq []
       end
     end
   end

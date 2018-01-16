@@ -3,22 +3,22 @@
 require 'rails_helper'
 
 RSpec.describe Rating::Extension, ':after_create' do
-  context 'with :as as nil' do
-    let!(:user) { create :user }
+  context 'when :as is nil' do
+    let!(:article) { create :article }
 
     it 'creates a rating record with zero values just to be easy to make the count' do
-      rating = Rating::Rating.find_by(resource: user)
+      rating = Rating::Rating.find_by(resource: article)
 
       expect(rating.average).to   eq 0
       expect(rating.estimate).to  eq 0
-      expect(rating.resource).to  eq user
+      expect(rating.resource).to  eq article
       expect(rating.scopeable).to eq nil
       expect(rating.sum).to       eq 0
       expect(rating.total).to     eq 0
     end
   end
 
-  context 'with :as as :author' do
+  context 'when :as is :author' do
     let!(:author) { create :author }
 
     it 'does not creates a rating record' do

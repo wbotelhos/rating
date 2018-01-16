@@ -8,4 +8,3 @@ CreateArticlesTable.new.change
 CreateAuthorsTable.new.change
 CreateCategoriesTable.new.change
 CreateRatingTables.new.change
-CreateUsersTable.new.change

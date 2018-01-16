@@ -3,20 +3,20 @@
 require 'rails_helper'
 
 RSpec.describe Rating::Extension, ':rated?' do
-  let!(:user)    { create :user }
+  let!(:author)  { create :author }
   let!(:article) { create :article }
 
   context 'with no scopeable' do
     context 'when has no rate for the given resource' do
-      before { allow(user).to receive(:rate_for).with(article, scope: nil) { nil } }
+      before { allow(author).to receive(:rate_for).with(article, scope: nil) { nil } }
 
-      specify { expect(user.rated?(article)).to eq false }
+      specify { expect(author.rated?(article)).to eq false }
     end
 
     context 'when has rate for the given resource' do
-      before { allow(user).to receive(:rate_for).with(article, scope: nil) { double } }
+      before { allow(author).to receive(:rate_for).with(article, scope: nil) { double } }
 
-      specify { expect(user.rated?(article)).to eq true }
+      specify { expect(author.rated?(article)).to eq true }
     end
   end
 
@@ -24,15 +24,15 @@ RSpec.describe Rating::Extension, ':rated?' do
     let!(:category) { build :category }
 
     context 'when has no rate for the given resource' do
-      before { allow(user).to receive(:rate_for).with(article, scope: category) { nil } }
+      before { allow(author).to receive(:rate_for).with(article, scope: category) { nil } }
 
-      specify { expect(user.rated?(article, scope: category)).to eq false }
+      specify { expect(author.rated?(article, scope: category)).to eq false }
     end
 
     context 'when has rate for the given resource' do
-      before { allow(user).to receive(:rate_for).with(article, scope: category) { double } }
+      before { allow(author).to receive(:rate_for).with(article, scope: category) { double } }
 
-      specify { expect(user.rated?(article, scope: category)).to eq true }
+      specify { expect(author.rated?(article, scope: category)).to eq true }
     end
   end
 end

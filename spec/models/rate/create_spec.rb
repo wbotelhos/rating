@@ -3,17 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe Rating::Rate, ':create' do
-  let!(:user)    { create :user }
+  let!(:author)  { create :author }
   let!(:article) { create :article }
 
   context 'with no scopeable' do
-    before { create :rating_rate, author: user, resource: article, value: 3 }
+    before { create :rating_rate, author: author, resource: article, value: 3 }
 
     context 'when rate does not exist yet' do
       it 'creates a rate entry' do
         rate = described_class.last
 
-        expect(rate.author).to   eq user
+        expect(rate.author).to   eq author
         expect(rate.resource).to eq article
         expect(rate.value).to    eq 3
       end
@@ -30,24 +30,24 @@ RSpec.describe Rating::Rate, ':create' do
     end
 
     context 'when rate already exists' do
-      let!(:user_2) { create :user }
+      let!(:author_2) { create :author }
 
-      before { create :rating_rate, author: user_2, resource: article, value: 4 }
+      before { create :rating_rate, author: author_2, resource: article, value: 4 }
 
       it 'creates one more rate entry' do
-        rates = described_class.where(author: [user, user_2]).order('created_at asc')
+        rates = described_class.where(author: [author, author_2]).order('created_at asc')
 
         expect(rates.size).to eq 2
 
         rate = rates[0]
 
-        expect(rate.author).to   eq user
+        expect(rate.author).to   eq author
         expect(rate.resource).to eq article
         expect(rate.value).to    eq 3
 
         rate = rates[1]
 
-        expect(rate.author).to   eq user_2
+        expect(rate.author).to   eq author_2
         expect(rate.resource).to eq article
         expect(rate.value).to    eq 4
       end
@@ -67,13 +67,13 @@ RSpec.describe Rating::Rate, ':create' do
   context 'with scopeable' do
     let!(:category) { create :category }
 
-    before { create :rating_rate, author: user, resource: article, scopeable: category, value: 3 }
+    before { create :rating_rate, author: author, resource: article, scopeable: category, value: 3 }
 
     context 'when rate does not exist yet' do
       it 'creates a rate entry' do
         rate = described_class.last
 
-        expect(rate.author).to    eq user
+        expect(rate.author).to    eq author
         expect(rate.resource).to  eq article
         expect(rate.scopeable).to eq category
         expect(rate.value).to     eq 3
@@ -92,25 +92,25 @@ RSpec.describe Rating::Rate, ':create' do
     end
 
     context 'when rate already exists' do
-      let!(:user_2) { create :user }
+      let!(:author_2) { create :author }
 
-      before { create :rating_rate, author: user_2, resource: article, scopeable: category, value: 4 }
+      before { create :rating_rate, author: author_2, resource: article, scopeable: category, value: 4 }
 
       it 'creates one more rate entry' do
-        rates = described_class.where(author: [user, user_2]).order('created_at asc')
+        rates = described_class.where(author: [author, author_2]).order('created_at asc')
 
         expect(rates.size).to eq 2
 
         rate = rates[0]
 
-        expect(rate.author).to    eq user
+        expect(rate.author).to    eq author
         expect(rate.resource).to  eq article
         expect(rate.scopeable).to eq category
         expect(rate.value).to     eq 3
 
         rate = rates[1]
 
-        expect(rate.author).to    eq user_2
+        expect(rate.author).to    eq author_2
         expect(rate.resource).to  eq article
         expect(rate.scopeable).to eq category
         expect(rate.value).to     eq 4
