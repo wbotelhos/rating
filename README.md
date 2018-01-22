@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/wbotelhos/rating.svg)](https://travis-ci.org/wbotelhos/rating)
 [![Gem Version](https://badge.fury.io/rb/rating.svg)](https://badge.fury.io/rb/rating)
 [![Maintainability](https://api.codeclimate.com/v1/badges/cc5efe8b06bc1d5e9e8a/maintainability)](https://codeclimate.com/github/wbotelhos/rating/maintainability)
+[![LiberPay](https://img.shields.io/badge/donate-%3C3-brightgreen.svg)](https://liberapay.com/wbotelhos)
 
 A true Bayesian rating system with scope and cache enabled.
 
