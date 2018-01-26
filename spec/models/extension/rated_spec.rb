@@ -19,25 +19,21 @@ RSpec.describe Rating::Extension, ':rated' do
   end
 
   context 'when destroy author' do
-    before do
+    it 'destroys rates of that author' do
       expect(Rating::Rate.where(author: author_1).count).to eq 4
 
       author_1.destroy!
-    end
 
-    it 'destroys rates of that author' do
       expect(Rating::Rate.where(author: author_1).count).to eq 0
     end
   end
 
   context 'when destroy resource rated by author' do
-    before do
+    it 'destroys rates of that resource' do
       expect(Rating::Rate.where(resource: article_1).count).to eq 4
 
       article_1.destroy!
-    end
 
-    it 'destroys rates of that resource' do
       expect(Rating::Rate.where(resource: article_1).count).to eq 0
     end
   end

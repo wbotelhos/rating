@@ -7,42 +7,42 @@ RSpec.describe Rating::Rating, ':data' do
   include_context 'with_database_records'
 
   context 'with no scopeable' do
-    subject { described_class.data article_1, nil }
+    subject(:result) { described_class.data article_1, nil }
 
     it 'returns the average of value for a resource' do
-      expect(subject[:average]).to eq 50.5
+      expect(result[:average]).to eq 50.5
     end
 
     it 'returns the sum of values for a resource' do
-      expect(subject[:sum]).to eq 101
+      expect(result[:sum]).to eq 101
     end
 
     it 'returns the count of votes for a resource' do
-      expect(subject[:total]).to eq 2
+      expect(result[:total]).to eq 2
     end
 
     it 'returns the estimate for a resource' do
-      expect(subject[:estimate]).to eq 42.50000000000001
+      expect(result[:estimate]).to eq 42.50000000000001
     end
   end
 
   context 'with scopeable' do
-    subject { described_class.data article_1, category }
+    subject(:result) { described_class.data article_1, category }
 
     it 'returns the average of value for a resource' do
-      expect(subject[:average]).to eq 1.5
+      expect(result[:average]).to eq 1.5
     end
 
     it 'returns the sum of values for a resource' do
-      expect(subject[:sum]).to eq 3
+      expect(result[:sum]).to eq 3
     end
 
     it 'returns the count of votes for a resource' do
-      expect(subject[:total]).to eq 2
+      expect(result[:total]).to eq 2
     end
 
     it 'returns the estimate for a resource' do
-      expect(subject[:estimate]).to eq 1.5
+      expect(result[:estimate]).to eq 1.5
     end
   end
 end

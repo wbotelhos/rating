@@ -4,7 +4,7 @@ module Rating
   class Rating < ActiveRecord::Base
     self.table_name = 'rating_ratings'
 
-    belongs_to :resource , polymorphic: true
+    belongs_to :resource,  polymorphic: true
     belongs_to :scopeable, polymorphic: true
 
     validates :average, :estimate, :resource, :sum, :total, presence: true
@@ -18,7 +18,7 @@ module Rating
     class << self
       def averager_data(resource, scopeable)
         total_count    = how_many_resource_received_votes_sql?(distinct: false, scopeable: scopeable)
-        distinct_count = how_many_resource_received_votes_sql?(distinct: true , scopeable: scopeable)
+        distinct_count = how_many_resource_received_votes_sql?(distinct: true, scopeable: scopeable)
         values         = { resource_type: resource.class.base_class.name }
 
         values[:scopeable_type] = scopeable.class.base_class.name unless scopeable.nil?

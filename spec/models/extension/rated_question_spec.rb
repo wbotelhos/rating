@@ -8,13 +8,13 @@ RSpec.describe Rating::Extension, ':rated?' do
 
   context 'with no scopeable' do
     context 'when has no rate for the given resource' do
-      before { allow(author).to receive(:rate_for).with(article, scope: nil) { nil } }
+      before { allow(author).to receive(:rate_for).with(article, scope: nil).and_return nil }
 
       specify { expect(author.rated?(article)).to eq false }
     end
 
     context 'when has rate for the given resource' do
-      before { allow(author).to receive(:rate_for).with(article, scope: nil) { double } }
+      before { allow(author).to receive(:rate_for).with(article, scope: nil).and_return double }
 
       specify { expect(author.rated?(article)).to eq true }
     end
@@ -24,13 +24,13 @@ RSpec.describe Rating::Extension, ':rated?' do
     let!(:category) { build :category }
 
     context 'when has no rate for the given resource' do
-      before { allow(author).to receive(:rate_for).with(article, scope: category) { nil } }
+      before { allow(author).to receive(:rate_for).with(article, scope: category).and_return nil }
 
       specify { expect(author.rated?(article, scope: category)).to eq false }
     end
 
     context 'when has rate for the given resource' do
-      before { allow(author).to receive(:rate_for).with(article, scope: category) { double } }
+      before { allow(author).to receive(:rate_for).with(article, scope: category).and_return double }
 
       specify { expect(author.rated?(article, scope: category)).to eq true }
     end

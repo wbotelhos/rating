@@ -6,8 +6,8 @@ module Rating
 
     after_save :update_rating
 
-    belongs_to :author   , polymorphic: true
-    belongs_to :resource , polymorphic: true
+    belongs_to :author,    polymorphic: true
+    belongs_to :resource,  polymorphic: true
     belongs_to :scopeable, polymorphic: true
 
     validates :author, :resource, :value, presence: true

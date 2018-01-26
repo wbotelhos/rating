@@ -16,8 +16,8 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
   end
 
-  context 'filtering by :average' do
-    context 'as asc' do
+  context 'when filtering by :average' do
+    context 'with as asc' do
       it 'works' do
         expect(Article.order_by_rating(:average, :asc)).to eq [
           article_3,
@@ -35,7 +35,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
     end
 
-    context 'as desc' do
+    context 'with as desc' do
       it 'works' do
         expect(Article.order_by_rating(:average, :desc)).to eq [
           article_1,
@@ -54,8 +54,8 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
   end
 
-  context 'filtering by :estimate' do
-    context 'as asc' do
+  context 'when filtering by :estimate' do
+    context 'with as asc' do
       it 'works' do
         expect(Article.order_by_rating(:estimate, :asc)).to eq [
           article_3,
@@ -73,7 +73,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
     end
 
-    context 'as desc' do
+    context 'with as desc' do
       it 'works' do
         expect(Article.order_by_rating(:estimate, :desc)).to eq [
           article_1,
@@ -92,7 +92,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
   end
 
-  context 'filtering by :sum' do
+  context 'when filtering by :sum' do
     context 'as asc' do
       it 'works' do
         expect(Article.order_by_rating(:sum, :asc)).to eq [
@@ -111,7 +111,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
     end
 
-    context 'as desc' do
+    context 'with as desc' do
       it 'works' do
         expect(Article.order_by_rating(:sum, :desc)).to eq [
           article_1,
@@ -130,8 +130,8 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
   end
 
-  context 'filtering by :total' do
-    context 'as asc' do
+  context 'when filtering by :total' do
+    context 'with as asc' do
       it 'works' do
         result = Article.order_by_rating(:total, :asc)
 
@@ -148,7 +148,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
     end
 
-    context 'as desc' do
+    context 'with as desc' do
       it 'works' do
         result = Article.order_by_rating(:total, :desc)
 

@@ -2,62 +2,47 @@ require: rubocop-rspec
 
 inherit_from: .rubocop_todo.yml
 
-AllCops:
-  Exclude:
-    - generators/rating/templates/**/*
-
 Rails:
   Enabled: true
 
-Lint/Debugger:
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EmptyLinesAroundArguments:
   Enabled: false
 
-Metrics/AbcSize:
+Rails/ApplicationRecord:
   Enabled: false
 
-Metrics/ClassLength:
+RSpec/DescribeMethod:
   Enabled: false
 
-Metrics/CyclomaticComplexity:
+RSpec/ExampleLength:
+  Max: 10
+
+RSpec/FilePath:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 5
 
 Metrics/LineLength:
-  Enabled: false
+  Max: 120
 
-Metrics/MethodLength:
-  Enabled: false
-
-Metrics/PerceivedComplexity:
-  Enabled: false
-
-Rails/HasAndBelongsToMany:
-  Enabled: false
-
-Rails/HttpPositionalArguments:
-  Enabled: false
-
-Style/IfUnlessModifier:
-  MaxLineLength: 0
-
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    '%i': '[]'
-    '%I': '[]'
-    '%r': ()
-    '%w': '[]'
-    '%W': '[]'
-
-Style/AlignParameters:
-  EnforcedStyle: with_fixed_indentation
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
 
 Style/Documentation:
   Enabled: false
 
-Style/Encoding:
-  Enabled: false
-
-Style/SpaceBeforeComma:
-  Enabled: false
-
-Style/SpaceBeforeFirstArg:
-  Enabled: false
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%': '()'
+    '%i': '[]'
+    '%I': '[]'
+    '%r': '()'
+    '%w': '[]'
+    '%W': '[]'

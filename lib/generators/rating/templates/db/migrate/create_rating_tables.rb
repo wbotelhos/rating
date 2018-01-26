@@ -5,9 +5,9 @@ class CreateRatingTables < ActiveRecord::Migration[5.0]
     create_table :rating_rates do |t|
       t.decimal :value, default: 0, precision: 17, scale: 14
 
-      t.references :author   , index: true, null: false, polymorphic: true
-      t.references :resource , index: true, null: false, polymorphic: true
-      t.references :scopeable, index: true, null: true , polymorphic: true
+      t.references :author,    index: true, null: false, polymorphic: true
+      t.references :resource,  index: true, null: false, polymorphic: true
+      t.references :scopeable, index: true, null: true, polymorphic: true
 
       t.timestamps null: false
     end
@@ -17,13 +17,13 @@ class CreateRatingTables < ActiveRecord::Migration[5.0]
       unique: true
 
     create_table :rating_ratings do |t|
-      t.decimal :average , default: 0, mull: false, precision: 17, scale: 14
+      t.decimal :average,  default: 0, mull: false, precision: 17, scale: 14
       t.decimal :estimate, default: 0, mull: false, precision: 17, scale: 14
-      t.integer :sum     , default: 0, mull: false
-      t.integer :total   , default: 0, mull: false
+      t.integer :sum,      default: 0, mull: false
+      t.integer :total,    default: 0, mull: false
 
-      t.references :resource , index: true, null: false, polymorphic: true
-      t.references :scopeable, index: true, null: true , polymorphic: true
+      t.references :resource,  index: true, null: false, polymorphic: true
+      t.references :scopeable, index: true, null: true,  polymorphic: true
 
       t.timestamps null: false
     end

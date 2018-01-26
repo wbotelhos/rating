@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'with_database_records' do
   let!(:category) { create :category }
 
