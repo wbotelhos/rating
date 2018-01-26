@@ -128,4 +128,47 @@ RSpec.describe Rating::Rate, ':create' do
       end
     end
   end
+
+  context 'with metadata' do
+    before { AddCommentOnRatingRatesTable.new.change }
+
+    context 'with nil value' do
+      it 'creates a rate entry ignoring metadata' do
+        described_class.create author: author, metadata: nil, resource: article, value: 3
+
+        rate = described_class.last
+
+        expect(rate.author).to   eq author
+        expect(rate.comment).to  eq nil
+        expect(rate.resource).to eq article
+        expect(rate.value).to    eq 3
+      end
+    end
+
+    context 'with empty value' do
+      it 'creates a rate entry ignoring metadata' do
+        described_class.create author: author, metadata: '', resource: article, value: 3
+
+        rate = described_class.last
+
+        expect(rate.author).to   eq author
+        expect(rate.comment).to  eq nil
+        expect(rate.resource).to eq article
+        expect(rate.value).to    eq 3
+      end
+    end
+
+    context 'with hash value' do
+      it 'creates a rate entry with metadata included' do
+        described_class.create author: author, metadata: { comment: 'comment' }, resource: article, value: 3
+
+        rate = described_class.last
+
+        expect(rate.author).to   eq author
+        expect(rate.comment).to  eq 'comment'
+        expect(rate.resource).to eq article
+        expect(rate.value).to    eq 3
+      end
+    end
+  end
 end

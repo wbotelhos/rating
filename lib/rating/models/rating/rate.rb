@@ -23,6 +23,8 @@ module Rating
 
       return record if record.persisted? && value == record.value
 
+      metadata.each { |k, v| record[k] = v } if metadata.present?
+
       record.value = value
       record.save
 
