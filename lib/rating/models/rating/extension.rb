@@ -5,8 +5,8 @@ module Rating
     extend ActiveSupport::Concern
 
     included do
-      def rate(resource, value, author: self, scope: nil)
-        Rate.create author: author, resource: resource, scopeable: scope, value: value
+      def rate(resource, value, author: self, metadata: {}, scope: nil)
+        Rate.create author: author, metadata: metadata, resource: resource, scopeable: scope, value: value
       end
 
       def rate_for(resource, scope: nil)

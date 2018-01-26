@@ -18,7 +18,7 @@ module Rating
       scope:          %i[author_type resource_id resource_type scopeable_id scopeable_type]
     }
 
-    def self.create(author:, resource:, scopeable: nil, value:)
+    def self.create(author:, metadata:, resource:, scopeable: nil, value:)
       record = find_or_initialize_by(author: author, resource: resource, scopeable: scopeable)
 
       return record if record.persisted? && value == record.value
