@@ -8,3 +8,4 @@ CreateArticlesTable.new.change
 CreateAuthorsTable.new.change
 CreateCategoriesTable.new.change
 CreateRatingTables.new.change
+AddCommentOnRatingRatesTable.new.change

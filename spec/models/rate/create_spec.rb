@@ -7,7 +7,7 @@ RSpec.describe Rating::Rate, ':create' do
   let!(:article) { create :article }
 
   context 'with no scopeable' do
-    before { described_class.create author: author, resource: article, value: 3 }
+    before { described_class.create author: author, metadata: {}, resource: article, value: 3 }
 
     context 'when rate does not exist yet' do
       it 'creates a rate entry' do
@@ -32,7 +32,7 @@ RSpec.describe Rating::Rate, ':create' do
     context 'when rate already exists' do
       let!(:author_2) { create :author }
 
-      before { described_class.create author: author_2, resource: article, value: 4 }
+      before { described_class.create author: author_2, metadata: {}, resource: article, value: 4 }
 
       it 'creates one more rate entry' do
         rates = described_class.where(author: [author, author_2]).order('created_at asc')
@@ -67,7 +67,7 @@ RSpec.describe Rating::Rate, ':create' do
   context 'with scopeable' do
     let!(:category) { create :category }
 
-    before { described_class.create author: author, resource: article, scopeable: category, value: 3 }
+    before { described_class.create author: author, metadata: {}, resource: article, scopeable: category, value: 3 }
 
     context 'when rate does not exist yet' do
       it 'creates a rate entry' do
@@ -94,7 +94,7 @@ RSpec.describe Rating::Rate, ':create' do
     context 'when rate already exists' do
       let!(:author_2) { create :author }
 
-      before { described_class.create author: author_2, resource: article, scopeable: category, value: 4 }
+      before { described_class.create author: author_2, metadata: {}, resource: article, scopeable: category, value: 4 }
 
       it 'creates one more rate entry' do
         rates = described_class.where(author: [author, author_2]).order('created_at asc')
@@ -130,8 +130,6 @@ RSpec.describe Rating::Rate, ':create' do
   end
 
   context 'with metadata' do
-    before { AddCommentOnRatingRatesTable.new.change }
-
     context 'with nil value' do
       it 'creates a rate entry ignoring metadata' do
         described_class.create author: author, metadata: nil, resource: article, value: 3

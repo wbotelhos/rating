@@ -12,7 +12,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
     end
 
     context 'when rate does not exist' do
-      before { described_class.create author: author, resource: article, value: 3 }
+      before { described_class.create author: author, metadata: {}, resource: article, value: 3 }
 
       it 'returns the record' do
         expect(described_class.rate_for(author: author, resource: article)).to eq described_class.last
@@ -28,7 +28,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
     end
 
     context 'when rate does not exist' do
-      before { described_class.create author: author, resource: article, scopeable: category, value: 3 }
+      before { described_class.create author: author, metadata: {}, resource: article, scopeable: category, value: 3 }
 
       it 'returns the record' do
         query = described_class.rate_for(author: author, resource: article, scopeable: category)
