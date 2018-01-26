@@ -83,7 +83,7 @@ You can vote on some resource:
 author   = Author.last
 resource = Article.last
 
-author.rate(resource, 3)
+author.rate resource, 3
 ```
 
 ### rating
