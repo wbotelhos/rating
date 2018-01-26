@@ -283,6 +283,46 @@ An author model still can be rated, but won't genarate a Rating record with all 
 rating as: :author
 ```
 
+### Metadata
+
+Maybe you want include a `comment` together your rating or even a `fingerprint` field to make your rating more secure.
+So, first you will need to add more fields to the `Rating::Rate` table:
+
+```ruby
+class AddCommentAndFingerprintOnRatingRates < ActiveRecord::Migration
+  def change
+    add_column :rating_rates, :comment, :text
+
+    add_reference :rating_rates, :fingerprint, foreign_key: true, index: true, null: false
+  end
+end
+
+add_column :table_name, :column_name, :decimal, default: 0, precision: 15, scale: 10
+```
+
+As you can seed, we can add any kind of field we want. Now we just provide this values when we make the rate:
+
+```ruby
+author      = Author.last
+resource    = Article.last
+comment     = 'This is a very nice rating. s2'
+fingerprint = Fingerprint.new(ip: '127.0.0.1')
+
+author.rate resource, 3, metadata: { comment: comment, fingerprint: fingerprint }
+```
+
+Now you can have this data into your model normally:
+
+
+```ruby
+author = Author.last
+rate   = author.rates.last
+
+rate.comment     # 'This is a very nice rating. s2'
+rate.fingerprint # <Fingerprint id:...>
+rate.value       # 3
+```
+
 ## Love it!
 
 Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Support](https://liberapay.com/wbotelhos). Thanks! (:
