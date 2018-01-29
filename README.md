@@ -296,8 +296,6 @@ class AddCommentAndFingerprintOnRatingRates < ActiveRecord::Migration
     add_reference :rating_rates, :fingerprint, foreign_key: true, index: true, null: false
   end
 end
-
-add_column :table_name, :column_name, :decimal, default: 0, precision: 15, scale: 10
 ```
 
 As you can seed, we can add any kind of field we want. Now we just provide this values when we make the rate:
