@@ -1,3 +1,9 @@
+## v0.3.0
+
+### News
+
+- The `vote` method now can receive `metadata` to be persisted with vote data.
+
 ## v0.2.0
 
 ### News
