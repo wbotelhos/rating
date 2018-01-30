@@ -194,8 +194,8 @@ In this situation you should scope the vote of article with some category:
 **rate**
 
 ```ruby
-author.rate resource, 3, scopeable: category_1
-author.rate resource, 5, scopeable: category_2
+author.rate resource, 3, scope: category_1
+author.rate resource, 5, scope: category_2
 ```
 
 Now `resource` has a rating for `category_1` and another one for `category_2`.
@@ -259,8 +259,8 @@ author     = Author.last
 resource   = Article.last
 
 author.rate resource, 1
-author.rate resource, 3, scopeable: category_1
-author.rate resource, 5, scopeable: category_2
+author.rate resource, 3, scope: category_1
+author.rate resource, 5, scope: category_2
 
 author.rating_records
 # { average: 1, estimate: 1, scopeable: nil       , sum: 1, total: 1 },
