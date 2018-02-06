@@ -25,8 +25,8 @@ module Rating
 
         sql = %(
           SELECT
-            (#{total_count} / CAST(#{distinct_count} AS float)) count_avg,
-            COALESCE(AVG(value), 0)                             rating_avg
+            (CAST(#{total_count} AS DECIMAL(17, 14)) / #{distinct_count}) count_avg,
+            COALESCE(AVG(value), 0)                                       rating_avg
           FROM #{rate_table_name}
           WHERE resource_type = :resource_type AND #{scope_type_query(scopeable)}
         ).squish

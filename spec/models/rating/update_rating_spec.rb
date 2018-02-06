@@ -10,8 +10,8 @@ RSpec.describe Rating::Rating, ':update_rating' do
     it 'updates the rating data of the given resource' do
       record = described_class.find_by(resource: article_1)
 
-      expect(record.average).to  eq 50.50000000000001
-      expect(record.estimate).to eq 42.50000000000001
+      expect(record.average).to  eq 50.5
+      expect(record.estimate).to eq 42.5
       expect(record.sum).to      eq 101
       expect(record.total).to    eq 2
     end
