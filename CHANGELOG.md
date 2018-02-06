@@ -1,3 +1,13 @@
+## v0.4.0
+
+### News
+
+- Adds support to MySQL using decimal over float cast on calculations.
+
+### Updates
+
+- Grows up the decimal precision to enable billion of records count.
+
 ## v0.3.0
 
 ### News
