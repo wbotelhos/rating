@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Rating::Config, 'models' do
+RSpec.describe Rating::Config, '.models' do
   it 'changes the rating models' do
     subject.models rate: Review, rating: ReviewRating
 
