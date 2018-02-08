@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
 class Article < ::ActiveRecord::Base
-  rating
+  rating scoping: :categories
+
+  has_many :categories
 end

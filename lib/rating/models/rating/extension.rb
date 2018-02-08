@@ -28,11 +28,23 @@ module Rating
       def rating(scope: nil)
         rating_records.find_by scopeable: scope
       end
+
+      def rating_warm_up(scoping: nil)
+        return Rating.find_or_create_by(resource: self) if scoping.blank?
+
+        [scoping].flatten.compact.map do |attribute|
+          next unless respond_to?(attribute)
+
+          [public_send(attribute)].flatten.compact.map do |object|
+            Rating.find_or_create_by! resource: self, scopeable: object
+          end
+        end.flatten.compact
+      end
     end
 
     module ClassMethods
-      def rating(as: nil)
-        after_create -> { Rating.find_or_create_by resource: self }, unless: -> { as == :author }
+      def rating(as: nil, scoping: nil)
+        after_save -> { rating_warm_up scoping: scoping }, unless: -> { as == :author }
 
         has_many :rating_records,
           as:         :resource,
