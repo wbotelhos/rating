@@ -4,7 +4,7 @@ module Rating
   class InstallGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
 
-    desc 'creates Rating migration'
+    desc 'Creates Rating migration'
 
     def create_migration
       template 'db/migrate/create_rating_table.rb', "db/migrate/#{timestamp(0)}_create_rating_table.rb"
