@@ -108,7 +108,7 @@ module Rating
       end
 
       def rate_table_name
-        @rate_table_name ||= ::Rating.config.rate_model.constantize.table_name
+        @rate_table_name ||= Rate.table_name
       end
 
       def scope_type_query(scopeable)
