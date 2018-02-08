@@ -7,14 +7,18 @@ module Rating
     desc 'creates Rating migration'
 
     def create_migration
-      template 'db/migrate/create_rating_table.rb', "db/migrate/#{timestamp}_create_rating_table.rb"
-      template 'db/migrate/create_rate_table.rb', "db/migrate/#{timestamp}_create_rate_table.rb"
+      template 'db/migrate/create_rating_table.rb', "db/migrate/#{timestamp(0)}_create_rating_table.rb"
+      template 'db/migrate/create_rate_table.rb', "db/migrate/#{timestamp(1)}_create_rate_table.rb"
     end
 
     private
 
-    def timestamp
-      Time.current.strftime '%Y%m%d%H%M%S'
+    def time
+      @time ||= Time.current
+    end
+
+    def timestamp(seconds)
+      (time + seconds.seconds).strftime '%Y%m%d%H%M%S'
     end
   end
 end
