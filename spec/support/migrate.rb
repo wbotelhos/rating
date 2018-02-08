@@ -10,4 +10,6 @@ CreateAuthorsTable.new.change
 CreateCategoriesTable.new.change
 CreateRateTable.new.change
 CreateRatingTable.new.change
+CreateReviewRatingsTable.new.change
+CreateReviewsTable.new.change
 AddCommentOnRatingRatesTable.new.change

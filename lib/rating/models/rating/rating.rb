@@ -2,7 +2,7 @@
 
 module Rating
   class Rating < ActiveRecord::Base
-    self.table_name = 'rating_ratings'
+    self.table_name = ::Rating.config.rating_model
 
     belongs_to :resource,  polymorphic: true
     belongs_to :scopeable, polymorphic: true
@@ -107,7 +107,7 @@ module Rating
       end
 
       def rate_table_name
-        @rate_table_name ||= Rate.table_name
+        @rate_table_name ||= ::Rating.config.rate_model
       end
 
       def scope_type_query(scopeable)
