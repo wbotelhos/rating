@@ -7,7 +7,7 @@ class CreateReviewsTable < ActiveRecord::Migration[5.0]
 
       t.references :author,    index: true, null: false, polymorphic: true
       t.references :resource,  index: true, null: false, polymorphic: true
-      t.references :scopeable, index: true, null: true, polymorphic: true
+      t.references :scopeable, index: true, null: true,  polymorphic: true
 
       t.timestamps null: false
     end
