@@ -7,7 +7,8 @@ module Rating
     desc 'creates Rating migration'
 
     def create_migration
-      template 'db/migrate/create_rating_tables.rb', "db/migrate/#{timestamp}_create_rating_tables.rb"
+      template 'db/migrate/create_rating_table.rb', "db/migrate/#{timestamp}_create_rating_table.rb"
+      template 'db/migrate/create_rate_table.rb', "db/migrate/#{timestamp}_create_rate_table.rb"
     end
 
     private
