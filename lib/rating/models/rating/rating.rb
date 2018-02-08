@@ -101,7 +101,7 @@ module Rating
         count = distinct ? 'COUNT(DISTINCT resource_id)' : 'COUNT(1)'
 
         %((
-          SELECT #{count}
+          SELECT GREATEST(#{count}, 1)
           FROM #{rate_table_name}
           WHERE resource_type = :resource_type AND #{scope_type_query(scopeable)}
         ))
