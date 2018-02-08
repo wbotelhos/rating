@@ -12,8 +12,8 @@ module Rating
     end
 
     def initialize
-      @rate_model   = ::Rating::Rate
-      @rating_model = ::Rating::Rating
+      @rate_model   = '::Rating::Rate'
+      @rating_model = '::Rating::Rating'
     end
   end
 end
