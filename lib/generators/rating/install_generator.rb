@@ -4,6 +4,12 @@ module Rating
   class InstallGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
 
+    desc 'Creates Rating initializer'
+
+    def copy_initializer
+      copy_file 'config/initializers/rating.rb', 'config/initializers/rating.rb'
+    end
+
     desc 'Creates Rating migration'
 
     def create_migration
