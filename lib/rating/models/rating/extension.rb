@@ -44,7 +44,7 @@ module Rating
 
     module ClassMethods
       def rating(as: nil, scoping: nil)
-        after_save -> { rating_warm_up scoping: scoping }, unless: -> { as == :author }
+        after_create -> { rating_warm_up scoping: scoping }, unless: -> { as == :author }
 
         has_many :rating_records,
           as:         :resource,
