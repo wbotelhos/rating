@@ -3,7 +3,7 @@
 module Rating
   class Rating < ActiveRecord::Base
     self.table_name_prefix = 'rating_'
-    self.table_name        = ::Rating.config.rating_table
+    self.table_name        = ::Rating::Config.rating_table
 
     belongs_to :resource,  polymorphic: true
     belongs_to :scopeable, polymorphic: true

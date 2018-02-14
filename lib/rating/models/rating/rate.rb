@@ -3,7 +3,7 @@
 module Rating
   class Rate < ActiveRecord::Base
     self.table_name_prefix = 'rating_'
-    self.table_name        = ::Rating.config.rate_table
+    self.table_name        = ::Rating::Config.rate_table
 
     after_save :update_rating
 

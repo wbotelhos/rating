@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module Rating
-  class Config
+  module Config
+    module_function
+
     def config
       @config ||= begin
         file_path = File.expand_path('config/rating.yml')

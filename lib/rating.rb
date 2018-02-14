@@ -1,15 +1,6 @@
 # frozen_string_literal: true
 
 module Rating
-  class << self
-    def config
-      @config ||= Config.new
-    end
-
-    def configure
-      yield config
-    end
-  end
 end
 
 require 'rating/config'
