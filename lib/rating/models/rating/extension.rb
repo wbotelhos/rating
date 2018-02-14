@@ -48,17 +48,17 @@ module Rating
 
         has_many :rating_records,
           as:         :resource,
-          class_name: ::Rating.config.rating_model,
+          class_name: '::Rating::Rating',
           dependent:  :destroy
 
         has_many :rates_records,
           as:         :resource,
-          class_name: ::Rating.config.rate_model,
+          class_name: '::Rating::Rate',
           dependent:  :destroy
 
         has_many :rated_records,
           as:         :author,
-          class_name: ::Rating.config.rate_model,
+          class_name: '::Rating::Rate',
           dependent:  :destroy
 
         scope :order_by_rating, ->(column = :estimate, direction = :desc, scope: nil) {

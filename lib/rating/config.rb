@@ -2,18 +2,22 @@
 
 module Rating
   class Config
-    attr_accessor :rate_model, :rating_model
+    def config
+      @config ||= begin
+        file_path = File.expand_path('config/rating.yml')
 
-    def models(rate: nil, rating: nil)
-      @rate_model   = rate   unless rate.nil?
-      @rating_model = rating unless rating.nil?
+        return {} unless File.exist?(file_path)
 
-      self
+        YAML.safe_load(File.read(file_path))['rating']
+      end
     end
 
-    def initialize
-      @rate_model   = '::Rating::Rate'
-      @rating_model = '::Rating::Rating'
+    def rate_table
+      @rate_table ||= config[__method__.to_s] || 'rating_rates'
+    end
+
+    def rating_table
+      @rating_table ||= config[__method__.to_s] || 'rating_ratings'
     end
   end
 end
