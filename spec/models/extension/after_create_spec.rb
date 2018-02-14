@@ -2,27 +2,46 @@
 
 require 'rails_helper'
 
-RSpec.describe Rating::Extension, ':after_create' do
-  context 'when :as is nil' do
-    let!(:article) { create :article }
+RSpec.describe Rating::Extension, 'after_create' do
+  context 'when record is author' do
+    let!(:record) { build :author }
 
-    it 'creates a rating record with zero values just to be easy to make the count' do
-      rating = Rating::Rating.find_by(resource: article)
+    it 'does not warm up the cache' do
+      expect(record).not_to receive(:rating_warm_up)
 
-      expect(rating.average).to   eq 0
-      expect(rating.estimate).to  eq 0
-      expect(rating.resource).to  eq article
-      expect(rating.scopeable).to eq nil
-      expect(rating.sum).to       eq 0
-      expect(rating.total).to     eq 0
+      record.save
     end
   end
 
-  context 'when :as is :author' do
-    let!(:author) { create :author }
+  context 'when record is not author' do
+    context 'when record has scoping' do
+      let!(:record) { build :article }
 
-    it 'does not creates a rating record' do
-      expect(Rating::Rating.exists?(resource: author)).to eq false
+      it 'warms up the cache' do
+        expect(record).to receive(:rating_warm_up).with(scoping: :categories)
+
+        record.save
+      end
+    end
+
+    context 'when record has no scoping' do
+      let!(:record) { build :comment }
+
+      it 'warms up the cache' do
+        expect(record).to receive(:rating_warm_up).with(scoping: nil)
+
+        record.save
+      end
+    end
+
+    context 'when update is made' do
+      let!(:record) { create :comment }
+
+      it 'does not warm up the cache' do
+        expect(record).not_to receive(:rating_warm_up)
+
+        record.save
+      end
     end
   end
 end
