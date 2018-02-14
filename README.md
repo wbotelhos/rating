@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/wbotelhos/rating.svg)](https://travis-ci.org/wbotelhos/rating)
 [![Gem Version](https://badge.fury.io/rb/rating.svg)](https://badge.fury.io/rb/rating)
 [![Maintainability](https://api.codeclimate.com/v1/badges/cc5efe8b06bc1d5e9e8a/maintainability)](https://codeclimate.com/github/wbotelhos/rating/maintainability)
-[![Support](https://img.shields.io/badge/donate-%3C3-brightgreen.svg)](https://liberapay.com/wbotelhos)
+[![Patreon](https://img.shields.io/badge/donate-%3C3-brightgreen.svg)](https://www.patreon.com/wbotelhos)
 
 A true Bayesian rating system with scope and cache enabled.
 
@@ -349,4 +349,4 @@ You can change one table o both of them.
 
 ## Love it!
 
-Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Support](https://liberapay.com/wbotelhos). Thanks! (:
+Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Patreon](https://www.patreon.com/wbotelhos). Thanks! (:
