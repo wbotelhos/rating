@@ -1,3 +1,14 @@
+## v0.5.0
+
+### News
+
+- Adds `rating.yml` config to support to change the tables where Rating will write the data;
+- Adds `scoping` option to support to generates zero based rating via scope.
+
+### Updates
+
+- The migrate was separated in two to improve in troubleshoot. (iondrimba)
+
 ## v0.4.0
 
 ### News

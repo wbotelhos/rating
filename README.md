@@ -321,6 +321,32 @@ rate.fingerprint # <Fingerprint id:...>
 rate.value       # 3
 ```
 
+### Scoping
+
+If you need to warm up a record with scope, you need to setup the `scoping` relation.
+
+```ruby
+class Resource < ApplicationRecord
+  voting scoping: :categories
+end
+```
+
+Now, when a resource is created, the cache will be generated for each related `category` as `scopeable`.
+
+### Table Name
+
+You can choose the table where Rating will write the data via YAML config.
+You should just to provide a `config/rating.yml` file with the following content:
+
+```yml
+rating:
+  rate_table: 'reviews'
+  rating_table: 'review_ratings'
+```
+
+Now the rates will be written on `reviews` table over `rating_rates` and calculation will be on `review_ratings` over `rating_ratings`.
+You can change one table o both of them.
+
 ## Love it!
 
 Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Support](https://liberapay.com/wbotelhos). Thanks! (:
