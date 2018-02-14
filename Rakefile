@@ -23,3 +23,11 @@ task :spec_config do
 
   FileUtils.rm_rf(directory_config) unless unsafe_path
 end
+
+desc 'Runs tests with and without config enabled'
+task :spec do
+  Rake::Task['spec'].invoke
+  Rake::Task['spec_config'].invoke
+
+  puts "Spec with and without config enabled executed."
+end
