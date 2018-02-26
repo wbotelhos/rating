@@ -347,6 +347,19 @@ rating:
 Now the rates will be written on `reviews` table over `rating_rates` and calculation will be on `review_ratings` over `rating_ratings`.
 You can change one table o both of them.
 
+
+## Validation
+
+It is recommended that you add a validation to ensure that the author do not vote multiple times on the same resource and its scope.
+This validation is not inside the gem since you could want make your own custom validation.
+
+```ruby
+validates :author_id, uniqueness: {
+  case_sensitive: false,
+  scope:          %i[author_type resource_id resource_type scopeable_id scopeable_type]
+}
+```
+
 ## Love it!
 
 Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Patreon](https://www.patreon.com/wbotelhos). Thanks! (:

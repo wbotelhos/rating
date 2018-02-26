@@ -14,11 +14,6 @@ module Rating
     validates :author, :resource, :value, presence: true
     validates :value, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
 
-    validates :author_id, uniqueness: {
-      case_sensitive: false,
-      scope:          %i[author_type resource_id resource_type scopeable_id scopeable_type]
-    }
-
     def self.create(author:, metadata:, resource:, scopeable: nil, value:)
       record = find_or_initialize_by(author: author, resource: resource, scopeable: scopeable)
 
