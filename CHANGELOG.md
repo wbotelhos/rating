@@ -1,3 +1,9 @@
+## v0.6.0
+
+### Updates
+
+- The author unique validations was removed to enable custom validations
+
 ## v0.5.0
 
 ### News
