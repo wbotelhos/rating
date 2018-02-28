@@ -18,4 +18,10 @@ RSpec.describe Rating::Rate do
   it do
     is_expected.to validate_numericality_of(:value).is_less_than_or_equal_to(100).is_less_than_or_equal_to 100
   end
+
+  it do
+    expect(object).to validate_uniqueness_of(:author_id)
+      .scoped_to(%i[author_type resource_id resource_type scopeable_id scopeable_type])
+      .case_insensitive
+  end
 end
