@@ -15,8 +15,8 @@ module Rating
     validates :value, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 100 }
 
     validates :author_id, uniqueness: {
-      case_sensitive: false,
-      scope:          %i[author_type resource_id resource_type scopeable_id scopeable_type]
+      case_sensitive: ::Rating::Config.validations['rate']['case_sensitive'],
+      scope:          ::Rating::Config.validations['rate']['scope'].map(&:to_sym)
     }
 
     def self.create(author:, extra_scopes:, metadata:, resource:, scopeable: nil, value:)
