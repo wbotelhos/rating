@@ -81,7 +81,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
     end
 
     context 'when matches all attributes but at least one extra scopes' do
-      let!(:record) do
+      before do
         described_class.create(
           author:       author,
           extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
