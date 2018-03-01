@@ -6,8 +6,6 @@ RSpec.describe Rating::Rate, ':rate_for' do
   let!(:author)  { create :author }
   let!(:article) { create :article }
 
-  before(:all) { AddExtraScopesOnRatingRatesTable.new.change }
-
   context 'with no scopeable' do
     context 'when rate does not exist' do
       it { expect(described_class.rate_for(author: author, resource: article)).to eq nil }
@@ -103,5 +101,5 @@ RSpec.describe Rating::Rate, ':rate_for' do
         expect(result).to eq nil
       end
     end
-  end
+  end if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
 end

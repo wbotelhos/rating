@@ -37,4 +37,12 @@ RSpec.describe Rating::Extension, ':rated' do
       expect(Rating::Rate.where(resource: article_1).count).to eq 0
     end
   end
+
+  context 'with extra scopes' do
+    let!(:extra_scopes_rate) { author_1.rate article_1, 1, extra_scopes: { scope_1: 'scope_1' } }
+
+    it 'returns records considering the extra scopes' do
+      expect(author_1.rated(extra_scopes: { scope_1: 'scope_1' })).to eq [extra_scopes_rate]
+    end
+  end if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
 end

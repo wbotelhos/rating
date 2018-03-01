@@ -5,24 +5,36 @@ module Rating
     extend ActiveSupport::Concern
 
     included do
-      def rate(resource, value, author: self, metadata: {}, scope: nil)
-        Rate.create author: author, metadata: metadata, resource: resource, scopeable: scope, value: value
+      def rate(resource, value, author: self, extra_scopes: {}, metadata: {}, scope: nil)
+        Rate.create(
+          author:       author,
+          extra_scopes: extra_scopes,
+          metadata:     metadata,
+          resource:     resource,
+          scopeable:    scope,
+          value:        value
+        )
       end
 
-      def rate_for(resource, scope: nil)
-        Rate.rate_for author: self, resource: resource, scopeable: scope
+      def rate_for(resource, extra_scopes: {}, scope: nil)
+        Rate.rate_for author: self, extra_scopes: extra_scopes, resource: resource, scopeable: scope
       end
 
-      def rated?(resource, scope: nil)
-        !rate_for(resource, scope: scope).nil?
+      # TODO: use exists for performance
+      def rated?(resource, extra_scopes: {}, scope: nil)
+        !rate_for(resource, extra_scopes: extra_scopes, scope: scope).nil?
       end
 
-      def rates(scope: nil)
-        rates_records.where scopeable: scope
+      def rates(extra_scopes: {}, scope: nil)
+        attributes = { scopeable: scope }.merge(extra_scopes)
+
+        rates_records.where attributes
       end
 
-      def rated(scope: nil)
-        rated_records.where scopeable: scope
+      def rated(extra_scopes: {}, scope: nil)
+        attributes = { scopeable: scope }.merge(extra_scopes)
+
+        rated_records.where attributes
       end
 
       def rating(scope: nil)

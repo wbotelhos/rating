@@ -6,8 +6,6 @@ RSpec.describe Rating::Rate, ':create' do
   let!(:author)  { create :author }
   let!(:article) { create :article }
 
-  before(:all) { AddExtraScopesOnRatingRatesTable.new.change }
-
   context 'with no scopeable' do
     before { described_class.create author: author, extra_scopes: {}, metadata: {}, resource: article, value: 3 }
 
@@ -360,5 +358,5 @@ RSpec.describe Rating::Rate, ':create' do
         expect(rating.total).to     eq 2
       end
     end
-  end
+  end if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
 end

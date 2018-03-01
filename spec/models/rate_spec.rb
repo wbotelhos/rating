@@ -20,8 +20,9 @@ RSpec.describe Rating::Rate do
   end
 
   it do
-    expect(object).to validate_uniqueness_of(:author_id)
-      .scoped_to(%i[author_type resource_id resource_type scopeable_id scopeable_type])
-      .case_insensitive
+    scopes = %i[author_type resource_id resource_type scopeable_id scopeable_type]
+    scopes += %i[scope_1 scope_2] if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
+
+    expect(object).to validate_uniqueness_of(:author_id).scoped_to(scopes).case_insensitive
   end
 end

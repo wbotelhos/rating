@@ -14,3 +14,4 @@ CreateRatingTable.new.change
 CreateReviewRatingsTable.new.change
 CreateReviewsTable.new.change
 AddCommentOnRatingRatesTable.new.change
+AddExtraScopesOnRatingRatesTable.new.change
