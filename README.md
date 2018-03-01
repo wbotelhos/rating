@@ -248,6 +248,26 @@ To order the rating you do the same thing:
 Article.order_by_rating scope: category_1
 ```
 
+### Extra Scopes
+
+Maybe you need to use more than one scope to make a rate, so you can use the `extra_scopes` options.
+This feature is enable **only** to restrict the rate, the rating calculation will **ignore** it.
+
+Example situation: I have a Profile (resource) that belongs to some Category (scope) and the Client (author) will rate
+this Profile based on each Lead (extra scope) this Profile made. The Client can vote just one time on each lead, but many
+times to that Profile. The Profile has a rating score based on all leads made on that Category.
+
+```ruby
+scope    = Category.first
+author   = Client.last
+resource = Profile.last
+lead     = Lead.last
+
+author.rate resource, 5, extra_scopes: { lead_id: lead.id }, scope: scope
+```
+
+* The extra scopes fields is not present into gem, so you cannot use `{ lead: lead }`, for example.
+
 ### Records
 
 Maybe you want to recover all records with or without scope, so you can add the suffix `_records` on relations:
