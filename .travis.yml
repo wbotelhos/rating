@@ -1,1 +1,6 @@
 language: ruby
+
+script:
+  - bundle exec rake spec
+  - bundle exec rake spec_config
+  - bundle exec rake spec_config_with_extra_scopes
