@@ -62,13 +62,8 @@ module Rating
           dependent:  :destroy
 
         scope :order_by_rating, ->(column = :estimate, direction = :desc, scope: nil) {
-          scope_values = {
-            scopeable_id:   scope&.id,
-            scopeable_type: scope&.class&.base_class&.name
-          }
-
           includes(:rating_records)
-            .where(Rating.table_name => scope_values)
+            .where(Rating.table_name => { scopeable_id: scope&.id, scopeable_type: scope&.class&.base_class&.name })
             .order("#{Rating.table_name}.#{column} #{direction}")
         }
       end
