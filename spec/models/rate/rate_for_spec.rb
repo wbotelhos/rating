@@ -6,16 +6,20 @@ RSpec.describe Rating::Rate, ':rate_for' do
   let!(:author)  { create :author }
   let!(:article) { create :article }
 
+  before(:all) { AddExtraScopesOnRatingRatesTable.new.change }
+
   context 'with no scopeable' do
     context 'when rate does not exist' do
-      specify { expect(described_class.rate_for(author: author, resource: article)).to eq nil }
+      it { expect(described_class.rate_for(author: author, resource: article)).to eq nil }
     end
 
-    context 'when rate does not exist' do
-      before { described_class.create author: author, metadata: {}, resource: article, value: 3 }
+    context 'when rate exists' do
+      let!(:record) do
+        described_class.create author: author, extra_scopes: {}, metadata: {}, resource: article, value: 3
+      end
 
       it 'returns the record' do
-        expect(described_class.rate_for(author: author, resource: article)).to eq described_class.last
+        expect(described_class.rate_for(author: author, resource: article)).to eq record
       end
     end
   end
@@ -24,16 +28,79 @@ RSpec.describe Rating::Rate, ':rate_for' do
     let!(:category) { create :category }
 
     context 'when rate does not exist' do
-      specify { expect(described_class.rate_for(author: author, resource: article, scopeable: category)).to eq nil }
+      it do
+        expect(described_class.rate_for(author: author, resource: article, scopeable: category)).to eq nil
+      end
     end
 
-    context 'when rate does not exist' do
-      before { described_class.create author: author, metadata: {}, resource: article, scopeable: category, value: 3 }
+    context 'when rate exists' do
+      let!(:record) do
+        described_class.create(
+          author:       author,
+          extra_scopes: {},
+          metadata:     {},
+          resource:     article,
+          scopeable:    category,
+          value:        3
+        )
+      end
 
       it 'returns the record' do
         query = described_class.rate_for(author: author, resource: article, scopeable: category)
 
-        expect(query).to eq described_class.last
+        expect(query).to eq record
+      end
+    end
+  end
+
+  context 'with extra scopes' do
+    let!(:category) { create :category }
+
+    context 'when matches all attributes including the extra scopes' do
+      let!(:record) do
+        described_class.create(
+          author:       author,
+          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
+          metadata:     {},
+          resource:     article,
+          scopeable:    category,
+          value:        1
+        )
+      end
+
+      it 'returns the record' do
+        result = described_class.rate_for(
+          author:       author,
+          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
+          resource:     article,
+          scopeable:    category
+        )
+
+        expect(result).to eq record
+      end
+    end
+
+    context 'when matches all attributes but at least one extra scopes' do
+      let!(:record) do
+        described_class.create(
+          author:       author,
+          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
+          metadata:     {},
+          resource:     article,
+          scopeable:    category,
+          value:        1
+        )
+      end
+
+      it 'does not return the record' do
+        result = described_class.rate_for(
+          author:       author,
+          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_missing' },
+          resource:     article,
+          scopeable:    category
+        )
+
+        expect(result).to eq nil
       end
     end
   end

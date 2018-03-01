@@ -19,8 +19,9 @@ module Rating
       scope:          %i[author_type resource_id resource_type scopeable_id scopeable_type]
     }
 
-    def self.create(author:, metadata:, resource:, scopeable: nil, value:)
-      record = find_or_initialize_by(author: author, resource: resource, scopeable: scopeable)
+    def self.create(author:, extra_scopes:, metadata:, resource:, scopeable: nil, value:)
+      attributes = { author: author, resource: resource, scopeable: scopeable }.merge(extra_scopes)
+      record     = find_or_initialize_by(attributes)
 
       return record if record.persisted? && value == record.value
 
@@ -32,8 +33,10 @@ module Rating
       record
     end
 
-    def self.rate_for(author:, resource:, scopeable: nil)
-      find_by author: author, resource: resource, scopeable: scopeable
+    def self.rate_for(author:, extra_scopes: {}, resource:, scopeable: nil)
+      attributes = { author: author, resource: resource, scopeable: scopeable }.merge(extra_scopes)
+
+      find_by attributes
     end
 
     private
