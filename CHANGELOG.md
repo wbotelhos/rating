@@ -1,3 +1,14 @@
+## v0.7.0
+
+### News
+
+- Support to configure `uniqueness` validation via YAML into Rating::Rate model;
+- Support to multiple scopes via `extra_scopes` option.
+
+### Updates
+
+- Reverts v0.6.0, since we need this validation because we cannot edit the Rate model by ourself.
+
 ## v0.6.0
 
 ### Updates
