@@ -268,6 +268,8 @@ author.rate resource, 5, extra_scopes: { lead_id: lead.id }, scope: scope
 
 * The extra scopes fields is not present into gem, so you cannot use `{ lead: lead }`, for example.
 
+All methods listed on [Scope](#scope) session allows `extra_scopes` as additional condition too.
+
 ### Records
 
 Maybe you want to recover all records with or without scope, so you can add the suffix `_records` on relations:
@@ -360,12 +362,35 @@ You should just to provide a `config/rating.yml` file with the following content
 
 ```yml
 rating:
-  rate_table: 'reviews'
-  rating_table: 'review_ratings'
+  rate_table: reviews
+  rating_table: review_ratings
 ```
 
 Now the rates will be written on `reviews` table over `rating_rates` and calculation will be on `review_ratings` over `rating_ratings`.
 You can change one table o both of them.
+
+### Validations
+
+#### Rate Uniqueness
+
+Since you can to use [Extra Scopes](#extra_scopes) to restrict rates and the original model `Rating::Rate` is inside gem, you can configure the uniqueness validation, from outside, to include this extra scopes.
+
+```yml
+rating:
+  validations:
+    rate:
+      uniqueness:
+        case_sensitive: false
+
+        scope:
+          - author_type
+          - resource_id
+          - resource_type
+          - scopeable_id
+          - scopeable_type
+          - scope_1
+          - scope_2
+```
 
 ## Love it!
 
