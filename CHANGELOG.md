@@ -1,3 +1,9 @@
+## v0.8.0
+
+### News
+
+- Adds `unscoped_rating` option to calculate the rating counting all resource record ignoring the scope.
+
 ## v0.7.0
 
 ### News

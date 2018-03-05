@@ -392,6 +392,24 @@ rating:
           - scope_2
 ```
 
+### Unscoped Rating
+
+All rating values are grouped by the scope, but you can disable it and group all of them.
+
+```ruby
+rating unscoped_rating: true
+
+author   = User.last
+resource = Article.last
+scope    = Category.last
+
+author.rate resource, 1, scope: scope
+author.rate resource, 2, scope: scope
+author.rate resource, 3
+```
+
+Now the `sum` will be `6` and the `total` will be `3` because all rating will be calculated into just one rating record ignoring the `scopeable` object. The rating record is always saved on the record with `scopeable` as `nil`.
+
 ## Love it!
 
 Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Patreon](https://www.patreon.com/wbotelhos). Thanks! (:
