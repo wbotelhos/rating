@@ -18,8 +18,8 @@ module Rating
 
     class << self
       def averager_data(resource, scopeable)
-        total_count    = how_many_resource_received_votes_sql?(distinct: false, scopeable: scopeable)
-        distinct_count = how_many_resource_received_votes_sql?(distinct: true, scopeable: scopeable)
+        total_count    = how_many_resource_received_votes_sql(distinct: false, resource: resource, scopeable: scopeable)
+        distinct_count = how_many_resource_received_votes_sql(distinct: true, resource: resource, scopeable: scopeable)
         values         = { resource_type: resource.class.base_class.name }
 
         values[:scopeable_type] = scopeable.class.base_class.name unless scopeable.nil?
@@ -29,7 +29,7 @@ module Rating
             (CAST(#{total_count} AS DECIMAL(17, 14)) / #{distinct_count}) count_avg,
             COALESCE(AVG(value), 0)                                       rating_avg
           FROM #{rate_table_name}
-          WHERE resource_type = :resource_type AND #{scope_type_query(scopeable)}
+          WHERE resource_type = :resource_type #{scope_type_query(resource, scopeable)}
         ).squish
 
         execute_sql [sql, values]
@@ -48,29 +48,26 @@ module Rating
       end
 
       def values_data(resource, scopeable)
-        scope_query = if scopeable.nil?
-                        'scopeable_type is NULL AND scopeable_id is NULL'
-                      else
-                        'scopeable_type = ? AND scopeable_id = ?'
-                      end
-
         sql = %(
           SELECT
             COALESCE(AVG(value), 0) rating_avg,
             COALESCE(SUM(value), 0) rating_sum,
             COUNT(1)                rating_count
           FROM #{rate_table_name}
-          WHERE resource_type = ? AND resource_id = ? AND #{scope_query}
+          WHERE resource_type = ? AND resource_id = ? #{scope_type_and_id_query(resource, scopeable)}
         ).squish
 
         values =  [sql, resource.class.base_class.name, resource.id]
-        values += [scopeable.class.base_class.name, scopeable.id] unless scopeable.nil?
+        values += [scopeable.class.base_class.name, scopeable.id] unless scopeable.nil? || unscoped_rating?(resource)
 
         execute_sql values
       end
 
       def update_rating(resource, scopeable)
-        record = find_or_initialize_by(resource: resource, scopeable: scopeable)
+        attributes             = { resource: resource }
+        attributes[:scopeable] = unscoped_rating?(resource) ? nil : scopeable
+
+        record = find_or_initialize_by(attributes)
         result = data(resource, scopeable)
 
         record.average  = result[:average]
@@ -97,13 +94,17 @@ module Rating
         Rate.find_by_sql(sql).first
       end
 
-      def how_many_resource_received_votes_sql?(distinct:, scopeable:)
+      def unscoped_rating?(resource)
+        resource.rating_options[:unscoped_rating]
+      end
+
+      def how_many_resource_received_votes_sql(distinct:, resource:, scopeable:)
         count = distinct ? 'COUNT(DISTINCT resource_id)' : 'COUNT(1)'
 
         %((
           SELECT GREATEST(#{count}, 1)
           FROM #{rate_table_name}
-          WHERE resource_type = :resource_type AND #{scope_type_query(scopeable)}
+          WHERE resource_type = :resource_type #{scope_type_query(resource, scopeable)}
         ))
       end
 
@@ -111,8 +112,17 @@ module Rating
         @rate_table_name ||= Rate.table_name
       end
 
-      def scope_type_query(scopeable)
-        scopeable.nil? ? 'scopeable_type is NULL' : 'scopeable_type = :scopeable_type'
+      def scope_type_query(resource, scopeable)
+        return '' if unscoped_rating?(resource)
+
+        scopeable.nil? ? 'AND scopeable_type is NULL' : 'AND scopeable_type = :scopeable_type'
+      end
+
+      def scope_type_and_id_query(resource, scopeable)
+        return '' if unscoped_rating?(resource)
+        return 'AND scopeable_type is NULL AND scopeable_id is NULL' if scopeable.nil?
+
+        'AND scopeable_type = ? AND scopeable_id = ?'
       end
     end
   end

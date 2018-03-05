@@ -6,6 +6,7 @@ class CreateCategoriesTable < ActiveRecord::Migration[5.0]
       t.string :name, null: false
 
       t.references :article, foreign_key: true, index: true
+      t.references :global,  foreign_key: true, index: true
     end
   end
 end

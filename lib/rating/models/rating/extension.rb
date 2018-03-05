@@ -55,8 +55,8 @@ module Rating
     end
 
     module ClassMethods
-      def rating(as: nil, scoping: nil)
-        after_create -> { rating_warm_up scoping: scoping }, unless: -> { as == :author }
+      def rating(options = {})
+        after_create -> { rating_warm_up scoping: options[:scoping] }, unless: -> { options[:as] == :author }
 
         has_many :rating_records,
           as:         :resource,
@@ -78,6 +78,10 @@ module Rating
             .where(Rating.table_name => { scopeable_id: scope&.id, scopeable_type: scope&.class&.base_class&.name })
             .order("#{Rating.table_name}.#{column} #{direction}")
         }
+
+        define_method :rating_options do
+          options
+        end
       end
     end
   end

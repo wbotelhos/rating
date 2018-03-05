@@ -7,7 +7,10 @@ Dir[File.expand_path('db/migrate/*.rb', __dir__)].each { |file| require file }
 
 CreateArticlesTable.new.change
 CreateAuthorsTable.new.change
+
+CreateGlobalsTable.new.change
 CreateCategoriesTable.new.change
+
 CreateCommentsTable.new.change
 CreateRateTable.new.change
 CreateRatingTable.new.change
