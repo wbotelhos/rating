@@ -14,7 +14,7 @@ class CreateRatingTable < ActiveRecord::Migration[5.0]
       t.timestamps null: false
     end
 
-    add_index :rating_ratings, %i[resource_id resource_type scopeable_id scopeable_type],
+    add_index :rating_ratings, %i[resource_type resource_id scopeable_type scopeable_id],
       name:   :index_rating_rating_on_resource_and_scopeable,
       unique: true
   end

@@ -12,7 +12,7 @@ class CreateRateTable < ActiveRecord::Migration[5.0]
       t.timestamps null: false
     end
 
-    add_index :rating_rates, %i[author_id author_type resource_id resource_type scopeable_id scopeable_type],
+    add_index :rating_rates, %i[author_type author_id resource_type resource_id scopeable_type scopeable_id],
       name:   :index_rating_rates_on_author_and_resource_and_scopeable,
       unique: true
   end
