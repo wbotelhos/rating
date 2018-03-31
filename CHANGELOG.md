@@ -1,3 +1,10 @@
+## next version
+
+### News
+
+- Order index keys of template the same way Rails does the query;
+- Limits the `_type` columns to avoid overflow bytes in DBs like MySQL < 5.7.
+
 ## v0.8.0
 
 ### News
