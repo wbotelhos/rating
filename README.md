@@ -410,6 +410,6 @@ author.rate resource, 3
 
 Now the `sum` will be `6` and the `total` will be `3` because all rating will be calculated into just one rating record ignoring the `scopeable` object. The rating record is always saved on the record with `scopeable` as `nil`.
 
-## Love it!
+### References
 
-Via [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=X8HEP2878NDEG&item_name=rating) or [Patreon](https://www.patreon.com/wbotelhos). Thanks! (:
+- [Evan Miller](http://www.evanmiller.org/ranking-items-with-star-ratings.html)
