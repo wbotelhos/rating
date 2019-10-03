@@ -1,9 +1,14 @@
-## next version
+## v0.9.0
 
 ### News
 
 - Order index keys of template the same way Rails does the query;
 - Limits the `_type` columns to avoid overflow bytes in DBs like MySQL < 5.7.
+
+### Updates
+
+- Update Rails to 2.6.5;
+- Update Activerecord to the last version;
 
 ## v0.8.0
 
