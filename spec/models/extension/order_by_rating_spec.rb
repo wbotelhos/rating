@@ -11,7 +11,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       expect(Article.order_by_rating).to eq [
         article_1,
         article_2,
-        article_3
+        article_3,
       ]
     end
   end
@@ -22,14 +22,14 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
         expect(Article.order_by_rating(:average, :asc)).to eq [
           article_3,
           article_2,
-          article_1
+          article_1,
         ]
       end
 
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:average, :asc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end
@@ -40,14 +40,14 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
         expect(Article.order_by_rating(:average, :desc)).to eq [
           article_1,
           article_2,
-          article_3
+          article_3,
         ]
       end
 
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:average, :desc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end
@@ -60,14 +60,14 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
         expect(Article.order_by_rating(:estimate, :asc)).to eq [
           article_3,
           article_2,
-          article_1
+          article_1,
         ]
       end
 
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:estimate, :asc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end
@@ -78,14 +78,14 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
         expect(Article.order_by_rating(:estimate, :desc)).to eq [
           article_1,
           article_2,
-          article_3
+          article_3,
         ]
       end
 
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:estimate, :desc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end
@@ -98,14 +98,14 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
         expect(Article.order_by_rating(:sum, :asc)).to eq [
           article_3,
           article_2,
-          article_1
+          article_1,
         ]
       end
 
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:sum, :asc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end
@@ -116,14 +116,14 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
         expect(Article.order_by_rating(:sum, :desc)).to eq [
           article_1,
           article_2,
-          article_3
+          article_3,
         ]
       end
 
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:sum, :desc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end
@@ -142,7 +142,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:total, :asc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end
@@ -159,7 +159,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       context 'with scope' do
         it 'works' do
           expect(Article.order_by_rating(:total, :desc, scope: category)).to eq [
-            article_1
+            article_1,
           ]
         end
       end

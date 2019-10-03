@@ -32,15 +32,17 @@ RSpec.describe Rating::Extension, ':rated?' do
     end
   end
 
-  context 'with extra scopes' do
-    before { author.rate resource, 1, extra_scopes: { scope_1: 'scope_1' } }
+  if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
+    context 'with extra scopes' do
+      before { author.rate resource, 1, extra_scopes: { scope_1: 'scope_1' } }
 
-    context 'when has no rate for the given resource with given extra scopes' do
-      specify { expect(author.rated?(resource, extra_scopes: { scope_1: 'missing' })).to eq false }
-    end
+      context 'when has no rate for the given resource with given extra scopes' do
+        specify { expect(author.rated?(resource, extra_scopes: { scope_1: 'missing' })).to eq false }
+      end
 
-    context 'when has rate for the given resource with given extra scopes' do
-      specify { expect(author.rated?(resource, extra_scopes: { scope_1: 'scope_1' })).to eq true }
+      context 'when has rate for the given resource with given extra scopes' do
+        specify { expect(author.rated?(resource, extra_scopes: { scope_1: 'scope_1' })).to eq true }
+      end
     end
-  end if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
+  end
 end

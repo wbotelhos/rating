@@ -1,9 +1,15 @@
-require: rubocop-rspec
+require:
+  - rubocop-performance
+  - rubocop-rspec
 
 inherit_from: .rubocop_todo.yml
 
-Rails:
-  Enabled: true
+Layout/AlignArguments:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/AlignHash:
+  EnforcedColonStyle: table
+  Enabled: false
 
 Layout/AlignParameters:
   EnforcedStyle: with_fixed_indentation
@@ -11,14 +17,32 @@ Layout/AlignParameters:
 Layout/EmptyLinesAroundArguments:
   Enabled: false
 
-Rails/ApplicationRecord:
+Layout/MultilineMethodCallBraceLayout:
+  EnforcedStyle: new_line
+
+Metrics/AbcSize:
+  Max: 50
+
+Metrics/BlockLength:
   Enabled: false
 
-RSpec/DescribeMethod:
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Max: 50
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+Rails:
+  Enabled: true
+
+RSpec/AnyInstance:
   Enabled: false
 
 RSpec/ExampleLength:
-  Max: 10
+  Enabled: false
 
 RSpec/FilePath:
   Enabled: false
@@ -28,12 +52,6 @@ RSpec/MultipleExpectations:
 
 RSpec/NestedGroups:
   Max: 5
-
-Metrics/LineLength:
-  Max: 120
-
-Naming/VariableNumber:
-  EnforcedStyle: snake_case
 
 Style/Documentation:
   Enabled: false
@@ -46,3 +64,12 @@ Style/PercentLiteralDelimiters:
     '%r': '()'
     '%w': '[]'
     '%W': '[]'
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

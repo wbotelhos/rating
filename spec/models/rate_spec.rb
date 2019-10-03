@@ -16,7 +16,7 @@ RSpec.describe Rating::Rate do
   it { is_expected.to validate_presence_of :value }
 
   it do
-    is_expected.to validate_numericality_of(:value).is_less_than_or_equal_to(100).is_less_than_or_equal_to 100
+    expect(subject).to validate_numericality_of(:value).is_less_than_or_equal_to(100).is_less_than_or_equal_to 100
   end
 
   it do

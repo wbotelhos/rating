@@ -13,7 +13,7 @@ module Rating
 
     validates :resource_id, uniqueness: {
       case_sensitive: false,
-      scope:          %i[resource_type scopeable_id scopeable_type]
+      scope:          %i[resource_type scopeable_id scopeable_type],
     }
 
     class << self
@@ -43,7 +43,7 @@ module Rating
           average:  values.rating_avg,
           estimate: estimate(averager, values),
           sum:      values.rating_sum,
-          total:    values.rating_count
+          total:    values.rating_count,
         }
       end
 

@@ -51,55 +51,57 @@ RSpec.describe Rating::Rate, ':rate_for' do
     end
   end
 
-  context 'with extra scopes' do
-    let!(:category) { create :category }
+  if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
+    context 'with extra scopes' do
+      let!(:category) { create :category }
 
-    context 'when matches all attributes including the extra scopes' do
-      let!(:record) do
-        described_class.create(
-          author:       author,
-          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
-          metadata:     {},
-          resource:     article,
-          scopeable:    category,
-          value:        1
-        )
+      context 'when matches all attributes including the extra scopes' do
+        let!(:record) do
+          described_class.create(
+            author:       author,
+            extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
+            metadata:     {},
+            resource:     article,
+            scopeable:    category,
+            value:        1
+          )
+        end
+
+        it 'returns the record' do
+          result = described_class.rate_for(
+            author:       author,
+            extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
+            resource:     article,
+            scopeable:    category
+          )
+
+          expect(result).to eq record
+        end
       end
 
-      it 'returns the record' do
-        result = described_class.rate_for(
-          author:       author,
-          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
-          resource:     article,
-          scopeable:    category
-        )
+      context 'when matches all attributes but at least one extra scopes' do
+        before do
+          described_class.create(
+            author:       author,
+            extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
+            metadata:     {},
+            resource:     article,
+            scopeable:    category,
+            value:        1
+          )
+        end
 
-        expect(result).to eq record
+        it 'does not return the record' do
+          result = described_class.rate_for(
+            author:       author,
+            extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_missing' },
+            resource:     article,
+            scopeable:    category
+          )
+
+          expect(result).to eq nil
+        end
       end
     end
-
-    context 'when matches all attributes but at least one extra scopes' do
-      before do
-        described_class.create(
-          author:       author,
-          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
-          metadata:     {},
-          resource:     article,
-          scopeable:    category,
-          value:        1
-        )
-      end
-
-      it 'does not return the record' do
-        result = described_class.rate_for(
-          author:       author,
-          extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_missing' },
-          resource:     article,
-          scopeable:    category
-        )
-
-        expect(result).to eq nil
-      end
-    end
-  end if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
+  end
 end

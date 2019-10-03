@@ -38,11 +38,13 @@ RSpec.describe Rating::Extension, ':rated' do
     end
   end
 
-  context 'with extra scopes' do
-    let!(:extra_scopes_rate) { author_1.rate article_1, 1, extra_scopes: { scope_1: 'scope_1' } }
+  if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
+    context 'with extra scopes' do
+      let!(:extra_scopes_rate) { author_1.rate article_1, 1, extra_scopes: { scope_1: 'scope_1' } }
 
-    it 'returns records considering the extra scopes' do
-      expect(author_1.rated(extra_scopes: { scope_1: 'scope_1' })).to eq [extra_scopes_rate]
+      it 'returns records considering the extra scopes' do
+        expect(author_1.rated(extra_scopes: { scope_1: 'scope_1' })).to eq [extra_scopes_rate]
+      end
     end
-  end if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
+  end
 end
