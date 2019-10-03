@@ -10,7 +10,7 @@ RSpec.describe Rating::Rating, ':averager_data' do
     subject(:result) { described_class.averager_data article_1, nil }
 
     it 'returns the values average of given resource type' do
-      expect(result.as_json['rating_avg']).to eq 30.5
+      expect(result.as_json['rating_avg'].to_f.to_s).to eq '30.5'
     end
 
     it 'returns the average of number of records for the given resource type' do
@@ -22,11 +22,11 @@ RSpec.describe Rating::Rating, ':averager_data' do
     subject(:result) { described_class.averager_data article_1, category }
 
     it 'returns the values average of given resource type' do
-      expect(result.as_json['rating_avg']).to eq 1.5
+      expect(result.as_json['rating_avg'].to_f.to_s).to eq '1.5'
     end
 
     it 'returns the average of number of records for the given resource type' do
-      expect(result.as_json['count_avg']).to eq 2
+      expect(result.as_json['count_avg'].to_f.to_s).to eq '2.0'
     end
   end
 end
