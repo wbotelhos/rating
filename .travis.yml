@@ -1,5 +1,8 @@
 language: ruby
 
+rvm:
+  - 2.6
+
 script:
   - bundle exec rake spec
   - bundle exec rake spec_config
