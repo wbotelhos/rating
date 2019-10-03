@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.test_files  = Dir['spec/**/*']
   spec.version     = Rating::VERSION
 
-  spec.add_dependency 'activerecord', '>= 4.2', '< 6'
+  spec.add_dependency 'activerecord'
 
   spec.add_development_dependency 'database_cleaner'
   spec.add_development_dependency 'factory_bot_rails'
