@@ -138,24 +138,20 @@ author.rated? resource
 
 ### rates
 
-You can retrieve all rates received by some resource:
+All rating received.
 
 ```ruby
-resource = Article.last
-
-resource.rates
+Article.first.rates
 ```
 
 It will return a collection of `Rate` object.
 
 ### rated
 
-In the same way you can retrieve all rates that some author received:
+All rating given.
 
 ```ruby
-author = Author.last
-
-author.rated
+Author.first.rated
 ```
 
 It will return a collection of `Rate` object.
