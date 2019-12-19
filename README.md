@@ -345,7 +345,7 @@ If you need to warm up a record with scope, you need to setup the `scoping` rela
 
 ```ruby
 class Resource < ApplicationRecord
-  voting scoping: :categories
+  rating scoping: :categories
 end
 ```
 

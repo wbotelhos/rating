@@ -85,7 +85,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     end
   end
 
-  context 'when is true and have a non scopeable record first on dabase' do
+  context 'when is true and have a non scopeable record first on database' do
     let!(:resource) { create :global }
 
     before { ::Rating::Rating.create resource: resource, scopeable: scope }

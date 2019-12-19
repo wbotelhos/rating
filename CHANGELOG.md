@@ -7,7 +7,7 @@
 
 ### Updates
 
-- Update Rails to 2.6.5;
+- Update Ruby to 2.6.5;
 - Update Activerecord to the last version;
 
 ## v0.8.0
