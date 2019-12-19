@@ -62,29 +62,6 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     end
   end
 
-  context 'when is true' do
-    let!(:resource) { create :global }
-
-    it 'groups in the same line record' do
-      author_1.rate resource, 1, scope: scope
-      author_2.rate resource, 2, scope: scope
-      author_1.rate resource, 5
-
-      ratings = Rating::Rating.all.order('id')
-
-      expect(ratings.size).to eq 1
-
-      rating = ratings[0]
-
-      expect(rating.average.to_s).to  eq '2.6666666666666667'
-      expect(rating.estimate.to_s).to eq '2.6666666666666667'
-      expect(rating.resource).to      eq resource
-      expect(rating.scopeable).to     eq nil
-      expect(rating.sum).to           eq 8
-      expect(rating.total).to         eq 3
-    end
-  end
-
   context 'when is true and have a non scopeable record first on database' do
     let!(:resource) { create :global }
 
