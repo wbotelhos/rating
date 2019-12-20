@@ -29,7 +29,10 @@ module Rating
             (CAST(#{total_count} AS DECIMAL(17, 14)) / #{distinct_count}) count_avg,
             COALESCE(AVG(value), 0)                                       rating_avg
           FROM #{rate_table_name}
-          WHERE resource_type = :resource_type #{scope_type_query(resource, scopeable)}
+          WHERE
+            resource_type = :resource_type
+            #{scope_type_query(resource, scopeable)}
+            #{scope_where_query(resource)}
         ).squish
 
         execute_sql [sql, values]
@@ -54,7 +57,11 @@ module Rating
             COALESCE(SUM(value), 0) rating_sum,
             COUNT(1)                rating_count
           FROM #{rate_table_name}
-          WHERE resource_type = ? AND resource_id = ? #{scope_type_and_id_query(resource, scopeable)}
+          WHERE
+            resource_type = ?
+            AND resource_id = ?
+            #{scope_type_and_id_query(resource, scopeable)}
+            #{scope_where_query(resource)}
         ).squish
 
         values =  [sql, resource.class.base_class.name, resource.id]
@@ -104,7 +111,10 @@ module Rating
         %((
           SELECT GREATEST(#{count}, 1)
           FROM #{rate_table_name}
-          WHERE resource_type = :resource_type #{scope_type_query(resource, scopeable)}
+          WHERE
+            resource_type = :resource_type
+            #{scope_type_query(resource, scopeable)}
+            #{scope_where_query(resource)}
         ))
       end
 
@@ -123,6 +133,16 @@ module Rating
         return 'AND scopeable_type is NULL AND scopeable_id is NULL' if scopeable.nil?
 
         'AND scopeable_type = ? AND scopeable_id = ?'
+      end
+
+      def scope_where_query(resource)
+        return '' if where_condition(resource).blank?
+
+        "AND #{where_condition(resource)}"
+      end
+
+      def where_condition(resource)
+        resource.rating_options[:where]
       end
     end
   end

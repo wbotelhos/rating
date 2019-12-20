@@ -7,6 +7,7 @@ CreateRatingTable.new.change
 
 CreateArticlesTable.new.change
 CreateAuthorsTable.new.change
+CreateToysTable.new.change
 
 CreateGlobalsTable.new.change
 CreateCategoriesTable.new.change
