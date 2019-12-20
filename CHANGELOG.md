@@ -1,3 +1,9 @@
+## v0.10.0
+
+### News
+
+- Add option `where` to be able adds conditions on `Rating::Rate`.
+
 ## v0.9.0
 
 ### News

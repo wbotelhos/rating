@@ -406,6 +406,22 @@ author.rate resource, 3
 
 Now the `sum` will be `6` and the `total` will be `3` because all rating will be calculated into just one rating record ignoring the `scopeable` object. The rating record is always saved on the record with `scopeable` as `nil`.
 
+### where
+
+The `where` option can be used to filter the `Rating::Rate` records used to create the final `Rating::Rating`. You can filter only approved rates, for exemplo:
+
+```ruby
+rating where: 'approved = true'
+
+author   = User.last
+resource = Article.last
+
+author.rate resource, 1, extra_scope: { approved: false }
+author.rate resource, 5, extra_scope: { approved: true }
+```
+
+As you can see, now, only the rate with value `5` will be included on the final rating.
+
 ### References
 
 - [Evan Miller](http://www.evanmiller.org/ranking-items-with-star-ratings.html)
