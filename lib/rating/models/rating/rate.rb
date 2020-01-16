@@ -34,9 +34,7 @@ module Rating
     end
 
     def self.rate_for(author:, extra_scopes: {}, resource:, scopeable: nil)
-      attributes = { author: author, resource: resource, scopeable: scopeable }.merge(extra_scopes)
-
-      find_by attributes
+      find_by extra_scopes.merge(author: author, resource: resource, scopeable: scopeable)
     end
 
     private
