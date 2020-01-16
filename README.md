@@ -390,7 +390,7 @@ rating:
 
 ### Unscoped Rating
 
-All rating values are grouped by the scope, but you can disable it and group all of them.
+All rating values are grouped by its own scope, but you can disable it and group all of them together.
 
 ```ruby
 rating unscoped_rating: true
@@ -404,7 +404,8 @@ author.rate resource, 2, scope: scope
 author.rate resource, 3
 ```
 
-Now the `sum` will be `6` and the `total` will be `3` because all rating will be calculated into just one rating record ignoring the `scopeable` object. The rating record is always saved on the record with `scopeable` as `nil`.
+Now the `sum` will be `6` and the `total` will be `3` because all rating will be calculated into just one rating record ignoring the `scopeable` object.
+The rating record is *always* saved on the record with `scopeable` as `nil`.
 
 ### where
 
