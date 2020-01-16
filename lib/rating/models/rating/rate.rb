@@ -23,8 +23,6 @@ module Rating
       attributes = { author: author, resource: resource, scopeable: scopeable }.merge(extra_scopes)
       record     = find_or_initialize_by(attributes)
 
-      return record if record.persisted? && value == record.value
-
       metadata.each { |k, v| record[k] = v } if metadata.present?
 
       record.value = value

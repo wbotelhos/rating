@@ -192,6 +192,64 @@ RSpec.describe Rating::Rate, ':create' do
         expect(rate.value).to    eq 3
       end
     end
+
+    context 'when already has an entry' do
+      before do
+        described_class.create(
+          author:       author,
+          extra_scopes: {},
+          metadata:     { comment: 'comment' },
+          resource:     article,
+          value:        1
+        )
+      end
+
+      context 'when value is the same' do
+        it 'still updates metadata' do
+          described_class.create(
+            author:       author,
+            extra_scopes: {},
+            metadata:     { comment: 'comment.updated' },
+            resource:     article,
+            value:        1
+          )
+
+          rates = described_class.all
+
+          expect(rates.size).to eq 1
+
+          rate = rates[0]
+
+          expect(rate.author).to   eq author
+          expect(rate.comment).to  eq 'comment.updated'
+          expect(rate.resource).to eq article
+          expect(rate.value).to    eq 1
+        end
+      end
+
+      context 'when value is different same' do
+        it 'still updates metadata' do
+          described_class.create(
+            author:       author,
+            extra_scopes: {},
+            metadata:     { comment: 'comment.updated' },
+            resource:     article,
+            value:        2
+          )
+
+          rates = described_class.all
+
+          expect(rates.size).to eq 1
+
+          rate = rates[0]
+
+          expect(rate.author).to   eq author
+          expect(rate.comment).to  eq 'comment.updated'
+          expect(rate.resource).to eq article
+          expect(rate.value).to    eq 2
+        end
+      end
+    end
   end
 
   if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
