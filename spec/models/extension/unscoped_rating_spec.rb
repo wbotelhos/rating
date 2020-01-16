@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe Rating::Extension, 'unscoped_rating' do
   let!(:author_1) { create :author }
   let!(:author_2) { create :author }
+  let!(:author_3) { create :author }
   let!(:scope)    { create :category }
 
   context 'when is false' do
@@ -13,7 +14,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     it 'groups in different line record' do
       author_1.rate resource, 1, scope: scope
       author_2.rate resource, 2, scope: scope
-      author_1.rate resource, 5
+      author_2.rate resource, 5
 
       ratings = Rating::Rating.all.order('id')
 
@@ -45,7 +46,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     it 'groups in the same line record' do
       author_1.rate resource, 1, scope: scope
       author_2.rate resource, 2, scope: scope
-      author_1.rate resource, 5
+      author_2.rate resource, 5
 
       ratings = Rating::Rating.all.order('id')
 
@@ -62,15 +63,15 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     end
   end
 
-  context 'when is true and have a non scopeable record first on database' do
+  context 'when is true and have a non scoped record first on database' do
     let!(:resource) { create :global }
 
     before { ::Rating::Rating.create resource: resource, scopeable: scope }
 
-    it 'groups in the line with no scope' do
+    it 'sets the result on record with no scope' do
       author_1.rate resource, 1, scope: scope
       author_2.rate resource, 2, scope: scope
-      author_1.rate resource, 5
+      author_3.rate resource, 5
 
       ratings = Rating::Rating.all.order('id')
 
