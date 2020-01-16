@@ -1,3 +1,9 @@
+## v0.11.0
+
+### Updates
+
+- Same rate value hits DB to update metadata.
+
 ## v0.10.0
 
 ### News

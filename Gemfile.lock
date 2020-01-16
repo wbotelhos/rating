@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rating (0.10.0)
+    rating (0.11.0)
       activerecord
 
 GEM
@@ -117,7 +117,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.6)
       thread_safe (~> 0.1)
-    unicode-display_width (1.6.0)
+    unicode-display_width (1.6.1)
     zeitwerk (2.2.2)
 
 PLATFORMS
