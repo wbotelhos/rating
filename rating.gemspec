@@ -1,23 +1,19 @@
 # frozen_string_literal: true
 
-lib = File.expand_path('lib', __dir__)
-
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-
-require 'rating/version'
+require_relative 'lib/rating/version'
 
 Gem::Specification.new do |spec|
-  spec.author      = 'Washington Botelho'
-  spec.description = 'A true Bayesian rating system with scope and cache enabled.'
-  spec.email       = 'wbotelhos@gmail.com'
-  spec.files       = Dir['lib/**/*'] + %w[CHANGELOG.md LICENSE README.md]
-  spec.homepage    = 'https://github.com/wbotelhos/rating'
-  spec.license     = 'MIT'
-  spec.name        = 'rating'
-  spec.platform    = Gem::Platform::RUBY
-  spec.summary     = 'A true Bayesian rating system with scope and cache enabled.'
-  spec.test_files  = Dir['spec/**/*']
-  spec.version     = Rating::VERSION
+  spec.author           = 'Washington Botelho'
+  spec.description      = 'A true Bayesian rating system with scope and cache enabled.'
+  spec.email            = 'wbotelhos@gmail.com'
+  spec.extra_rdoc_files = Dir['CHANGELOG.md', 'LICENSE', 'README.md']
+  spec.files            = `git ls-files lib`.split("\n")
+  spec.homepage         = 'https://github.com/wbotelhos/rating'
+  spec.license          = 'MIT'
+  spec.name             = 'rating'
+  spec.summary          = 'A true Bayesian rating system with scope and cache enabled.'
+  spec.test_files       = Dir['spec/**/*']
+  spec.version          = Rating::VERSION
 
   spec.add_dependency 'activerecord'
 
