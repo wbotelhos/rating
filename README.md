@@ -51,15 +51,15 @@ Add the following code on your `Gemfile` and run `bundle install`:
 gem 'rating'
 ```
 
-Run the following task to create a Rating migration:
+Run the following task to create the Rating migration:
 
-```bash
+```sh
 rails g rating:install
 ```
 
 Then execute the migrations to create the to create tables `rating_rates` and `rating_ratings`:
 
-```bash
+```sh
 rake db:migrate
 ```
 
