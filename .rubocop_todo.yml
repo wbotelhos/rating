@@ -51,7 +51,7 @@ Metrics/ParameterLists:
 # AllowedIdentifiers: capture3, iso8601, rfc1123_date, rfc822, rfc2822, rfc3339
 Naming/VariableNumber:
   Exclude:
-    - 'spec/support/mysql.rb'
+    - 'spec/support/database.rb'
 
 # Offense count: 9
 # This cop supports safe auto-correction (--auto-correct).

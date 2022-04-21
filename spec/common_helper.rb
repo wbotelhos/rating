@@ -9,7 +9,7 @@ require 'debug'
 require 'rating'
 
 require 'support/common'
-require 'support/mysql'
+require 'support/database'
 require 'support/database_cleaner'
 require 'support/factory_bot'
 require 'support/migrate'
