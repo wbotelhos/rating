@@ -8,7 +8,8 @@ RSpec.describe Rating::Extension, ':rate_for' do
 
   context 'with no scopeable' do
     it 'delegates to rate object' do
-      expect(Rating::Rate).to receive(:rate_for).with author: author, extra_scopes: {}, resource: article, scopeable: nil
+      expect(Rating::Rate).to receive(:rate_for).with author: author, extra_scopes: {}, resource: article,
+        scopeable: nil
 
       author.rate_for article
     end
@@ -18,7 +19,8 @@ RSpec.describe Rating::Extension, ':rate_for' do
     let!(:category) { build :category }
 
     it 'delegates to rate object' do
-      expect(Rating::Rate).to receive(:rate_for).with author: author, extra_scopes: {}, resource: article, scopeable: category
+      expect(Rating::Rate).to receive(:rate_for).with author: author, extra_scopes: {}, resource: article,
+        scopeable: category
 
       author.rate_for article, scope: category
     end

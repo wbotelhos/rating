@@ -1,17 +1,18 @@
 require:
   - rubocop-performance
+  - rubocop-rails
   - rubocop-rspec
 
 inherit_from: .rubocop_todo.yml
 
-Layout/AlignArguments:
+Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedColonStyle: table
   Enabled: false
 
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 
 Layout/EmptyLinesAroundArguments:
