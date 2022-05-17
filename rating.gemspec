@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.description      = 'A true Bayesian rating system with scope and cache enabled.'
   spec.email            = 'wbotelhos@gmail.com'
   spec.extra_rdoc_files = Dir['CHANGELOG.md', 'LICENSE', 'README.md']
-  spec.files            = `git ls-files lib`.split("\n")
+  spec.files            = Dir['lib/**/*']
   spec.homepage         = 'https://github.com/wbotelhos/rating'
   spec.license          = 'MIT'
   spec.name             = 'rating'
