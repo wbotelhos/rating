@@ -51,7 +51,12 @@ RSpec.describe Rating::Extension, ':rate' do
   context 'with extra_scopes' do
     it 'delegates to rate object' do
       expect(Rating::Rate).to receive(:create).with(
-        author: author, extra_scopes: { scope_1: 'scope_1' }, metadata: { comment: 'comment' }, resource: article, scopeable: nil, value: 3
+        author: author,
+        extra_scopes: { scope_1: 'scope_1' },
+        metadata: { comment: 'comment' },
+        resource: article,
+        scopeable: nil,
+        value: 3
       )
 
       author.rate article, 3, extra_scopes: { scope_1: 'scope_1' }, metadata: { comment: 'comment' }

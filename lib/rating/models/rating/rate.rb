@@ -19,7 +19,7 @@ module Rating
       scope:          ::Rating::Config.validations['rate']['scope'].map(&:to_sym),
     }
 
-    def self.create(author:, extra_scopes:, metadata:, resource:, scopeable: nil, value:)
+    def self.create(author:, extra_scopes:, metadata:, resource:, value:, scopeable: nil)
       attributes = { author: author, resource: resource, scopeable: scopeable }.merge(extra_scopes)
       record     = find_or_initialize_by(attributes)
 
@@ -31,7 +31,7 @@ module Rating
       record
     end
 
-    def self.rate_for(author:, extra_scopes: {}, resource:, scopeable: nil)
+    def self.rate_for(author:, resource:, extra_scopes: {}, scopeable: nil)
       find_by extra_scopes.merge(author: author, resource: resource, scopeable: scopeable)
     end
 
