@@ -12,7 +12,6 @@ Gem::Specification.new do |spec|
   spec.license          = 'MIT'
   spec.name             = 'rating'
   spec.summary          = 'A true Bayesian rating system with scope and cache enabled.'
-  spec.test_files       = Dir['spec/**/*']
   spec.version          = Rating::VERSION
 
   spec.add_dependency 'activerecord'
