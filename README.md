@@ -423,6 +423,16 @@ author.rate resource, 5, extra_scope: { approved: true }
 
 As you can see, now, only the rate with value `5` will be included on the final rating.
 
+### Specs
+
+To run all specs, run the following rakes:
+
+```sh
+bundle exec rake spec
+bundle exec rake spec_config
+bundle exec rake spec_config_with_extra_scopes
+```
+
 ### References
 
 - [Evan Miller](http://www.evanmiller.org/ranking-items-with-star-ratings.html)
