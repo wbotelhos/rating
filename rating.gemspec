@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.files            = Dir['lib/**/*']
   spec.homepage         = 'https://github.com/wbotelhos/rating'
   spec.license          = 'MIT'
+  spec.metadata         = { 'rubygems_mfa_required' => 'true' }
   spec.name             = 'rating'
   spec.summary          = 'A true Bayesian rating system with scope and cache enabled.'
   spec.version          = Rating::VERSION
