@@ -28,7 +28,7 @@ jobs:
           MYSQL_DATABASE: rating_test
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
-        image: mysql:8
+        image: mysql:alpine
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
         ports:
@@ -40,7 +40,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_HOST_AUTH_METHOD: trust
 
-        image: postgres
+        image: postgres:alpine
 
         options: >-
           --health-cmd pg_isready
