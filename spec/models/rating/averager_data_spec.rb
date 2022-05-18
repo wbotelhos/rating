@@ -13,7 +13,13 @@ RSpec.describe Rating::Rating, ':averager_data' do
     end
 
     it 'returns the average of number of records for the given resource type' do
-      expect(result.count_avg).to eq(BigDecimal('1.333333333333333333'))
+      if ENV.fetch('DB') == 'mysql'
+        expect(result.count_avg).to eq(BigDecimal('1.333333333333333333'))
+      elsif ENV.fetch('DB') == 'postgres'
+        expect(result.count_avg).to eq(BigDecimal('1.3333333333333333'))
+      else
+        raise('DB env missing!')
+      end
     end
   end
 

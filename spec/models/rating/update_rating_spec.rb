@@ -9,10 +9,18 @@ RSpec.describe Rating::Rating, ':update_rating' do
     it 'updates the rating data of the given resource' do
       record = described_class.find_by(resource: article_1)
 
-      expect(record.average).to  eq(BigDecimal('50.5'))
-      expect(record.estimate).to eq(BigDecimal('42.5'))
-      expect(record.sum).to      be(101)
-      expect(record.total).to    be(2)
+      if ENV.fetch('DB') == 'mysql'
+        expect(record.average).to  eq(BigDecimal('50.5'))
+        expect(record.estimate).to eq(BigDecimal('42.5'))
+      elsif ENV.fetch('DB') == 'postgres'
+        expect(record.average).to  eq(BigDecimal('50.5'))
+        expect(record.estimate).to eq(BigDecimal('42.5000000000000001'))
+      else
+        raise('DB env missing!')
+      end
+
+      expect(record.sum).to   be(101)
+      expect(record.total).to be(2)
     end
   end
 

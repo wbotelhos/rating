@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ENV['DB'] ||= 'mysql'
+ENV['DB'] ||= 'postgres'
 
 conn_params = { database: :rating_test, host: '127.0.0.1' }
 
