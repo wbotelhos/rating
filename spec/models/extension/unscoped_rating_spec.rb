@@ -34,7 +34,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
       expect(rating.average.to_s).to  eq '5.0'
       expect(rating.estimate.to_s).to eq '5.0'
       expect(rating.resource).to      eq resource
-      expect(rating.scopeable).to     eq nil
+      expect(rating.scopeable).to     be(nil)
       expect(rating.sum).to           eq 5
       expect(rating.total).to         eq 1
     end
@@ -57,7 +57,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
       expect(rating.average.to_s).to  eq '2.6666666666666667'
       expect(rating.estimate.to_s).to eq '2.6666666666666667'
       expect(rating.resource).to      eq resource
-      expect(rating.scopeable).to     eq nil
+      expect(rating.scopeable).to     be(nil)
       expect(rating.sum).to           eq 8
       expect(rating.total).to         eq 3
     end
@@ -91,7 +91,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
       expect(rating.average.to_s).to  eq '2.6666666666666667'
       expect(rating.estimate.to_s).to eq '2.6666666666666667'
       expect(rating.resource).to      eq resource
-      expect(rating.scopeable).to     eq nil
+      expect(rating.scopeable).to     be(nil)
       expect(rating.sum).to           eq 8
       expect(rating.total).to         eq 3
     end

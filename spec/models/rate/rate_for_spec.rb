@@ -8,7 +8,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
 
   context 'with no scopeable' do
     context 'when rate does not exist' do
-      it { expect(described_class.rate_for(author: author, resource: article)).to eq nil }
+      it { expect(described_class.rate_for(author: author, resource: article)).to be(nil) }
     end
 
     context 'when rate exists' do
@@ -27,7 +27,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
 
     context 'when rate does not exist' do
       it do
-        expect(described_class.rate_for(author: author, resource: article, scopeable: category)).to eq nil
+        expect(described_class.rate_for(author: author, resource: article, scopeable: category)).to be(nil)
       end
     end
 
@@ -99,7 +99,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
             scopeable:    category
           )
 
-          expect(result).to eq nil
+          expect(result).to be(nil)
         end
       end
     end

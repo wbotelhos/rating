@@ -26,7 +26,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     expect(rating.average.to_s).to  eq '3.0'
     expect(rating.estimate.to_s).to eq '3.0'
     expect(rating.resource).to      eq resource
-    expect(rating.scopeable).to     eq nil
+    expect(rating.scopeable).to     be(nil)
     expect(rating.sum).to           eq 9
     expect(rating.total).to         eq 3
   end

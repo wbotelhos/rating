@@ -155,7 +155,7 @@ RSpec.describe Rating::Rate, ':create' do
         rate = described_class.last
 
         expect(rate.author).to   eq author
-        expect(rate.comment).to  eq nil
+        expect(rate.comment).to  be(nil)
         expect(rate.resource).to eq article
         expect(rate.value).to    eq 3
       end
@@ -168,7 +168,7 @@ RSpec.describe Rating::Rate, ':create' do
         rate = described_class.last
 
         expect(rate.author).to   eq author
-        expect(rate.comment).to  eq nil
+        expect(rate.comment).to  be(nil)
         expect(rate.resource).to eq article
         expect(rate.value).to    eq 3
       end

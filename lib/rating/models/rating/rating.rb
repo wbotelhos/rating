@@ -93,8 +93,8 @@ module Rating
         resource_rating_avg      = values.rating_avg
         resource_rating_count    = values.rating_count.to_f
 
-        (resource_rating_count / (resource_rating_count + count_avg)) * resource_rating_avg +
-          (count_avg           / (resource_rating_count + count_avg)) * resource_type_rating_avg
+        ((resource_rating_count / (resource_rating_count + count_avg)) * resource_rating_avg) +
+          ((count_avg           / (resource_rating_count + count_avg)) * resource_type_rating_avg)
       end
 
       def execute_sql(sql)
