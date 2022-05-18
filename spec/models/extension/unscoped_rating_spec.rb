@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Rating::Extension, 'unscoped_rating' do
   let!(:author_1) { create :author }
   let!(:author_2) { create :author }

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Rating::Config, '.validations' do
   if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] != 'true'
     context 'when rating.yml does not exist' do

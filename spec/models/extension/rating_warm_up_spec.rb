@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Rating::Extension, '.rating_warm_up' do
   context 'when scoping is nil' do
     context 'when update is made' do

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Rating::Config, '.rate_table' do
   if ENV['CONFIG_ENABLED'] != 'true'
     context 'when rating.yml does not exist' do

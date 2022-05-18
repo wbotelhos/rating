@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Rating::Extension, ':rated?' do
   let!(:author) { create :author }
   let!(:resource) { create :article }

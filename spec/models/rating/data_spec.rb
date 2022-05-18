@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
 require 'support/shared_context/with_database_records'
 
 RSpec.describe Rating::Rating, ':data' do

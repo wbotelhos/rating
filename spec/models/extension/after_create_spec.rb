@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe Rating::Extension, 'after_create' do
   context 'when record is author' do
     let!(:record) { build :author }
