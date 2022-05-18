@@ -7,11 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 2.7
-        bundler-cache: true # 'bundle install' and cache
-    - name: Run RuboCop
-      run: bundle exec rubocop --parallel
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Ruby and Bundle Install
+        uses: ruby/setup-ruby@v1
+
+        with:
+          bundler-cache: true
+          ruby-version: '2.7'
+
+      - name: RuboCop
+        run: bundle exec rubocop --parallel
