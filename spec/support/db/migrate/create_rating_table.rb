@@ -11,7 +11,7 @@ class CreateRatingTable < ActiveRecord::Migration[7.0]
       t.references :resource,  index: true, null: false, polymorphic: true
       t.references :scopeable, index: true, null: true,  polymorphic: true
 
-      t.timestamps null: false
+      t.timestamps
     end
 
     change_column :rating_ratings, :resource_type,  :string, limit: 10
