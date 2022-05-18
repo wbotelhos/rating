@@ -4,7 +4,7 @@ ENV['DB'] ||= 'postgres'
 
 conn_params = { database: :rating_test, host: '127.0.0.1' }
 
-case ENV.fetch('DB', nil)
+case ENV.fetch('DB')
 when 'mysql'
   require 'mysql2'
 
