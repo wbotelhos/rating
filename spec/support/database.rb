@@ -15,7 +15,7 @@ when 'mysql'
 when 'postgres'
   require 'pg'
 
-  client = PG::Connection.new(host: conn_params[:host], user: :postgres)
+  client = PG::Connection.new(host: conn_params[:host], password: '', user: :postgres)
 
   conn_params[:adapter] = :postgresql
   conn_params[:username] = :postgres
