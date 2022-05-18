@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateReviewRatingsTable < ActiveRecord::Migration[5.0]
+class CreateReviewRatingsTable < ActiveRecord::Migration[7.0]
   def change
     create_table :review_ratings do |t|
       t.decimal :average,  default: 0, mull: false, precision: 25, scale: 16
