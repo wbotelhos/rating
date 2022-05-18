@@ -1,0 +1,117 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  Exclude:
+    - bin/*
+    - config.ru
+    - config/application.rb
+    - config/boot.rb
+    - config/environment.rb
+    - config/environments/assets.rb
+    - config/environments/development.rb
+    - config/environments/production.rb
+    - config/environments/test.rb
+    - config/initializers/airbrake.rb
+    - config/initializers/application_controller_renderer.rb
+    - config/initializers/assets.rb
+    - config/initializers/backtrace_silencers.rb
+    - config/initializers/content_security_policy.rb
+    - config/initializers/cookies_serializer.rb
+    - config/initializers/devise.rb
+    - config/initializers/filter_parameter_logging.rb
+    - config/initializers/inflections.rb
+    - config/initializers/mime_types.rb
+    - config/initializers/rack_attack.rb
+    - config/initializers/wrap_parameters.rb
+    - config/puma.rb
+    - config/spring.rb
+    - db/schema.rb
+    - db/seeds/**/*
+    - Gemfile.lock
+    - script/rails
+    - vendor/**/*
+
+  NewCops: enable
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EmptyLinesAroundArguments:
+  Enabled: false
+
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  Enabled: false
+
+Layout/LineLength:
+  Max: 120
+
+Layout/MultilineMethodCallBraceLayout:
+  EnforcedStyle: new_line
+
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Metrics/AbcSize:
+  Max: 50
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 50
+
+Naming/MethodParameterName:
+  AllowedNames:
+    - id
+
+Naming/VariableNumber:
+  EnforcedStyle: snake_case
+
+Rails:
+  Enabled: true
+
+Rails/HttpStatus:
+  EnforcedStyle: numeric
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/FilePath:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 15
+
+RSpec/NestedGroups:
+  Max: 5
+
+Style/Documentation:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%': '()'
+    '%i': '[]'
+    '%I': '[]'
+    '%r': '()'
+    '%w': '[]'
+    '%W': '[]'
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
