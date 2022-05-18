@@ -39,10 +39,28 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
 
       - name: Runs tests
+        env:
+          CI: true
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          COVERAGE: true
+          MINIMUM_COVERAGE: 80
+
         run: bundle exec rake spec
 
       - name: Runs tests with config enabled
+        env:
+          CI: true
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          COVERAGE: true
+          MINIMUM_COVERAGE: 80
+
         run: bundle exec rake spec_config
 
       - name: Runs tests with config enabled for extra scopes
+        env:
+          CI: true
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          COVERAGE: true
+          MINIMUM_COVERAGE: 80
+
         run: bundle exec rake spec_config_with_extra_scopes

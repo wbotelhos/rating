@@ -17,6 +17,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activerecord'
 
+  spec.add_development_dependency 'codecov'
   spec.add_development_dependency 'database_cleaner'
   spec.add_development_dependency 'factory_bot_rails'
   spec.add_development_dependency 'mysql2'
