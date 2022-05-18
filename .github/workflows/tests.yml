@@ -28,7 +28,7 @@ jobs:
           MYSQL_DATABASE: rating_test
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
 
-        image: mysql:alpine
+        image: mysql:8
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
         ports:
