@@ -14,47 +14,47 @@
 
 ### News
 
-- Order index keys of template the same way Rails does the query;
+- Order index keys of the template the same way Rails does the query;
 - Limits the `_type` columns to avoid overflow bytes in DBs like MySQL < 5.7.
 
 ### Updates
 
 - Update Ruby to 2.6.5;
-- Update Activerecord to the last version;
+- Update ActiveRecord to the last version;
 
 ## v0.8.0
 
 ### News
 
-- Adds `unscoped_rating` option to calculate the rating counting all resource record ignoring the scope.
+- Adds `unscoped_rating` option to calculate the rating by counting all resource records ignoring the scope.
 
 ## v0.7.0
 
 ### News
 
 - Support to configure `uniqueness` validation via YAML into Rating::Rate model;
-- Support to multiple scopes via `extra_scopes` option.
+- Support multiple scopes via `extra_scopes` option.
 
 ### Updates
 
-- Reverts v0.6.0, since we need this validation because we cannot edit the Rate model by ourself.
+- Reverts v0.6.0, since we need this validation because we cannot edit the Rate model by ourselves.
 
 ## v0.6.0
 
 ### Updates
 
-- The author unique validations was removed to enable custom validations
+- The author's unique validations were removed to enable custom validations
 
 ## v0.5.0
 
 ### News
 
-- Adds `rating.yml` config to support to change the tables where Rating will write the data;
-- Adds `scoping` option to support to generates zero based rating via scope.
+- Adds `rating.yml` config to support changing the tables where Rating will write the data;
+- Adds `scoping` option to support generating zero-based rating via scope.
 
 ### Updates
 
-- The migrate was separated in two to improve in troubleshoot. (iondrimba)
+- The migration was separated in two to improve troubleshooting. [#1](https://github.com/wbotelhos/rating/pull/1) by [iondrimba](https://github.com/iondrimba)
 
 ## v0.4.0
 
