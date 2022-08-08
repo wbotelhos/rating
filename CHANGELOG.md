@@ -1,3 +1,17 @@
+## v0.12.0
+
+### News
+
+- Officially Supports Postgres;
+
+### Updates
+
+- Migrates the CI to GitHub Actions;
+- This gem does not depends on `git` package anymore;
+- Makes this gem requires MFA for security;
+- Adds coverage test;
+- The method `rated?` now uses a better query;
+
 ## v0.11.0
 
 ### Updates
