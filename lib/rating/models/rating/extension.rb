@@ -20,9 +20,8 @@ module Rating
         Rate.rate_for author: self, extra_scopes: extra_scopes, resource: resource, scopeable: scope
       end
 
-      # TODO: use exists for performance
       def rated?(resource, extra_scopes: {}, scope: nil)
-        !rate_for(resource, extra_scopes: extra_scopes, scope: scope).nil?
+        Rate.exists?(extra_scopes.merge(author: self, resource: resource, scopeable: scope))
       end
 
       def rates(extra_scopes: {}, scope: nil)
