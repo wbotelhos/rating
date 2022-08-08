@@ -4,12 +4,19 @@ on: [push, pull_request]
 
 jobs:
   test:
+    env:
+      DB: ${{ matrix.db }}
+
     runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
 
       matrix:
+        db:
+          - mysql
+          - postgres
+
         ruby:
           - '2.7'
           - '3.0'
@@ -26,6 +33,23 @@ jobs:
 
         ports:
           - 3306:3306
+
+      postgres:
+        env:
+          POSTGRES_DB: rating_test
+          POSTGRES_USER: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+
+        image: postgres:alpine
+
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+        ports:
+          - 5432:5432
 
     steps:
       - name: Checkout

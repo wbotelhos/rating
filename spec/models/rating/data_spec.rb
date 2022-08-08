@@ -21,7 +21,14 @@ RSpec.describe Rating::Rating, ':data' do
     end
 
     it 'returns the estimate for a resource' do
-      expect(result[:estimate].to_s).to eq '42.5000000000000000012000000505'
+      case ENV.fetch('DB')
+      when 'mysql'
+        expect(result[:estimate]).to eq(BigDecimal('42.5000000000000000012000000505'))
+      when 'postgres'
+        expect(result[:estimate]).to eq(BigDecimal('42.5000000000000001200000000000000012505'))
+      else
+        raise('DB env missing!')
+      end
     end
   end
 
