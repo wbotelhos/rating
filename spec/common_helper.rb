@@ -5,7 +5,7 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'support/coverage'
 
 require 'active_record/railtie'
-require 'debug'
+require 'pry-byebug'
 require 'rating'
 
 require 'support/common'
