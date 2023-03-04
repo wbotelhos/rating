@@ -72,10 +72,10 @@ module Rating
           class_name: '::Rating::Rate',
           dependent:  :destroy
 
-        scope :order_by_rating, lambda { |options = {}|
-          column = options.fetch(:column, :estimate)
-          direction = options.fetch(:direction, :desc)
-          scope = options[:scope]
+        scope :order_by_rating, lambda { |opts = {}|
+          column = opts.fetch(:column, :estimate)
+          direction = opts.fetch(:direction, :desc)
+          scope = opts[:scope]
 
           includes(:rating_records)
             .where(Rating.table_name => { scopeable_id: scope&.id, scopeable_type: scope&.class&.base_class&.name })
