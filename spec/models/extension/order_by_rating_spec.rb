@@ -17,7 +17,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
 
   context 'when filtering by :average' do
     context 'with as asc' do
-      it 'works' do
+      it 'orders by the given params' do
         expect(Article.order_by_rating({ column: :average, direction: :asc })).to eq [
           article_3,
           article_2,
@@ -26,7 +26,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :average, direction: :asc, scope: category })).to eq [
             article_1,
           ]
@@ -35,7 +35,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
 
     context 'with as desc' do
-      it 'works' do
+      it 'orders by the given params' do
         expect(Article.order_by_rating({ column: :average, direction: :desc })).to eq [
           article_1,
           article_2,
@@ -44,7 +44,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :average, direction: :desc, scope: category })).to eq [
             article_1,
           ]
@@ -55,7 +55,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
 
   context 'when filtering by :estimate' do
     context 'with as asc' do
-      it 'works' do
+      it 'orders by the given params' do
         expect(Article.order_by_rating({ column: :estimate, direction: :asc })).to eq [
           article_3,
           article_2,
@@ -64,7 +64,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :estimate, direction: :asc, scope: category })).to eq [
             article_1,
           ]
@@ -73,7 +73,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
 
     context 'with as desc' do
-      it 'works' do
+      it 'orders by the given params' do
         expect(Article.order_by_rating({ column: :estimate, direction: :desc })).to eq [
           article_1,
           article_2,
@@ -82,7 +82,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :estimate, direction: :desc, scope: category })).to eq [
             article_1,
           ]
@@ -93,7 +93,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
 
   context 'when filtering by :sum' do
     context 'as asc' do
-      it 'works' do
+      it 'orders by the given params' do
         expect(Article.order_by_rating({ column: :sum, direction: :asc })).to eq [
           article_3,
           article_2,
@@ -102,7 +102,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :sum, direction: :asc, scope: category })).to eq [
             article_1,
           ]
@@ -111,7 +111,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
 
     context 'with as desc' do
-      it 'works' do
+      it 'orders by the given params' do
         expect(Article.order_by_rating({ column: :sum, direction: :desc })).to eq [
           article_1,
           article_2,
@@ -120,7 +120,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :sum, direction: :desc, scope: category })).to eq [
             article_1,
           ]
@@ -131,7 +131,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
 
   context 'when filtering by :total' do
     context 'with as asc' do
-      it 'works' do
+      it 'orders by the given params' do
         result = Article.order_by_rating({ column: :total, direction: :asc })
 
         expect(result[0..1]).to match_array [article_2, article_3]
@@ -139,7 +139,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :total, direction: :asc, scope: category })).to eq [
             article_1,
           ]
@@ -148,7 +148,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
     end
 
     context 'with as desc' do
-      it 'works' do
+      it 'orders by the given params' do
         result = Article.order_by_rating({ column: :total, direction: :desc })
 
         expect(result.first).to eq article_1
@@ -156,7 +156,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
       end
 
       context 'with scope' do
-        it 'works' do
+        it 'orders by the given params' do
           expect(Article.order_by_rating({ column: :total, direction: :desc, scope: category })).to eq [
             article_1,
           ]
@@ -166,7 +166,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
   end
 
   context 'with other resource' do
-    it 'works' do
+    it 'orders by the given params' do
       expect(Author.order_by_rating({ column: :total, direction: :desc })).to match_array [author_1, author_2]
     end
 
