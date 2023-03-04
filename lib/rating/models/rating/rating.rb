@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Rating
-  class Rating < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
+  class Rating < ActiveRecord::Base
     self.table_name_prefix = 'rating_'
     self.table_name        = ::Rating::Config.rating_table
 
