@@ -43,8 +43,8 @@ module Rating
         values   = values_data(resource, scopeable)
 
         {
-          average:  values.rating_avg,
-          estimate: estimate(averager, values),
+          average:  values.rating_avg.round(2),
+          estimate: estimate(averager, values).round(2),
           sum:      values.rating_sum,
           total:    values.rating_count,
         }

@@ -3,8 +3,8 @@
 class CreateRatingTable < ActiveRecord::Migration[5.0]
   def change
     create_table :rating_ratings do |t|
-      t.decimal :average,  default: 0, mull: false, precision: 25, scale: 16
-      t.decimal :estimate, default: 0, mull: false, precision: 25, scale: 16
+      t.decimal :average,  default: 0, mull: false, precision: 11, scale: 2
+      t.decimal :estimate, default: 0, mull: false, precision: 11, scale: 2
       t.integer :sum,      default: 0, mull: false
       t.integer :total,    default: 0, mull: false
 
