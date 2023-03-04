@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Rating::Extension, ':rated?' do
-  let!(:author) { create :author }
-  let!(:resource) { create :article }
+  let!(:author) { create(:author) }
+  let!(:resource) { create(:article) }
 
   context 'with no scopeable' do
     before { author.rate resource, 1 }
@@ -17,7 +17,7 @@ RSpec.describe Rating::Extension, ':rated?' do
   end
 
   context 'with scopeable' do
-    let!(:category) { create :category }
+    let!(:category) { create(:category) }
 
     before { author.rate resource, 1, scope: category }
 

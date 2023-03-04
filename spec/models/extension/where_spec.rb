@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 RSpec.describe Rating::Extension, 'unscoped_rating' do
-  let!(:author_1) { create :author }
-  let!(:author_2) { create :author }
-  let!(:author_3) { create :author }
-  let!(:author_4) { create :author }
-  let!(:author_5) { create :author }
-  let!(:resource) { create :toy }
+  let!(:author_1) { create(:author) }
+  let!(:author_2) { create(:author) }
+  let!(:author_3) { create(:author) }
+  let!(:author_4) { create(:author) }
+  let!(:author_5) { create(:author) }
+  let!(:resource) { create(:toy) }
 
   it 'uses rate with where condition' do
     author_1.rate resource, 1

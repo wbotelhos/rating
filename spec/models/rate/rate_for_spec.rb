@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Rating::Rate, ':rate_for' do
-  let!(:author)  { create :author }
-  let!(:article) { create :article }
+  let!(:author)  { create(:author) }
+  let!(:article) { create(:article) }
 
   context 'with no scopeable' do
     context 'when rate does not exist' do
@@ -21,7 +21,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
   end
 
   context 'with scopeable' do
-    let!(:category) { create :category }
+    let!(:category) { create(:category) }
 
     context 'when rate does not exist' do
       it do
@@ -51,7 +51,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
 
   if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
     context 'with extra scopes' do
-      let!(:category) { create :category }
+      let!(:category) { create(:category) }
 
       context 'when matches all attributes including the extra scopes' do
         let!(:record) do

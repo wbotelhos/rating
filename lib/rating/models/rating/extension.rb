@@ -72,7 +72,7 @@ module Rating
           class_name: '::Rating::Rate',
           dependent:  :destroy
 
-        scope :order_by_rating, ->(options = {}) {
+        scope :order_by_rating, lambda { |options = {}|
           column = options.fetch(:column, :estimate)
           direction = options.fetch(:direction, :desc)
           scope = options[:scope]

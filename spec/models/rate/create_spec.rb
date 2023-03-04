@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Rating::Rate, ':create' do
-  let!(:author)  { create :author }
-  let!(:article) { create :article }
+  let!(:author)  { create(:author) }
+  let!(:article) { create(:article) }
 
   context 'with no scopeable' do
     before { described_class.create author: author, extra_scopes: {}, metadata: {}, resource: article, value: 3 }
@@ -28,7 +28,7 @@ RSpec.describe Rating::Rate, ':create' do
     end
 
     context 'when rate already exists' do
-      let!(:author_2) { create :author }
+      let!(:author_2) { create(:author) }
 
       before { described_class.create author: author_2, extra_scopes: {}, metadata: {}, resource: article, value: 4 }
 
@@ -63,7 +63,7 @@ RSpec.describe Rating::Rate, ':create' do
   end
 
   context 'with scopeable' do
-    let!(:category) { create :category }
+    let!(:category) { create(:category) }
 
     before do
       described_class.create(
@@ -99,7 +99,7 @@ RSpec.describe Rating::Rate, ':create' do
     end
 
     context 'when rate already exists' do
-      let!(:author_2) { create :author }
+      let!(:author_2) { create(:author) }
 
       before do
         described_class.create(
@@ -252,7 +252,7 @@ RSpec.describe Rating::Rate, ':create' do
 
   if ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] == 'true'
     context 'with extra scopes' do
-      let!(:category) { create :category }
+      let!(:category) { create(:category) }
 
       it 'creates a rate entry' do
         described_class.create(

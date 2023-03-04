@@ -2,7 +2,7 @@
 
 require 'support/shoulda'
 
-RSpec.describe Rating::Rating, type: :model do
+RSpec.describe Rating::Rating do
   let!(:object) { build(:rating_rating) }
 
   it { expect(object.valid?).to be(true) }

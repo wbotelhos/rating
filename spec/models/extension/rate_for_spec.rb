@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Rating::Extension, ':rate_for' do
-  let!(:author)  { create :author }
-  let!(:article) { create :article }
+  let!(:author)  { create(:author) }
+  let!(:article) { create(:article) }
 
   context 'with no scopeable' do
     it 'delegates to rate object' do
@@ -14,7 +14,7 @@ RSpec.describe Rating::Extension, ':rate_for' do
   end
 
   context 'with scopeable' do
-    let!(:category) { build :category }
+    let!(:category) { build(:category) }
 
     it 'delegates to rate object' do
       expect(Rating::Rate).to receive(:rate_for).with author: author, extra_scopes: {}, resource: article,
@@ -25,7 +25,7 @@ RSpec.describe Rating::Extension, ':rate_for' do
   end
 
   context 'with extra_scopes' do
-    let!(:category) { build :category }
+    let!(:category) { build(:category) }
 
     it 'delegates to rate object' do
       expect(Rating::Rate).to receive(:rate_for).with(
