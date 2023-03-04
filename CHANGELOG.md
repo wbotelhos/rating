@@ -1,11 +1,8 @@
 ## v1.0.0
 
-### Break Change
+### Break Changes
 
 - The attributes `estimate` and `average` now is rounded by two decimal numbers;
-
-### Updates
-
 - The method `order_by_rating` now receives a hash parameter to avoid scope and so support Ruby 3.2;
 
 ## v0.12.0
