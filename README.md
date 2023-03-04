@@ -169,7 +169,7 @@ It will return a collection of resource ordered by `estimate desc` as default.
 The order column and direction can be changed:
 
 ```ruby
-Article.order_by_rating :average, :asc
+Article.order_by_rating({ column: :average, direction: :asc })
 ```
 
 It will return a collection of resource ordered by `Rating` table data.
@@ -242,7 +242,7 @@ article.rates scope: category_2
 To order the rating you do the same thing:
 
 ```ruby
-Article.order_by_rating scope: category_1
+Article.order_by_rating({ scope: category_1 })
 ```
 
 ### Extra Scopes
