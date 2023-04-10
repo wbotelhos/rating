@@ -64,8 +64,8 @@ module Rating
             #{scope_where_query(resource)}
         ).squish
 
-        values =  [sql, resource.class.base_class.name, resource.id]
-        values += [scopeable.class.base_class.name, scopeable.id] unless scopeable.nil? || unscoped_rating?(resource)
+        values =  [sql, resource.class.base_class.name, resource]
+        values += [scopeable.class.base_class.name, scopeable] unless scopeable.nil? || unscoped_rating?(resource)
 
         execute_sql values
       end
