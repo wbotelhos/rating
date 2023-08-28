@@ -1,9 +1,9 @@
 # Rating
 
-[![CI](https://github.com/wbotelhos/rating/workflows/CI/badge.svg)](https://github.com/wbotelhos/rating/actions)
+[![Tests](https://github.com/wbotelhos/rating/workflows/Tests/badge.svg)](https://github.com/wbotelhos/rating/actions)
 [![Gem Version](https://badge.fury.io/rb/rating.svg)](https://badge.fury.io/rb/rating)
 [![Maintainability](https://api.codeclimate.com/v1/badges/cc5efe8b06bc1d5e9e8a/maintainability)](https://codeclimate.com/github/wbotelhos/rating/maintainability)
-[![codecov](https://codecov.io/gh/wbotelhos/rating/branch/master/graph/badge.svg?token=QJSHUOULEG)](https://codecov.io/gh/wbotelhos/rating)
+[![Coverage](https://codecov.io/gh/wbotelhos/rating/branch/master/graph/badge.svg?token=QJSHUOULEG)](https://codecov.io/gh/wbotelhos/rating)
 [![Sponsor](https://img.shields.io/badge/sponsor-%3C3-green)](https://github.com/sponsors/wbotelhos)
 
 A true Bayesian rating system with scope and cache enabled.
