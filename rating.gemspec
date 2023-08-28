@@ -26,6 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('rspec-rails') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('rubocop-performance') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('rubocop-rails') # rubocop:disable Gemspec/DevelopmentDependencies
+  spec.add_development_dependency('rubocop-rake') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('rubocop-rspec') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('shoulda-matchers') # rubocop:disable Gemspec/DevelopmentDependencies
 end

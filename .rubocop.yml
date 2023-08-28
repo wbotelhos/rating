@@ -1,3 +1,7 @@
 inherit_from:
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-factory_bot.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-rails.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-rake.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-rspec.yml
   - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop.yml
   - .rubocop_todo.yml
