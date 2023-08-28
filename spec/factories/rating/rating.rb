@@ -7,6 +7,6 @@ FactoryBot.define do
     sum      { 100 }
     total    { 1 }
 
-    association :resource, factory: :article, strategy: :build
+    resource factory: %i[article], strategy: :build
   end
 end
