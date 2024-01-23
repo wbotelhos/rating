@@ -24,10 +24,12 @@ module Rating
 
         values[:scopeable_type] = scopeable.class.base_class.name unless scopeable.nil?
 
+        total_count = total_count.to_f
+
         sql = %(
           SELECT
-            (CAST(#{total_count} AS DECIMAL(17, 14)) / #{distinct_count}) count_avg,
-            COALESCE(AVG(value), 0)                                       rating_avg
+          ROUND(#{total_count} / #{distinct_count}, 2) AS count_avg,
+          ROUND(COALESCE(AVG(value), 0), 2) AS rating_avg
           FROM #{rate_table_name}
           WHERE
             resource_type = :resource_type
