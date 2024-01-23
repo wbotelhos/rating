@@ -1,3 +1,10 @@
+This is a fork of [github.com/wbotelhos/rating](https://github.com/wbotelhos/rating). We were bumped into the bug that, when trying to rate a new item, we received the error:
+```
+PG::NumericValueOutOfRange: ERROR: numeric field overflow (ActiveRecord::RangeError)
+DETAIL: A field with precision 17, scale 14 must round to an absolute value less than 10^3.
+```
+Since our fields storing data were all set to precision 25 and scale 16, with no values stored in the database approaching 10, the assumption is that this had to be in the gem itself.
+
 # Rating
 
 [![Tests](https://github.com/wbotelhos/rating/workflows/Tests/badge.svg)](https://github.com/wbotelhos/rating/actions)
