@@ -1,7 +1,5 @@
 require:
   - rubocop-performance
-  - rubocop-rails
-  - rubocop-rspec
 
 AllCops:
   Exclude:
@@ -66,37 +64,24 @@ Metrics/MethodLength:
 
 Naming/MethodParameterName:
   AllowedNames:
+    - el
     - id
+    - lr
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case
 
-Rails:
-  Enabled: true
+Naming/BlockForwarding:
+  EnforcedStyle: explicit
 
-Rails/HttpStatus:
-  EnforcedStyle: numeric
-
-RSpec/AnyInstance:
-  Enabled: false
-
-RSpec/ExampleLength:
-  Enabled: false
-
-RSpec/FilePath:
-  Enabled: false
-
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/MultipleMemoizedHelpers:
-  Max: 15
-
-RSpec/NestedGroups:
-  Max: 5
+Style/NegatedIf:
+  EnforcedStyle: postfix
 
 Style/Documentation:
   Enabled: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
