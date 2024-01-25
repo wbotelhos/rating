@@ -26,8 +26,8 @@ module Rating
 
         sql = %(
           SELECT
-            (CAST(#{total_count} AS DECIMAL(17, 14)) / #{distinct_count}) count_avg,
-            COALESCE(AVG(value), 0)                                       rating_avg
+            CAST(#{total_count} AS DECIMAL(25, 16) / #{distinct_count}) count_avg,
+            COALESCE(AVG(value), 0) rating_avg
           FROM #{rate_table_name}
           WHERE
             resource_type = :resource_type
