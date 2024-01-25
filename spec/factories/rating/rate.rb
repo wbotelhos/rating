@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :rating_rate, class: 'Rating::Rate' do
     value { 100 }
 
-    author
-    resource
+    author { FactoryBot.build(:author) }
+    resource { FactoryBot.build(:article) }
   end
 end
