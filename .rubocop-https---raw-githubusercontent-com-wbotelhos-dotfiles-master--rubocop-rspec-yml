@@ -46,9 +46,6 @@ RSpec/DescribedClass:
 RSpec/ExampleLength:
   Enabled: false
 
-RSpec/FilePath:
-  Enabled: false
-
 RSpec/IndexedLet:
   Enabled: false
 

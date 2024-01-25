@@ -22,6 +22,7 @@ AllCops:
     - config/initializers/filter_parameter_logging.rb
     - config/initializers/inflections.rb
     - config/initializers/mime_types.rb
+    - config/initializers/permissions_policy.rb
     - config/initializers/rack_attack.rb
     - config/initializers/wrap_parameters.rb
     - config/puma.rb
