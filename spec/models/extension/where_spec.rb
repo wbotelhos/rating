@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Rating::Extension, 'unscoped_rating' do
+RSpec.describe Rating::Extension, '#rate' do
   let!(:author_1) { create(:author) }
   let!(:author_2) { create(:author) }
   let!(:author_3) { create(:author) }

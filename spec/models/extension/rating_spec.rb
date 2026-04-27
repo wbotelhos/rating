@@ -3,7 +3,7 @@
 require 'support/shared_context/with_database_records'
 
 RSpec.describe Rating::Extension, '.rating' do
-  include_context 'with_database_records'
+  include_context 'with database records'
 
   context 'with no scope' do
     it 'returns rating record' do

@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
-RSpec.describe Rating::Rate, ':rate_for' do
+RSpec.describe Rating::Rate, '.rate_for' do
   let!(:author)  { create(:author) }
   let!(:article) { create(:article) }
 
   context 'with no scopeable' do
     context 'when rate does not exist' do
-      it { expect(described_class.rate_for(author: author, resource: article)).to be(nil) }
+      it { expect(described_class.rate_for(author:, resource: article)).to be(nil) }
     end
 
     context 'when rate exists' do
       let!(:record) do
-        described_class.create author: author, extra_scopes: {}, metadata: {}, resource: article, value: 3
+        described_class.create author:, extra_scopes: {}, metadata: {}, resource: article, value: 3
       end
 
       it 'returns the record' do
-        expect(described_class.rate_for(author: author, resource: article)).to eq record
+        expect(described_class.rate_for(author:, resource: article)).to eq record
       end
     end
   end
@@ -25,14 +25,14 @@ RSpec.describe Rating::Rate, ':rate_for' do
 
     context 'when rate does not exist' do
       it do
-        expect(described_class.rate_for(author: author, resource: article, scopeable: category)).to be(nil)
+        expect(described_class.rate_for(author:, resource: article, scopeable: category)).to be(nil)
       end
     end
 
     context 'when rate exists' do
       let!(:record) do
         described_class.create(
-          author:       author,
+          author:,
           extra_scopes: {},
           metadata:     {},
           resource:     article,
@@ -42,7 +42,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
       end
 
       it 'returns the record' do
-        query = described_class.rate_for(author: author, resource: article, scopeable: category)
+        query = described_class.rate_for(author:, resource: article, scopeable: category)
 
         expect(query).to eq record
       end
@@ -56,7 +56,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
       context 'when matches all attributes including the extra scopes' do
         let!(:record) do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
             metadata:     {},
             resource:     article,
@@ -67,7 +67,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
 
         it 'returns the record' do
           result = described_class.rate_for(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
             resource:     article,
             scopeable:    category
@@ -80,7 +80,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
       context 'when matches all attributes but at least one extra scopes' do
         before do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
             metadata:     {},
             resource:     article,
@@ -91,7 +91,7 @@ RSpec.describe Rating::Rate, ':rate_for' do
 
         it 'does not return the record' do
           result = described_class.rate_for(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_missing' },
             resource:     article,
             scopeable:    category

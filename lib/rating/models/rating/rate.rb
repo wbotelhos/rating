@@ -25,7 +25,7 @@ module Rating
     }
 
     def self.create(author:, extra_scopes:, metadata:, resource:, value:, scopeable: nil)
-      attributes = { author: author, resource: resource, scopeable: scopeable }.merge(extra_scopes)
+      attributes = { author:, resource:, scopeable: }.merge(extra_scopes)
       record     = find_or_initialize_by(attributes)
 
       metadata.each { |k, v| record[k] = v } if metadata.present?
@@ -37,7 +37,7 @@ module Rating
     end
 
     def self.rate_for(author:, resource:, extra_scopes: {}, scopeable: nil)
-      find_by extra_scopes.merge(author: author, resource: resource, scopeable: scopeable)
+      find_by extra_scopes.merge(author:, resource:, scopeable:)
     end
 
     private

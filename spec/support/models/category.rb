@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Category < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
+class Category < ActiveRecord::Base
   belongs_to :article
   belongs_to :global
 end

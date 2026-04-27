@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'bigdecimal'
-require 'bigdecimal/util'
-
 module Rating
   class Rating < ActiveRecord::Base
     self.table_name_prefix = 'rating_'
@@ -75,7 +72,7 @@ module Rating
       end
 
       def update_rating(resource, scopeable)
-        attributes             = { resource: resource }
+        attributes             = { resource: }
         attributes[:scopeable] = unscoped_rating?(resource) ? nil : scopeable
 
         record = find_or_initialize_by(attributes)

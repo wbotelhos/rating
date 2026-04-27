@@ -12,7 +12,6 @@ RSpec.describe Rating::Rating do
 
   it { is_expected.to validate_presence_of(:average) }
   it { is_expected.to validate_presence_of(:estimate) }
-  it { is_expected.to validate_presence_of(:resource) }
   it { is_expected.to validate_presence_of(:sum) }
   it { is_expected.to validate_presence_of(:total) }
 

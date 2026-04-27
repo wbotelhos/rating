@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.license = 'MIT'
   spec.metadata = { 'rubygems_mfa_required' => 'true' }
   spec.name = 'rating'
+  spec.required_ruby_version = '>= 3.3'
   spec.summary = 'A true Bayesian rating system with scope and cache enabled.'
   spec.version = Rating::VERSION
 

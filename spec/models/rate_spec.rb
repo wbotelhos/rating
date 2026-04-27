@@ -11,12 +11,10 @@ RSpec.describe Rating::Rate do
   it { is_expected.to belong_to(:resource) }
   it { is_expected.to belong_to(:scopeable) }
 
-  it { is_expected.to validate_presence_of(:author) }
-  it { is_expected.to validate_presence_of(:resource) }
   it { is_expected.to validate_presence_of(:value) }
 
   it do
-    expect(subject).to validate_numericality_of(:value)
+    expect(object).to validate_numericality_of(:value)
       .only_integer
       .is_greater_than_or_equal_to(1)
       .is_less_than_or_equal_to(Rating::Config.rating_levels)

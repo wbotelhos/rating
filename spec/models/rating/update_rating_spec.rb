@@ -2,9 +2,9 @@
 
 require 'support/shared_context/with_database_records'
 
-RSpec.describe Rating::Rating, ':update_rating' do
+RSpec.describe Rating::Rating, '.update_rating' do
   context 'with no scopeable' do
-    include_context 'with_database_records'
+    include_context 'with database records'
 
     it 'updates the rating data of the given resource' do
       record = described_class.find_by(resource: article_1)
@@ -18,7 +18,7 @@ RSpec.describe Rating::Rating, ':update_rating' do
   end
 
   context 'with scopeable' do
-    include_context 'with_database_records'
+    include_context 'with database records'
 
     it 'updates the rating data of the given resource respecting the scope' do
       record = described_class.find_by(resource: article_1, scopeable: category)
@@ -53,7 +53,7 @@ RSpec.describe Rating::Rating, ':update_rating' do
       1_000.times do
         author = create(:author)
         article = create(:article)
-        create(:rating_rate, author: author, resource: article, value: 5)
+        create(:rating_rate, author:, resource: article, value: 5)
       end
     end
 
@@ -69,11 +69,11 @@ RSpec.describe Rating::Rating, ':update_rating' do
     let!(:polarized_resource)  { create(:article) }
 
     before do
-      author_pool.each { |author| create(:rating_rate, author: author, resource: consistent_resource, value: 4) }
+      author_pool.each { |author| create(:rating_rate, author:, resource: consistent_resource, value: 4) }
 
       author_pool.each_with_index do |author, index|
         value = index < 25 ? 1 : 5
-        create(:rating_rate, author: author, resource: polarized_resource, value: value)
+        create(:rating_rate, author:, resource: polarized_resource, value:)
       end
     end
 

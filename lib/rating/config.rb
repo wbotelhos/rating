@@ -8,9 +8,7 @@ module Rating
       @config ||= begin
         file_path = File.expand_path('config/rating.yml')
 
-        return {} unless File.exist?(file_path)
-
-        YAML.safe_load(File.read(file_path))['rating']
+        File.exist?(file_path) ? YAML.safe_load_file(file_path)['rating'] : {}
       end
     end
 

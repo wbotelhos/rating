@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Article < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
+class Article < ActiveRecord::Base
   rating scoping: :categories
 
   has_many :categories

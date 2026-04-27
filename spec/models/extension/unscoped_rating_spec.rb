@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Rating::Extension, 'unscoped_rating' do
+RSpec.describe Rating::Extension, '#rate' do
   let!(:author_1) { create(:author) }
   let!(:author_2) { create(:author) }
   let!(:author_3) { create(:author) }
@@ -10,8 +10,8 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     let!(:resource) { create(:article) }
 
     it 'groups in different line record' do
-      author_1.rate resource, 1, scope: scope
-      author_2.rate resource, 2, scope: scope
+      author_1.rate(resource, 1, scope:)
+      author_2.rate(resource, 2, scope:)
       author_2.rate resource, 5
 
       ratings = Rating::Rating.order(:id)
@@ -42,8 +42,8 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     let!(:resource) { create(:global) }
 
     it 'groups in the same line record' do
-      author_1.rate resource, 1, scope: scope
-      author_2.rate resource, 2, scope: scope
+      author_1.rate(resource, 1, scope:)
+      author_2.rate(resource, 2, scope:)
       author_2.rate resource, 5
 
       ratings = Rating::Rating.order(:id)
@@ -64,11 +64,11 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
   context 'when is true and have a non scoped record first on database' do
     let!(:resource) { create(:global) }
 
-    before { Rating::Rating.create resource: resource, scopeable: scope }
+    before { Rating::Rating.create resource:, scopeable: scope }
 
     it 'sets the result on record with no scope' do
-      author_1.rate resource, 1, scope: scope
-      author_2.rate resource, 2, scope: scope
+      author_1.rate(resource, 1, scope:)
+      author_2.rate(resource, 2, scope:)
       author_3.rate resource, 5
 
       ratings = Rating::Rating.order(:id)

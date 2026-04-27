@@ -2,8 +2,8 @@
 
 require 'support/shared_context/with_database_records'
 
-RSpec.describe Rating::Extension, ':order_by_rating' do
-  include_context 'with_database_records'
+RSpec.describe Rating::Extension, '.order_by_rating' do
+  include_context 'with database records'
 
   context 'with default filters' do
     it 'sorts by :estimate :desc' do
@@ -92,7 +92,7 @@ RSpec.describe Rating::Extension, ':order_by_rating' do
   end
 
   context 'when filtering by :sum' do
-    context 'as asc' do
+    context 'with asc direction' do
       it 'orders by the given params' do
         expect(Article.order_by_rating({ column: :sum, direction: :asc })).to eq [
           article_3,

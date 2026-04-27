@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
-RSpec.describe Rating::Extension, 'after_create' do
+RSpec.describe Rating::Extension, '#rating_warm_up' do
   context 'when record is author' do
     let!(:record) { build(:author) }
 
     it 'does not warm up the cache' do
-      expect(record).not_to receive(:rating_warm_up)
+      allow(record).to receive(:rating_warm_up)
 
       record.save
+
+      expect(record).not_to have_received(:rating_warm_up)
     end
   end
 
@@ -16,9 +18,11 @@ RSpec.describe Rating::Extension, 'after_create' do
       let!(:record) { build(:article) }
 
       it 'warms up the cache' do
-        expect(record).to receive(:rating_warm_up).with(scoping: :categories)
+        allow(record).to receive(:rating_warm_up)
 
         record.save
+
+        expect(record).to have_received(:rating_warm_up).with(scoping: :categories)
       end
     end
 
@@ -26,9 +30,11 @@ RSpec.describe Rating::Extension, 'after_create' do
       let!(:record) { build(:comment) }
 
       it 'warms up the cache' do
-        expect(record).to receive(:rating_warm_up).with(scoping: nil)
+        allow(record).to receive(:rating_warm_up)
 
         record.save
+
+        expect(record).to have_received(:rating_warm_up).with(scoping: nil)
       end
     end
 
@@ -36,9 +42,11 @@ RSpec.describe Rating::Extension, 'after_create' do
       let!(:record) { create(:comment) }
 
       it 'does not warm up the cache' do
-        expect(record).not_to receive(:rating_warm_up)
+        allow(record).to receive(:rating_warm_up)
 
         record.save
+
+        expect(record).not_to have_received(:rating_warm_up)
       end
     end
   end

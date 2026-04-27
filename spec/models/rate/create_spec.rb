@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-RSpec.describe Rating::Rate, ':create' do
+RSpec.describe Rating::Rate, '.create' do
   let!(:author)  { create(:author) }
   let!(:article) { create(:article) }
 
   context 'with no scopeable' do
-    before { described_class.create author: author, extra_scopes: {}, metadata: {}, resource: article, value: 3 }
+    before { described_class.create author:, extra_scopes: {}, metadata: {}, resource: article, value: 3 }
 
     context 'when rate does not exist yet' do
       it 'creates a rate entry' do
@@ -67,7 +67,7 @@ RSpec.describe Rating::Rate, ':create' do
 
     before do
       described_class.create(
-        author:       author,
+        author:,
         extra_scopes: {},
         metadata:     {},
         resource:     article,
@@ -148,7 +148,7 @@ RSpec.describe Rating::Rate, ':create' do
   context 'with metadata' do
     context 'with nil value' do
       it 'creates a rate entry ignoring metadata' do
-        described_class.create author: author, extra_scopes: {}, metadata: nil, resource: article, value: 3
+        described_class.create author:, extra_scopes: {}, metadata: nil, resource: article, value: 3
 
         rate = described_class.last
 
@@ -161,7 +161,7 @@ RSpec.describe Rating::Rate, ':create' do
 
     context 'with empty value' do
       it 'creates a rate entry ignoring metadata' do
-        described_class.create author: author, extra_scopes: {}, metadata: '', resource: article, value: 3
+        described_class.create author:, extra_scopes: {}, metadata: '', resource: article, value: 3
 
         rate = described_class.last
 
@@ -175,7 +175,7 @@ RSpec.describe Rating::Rate, ':create' do
     context 'with hash value' do
       it 'creates a rate entry with metadata included' do
         described_class.create(
-          author:       author,
+          author:,
           extra_scopes: {},
           metadata:     { comment: 'comment' },
           resource:     article,
@@ -194,7 +194,7 @@ RSpec.describe Rating::Rate, ':create' do
     context 'when already has an entry' do
       before do
         described_class.create(
-          author:       author,
+          author:,
           extra_scopes: {},
           metadata:     { comment: 'comment' },
           resource:     article,
@@ -205,7 +205,7 @@ RSpec.describe Rating::Rate, ':create' do
       context 'when value is the same' do
         it 'still updates metadata' do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: {},
             metadata:     { comment: 'comment.updated' },
             resource:     article,
@@ -228,7 +228,7 @@ RSpec.describe Rating::Rate, ':create' do
       context 'when value is different same' do
         it 'still updates metadata' do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: {},
             metadata:     { comment: 'comment.updated' },
             resource:     article,
@@ -256,7 +256,7 @@ RSpec.describe Rating::Rate, ':create' do
 
       it 'creates a rate entry' do
         described_class.create(
-          author:       author,
+          author:,
           extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
           metadata:     {},
           resource:     article,
@@ -276,7 +276,7 @@ RSpec.describe Rating::Rate, ':create' do
 
       it 'creates a rating entry' do
         described_class.create(
-          author:       author,
+          author:,
           extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
           metadata:     {},
           resource:     article,
@@ -297,7 +297,7 @@ RSpec.describe Rating::Rate, ':create' do
       context 'when rate already exists' do
         before do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
             metadata:     {},
             resource:     article,
@@ -308,7 +308,7 @@ RSpec.describe Rating::Rate, ':create' do
 
         it 'updates the rate entry' do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
             metadata:     {},
             resource:     article,
@@ -332,7 +332,7 @@ RSpec.describe Rating::Rate, ':create' do
 
         it 'updates the unique rating entry' do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
             metadata:     {},
             resource:     article,
@@ -358,7 +358,7 @@ RSpec.describe Rating::Rate, ':create' do
       context 'when rate already exists but with at least one extra scope different' do
         before do
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_2' },
             metadata:     {},
             resource:     article,
@@ -367,7 +367,7 @@ RSpec.describe Rating::Rate, ':create' do
           )
 
           described_class.create(
-            author:       author,
+            author:,
             extra_scopes: { scope_1: 'scope_1', scope_2: 'scope_missing' },
             metadata:     {},
             resource:     article,

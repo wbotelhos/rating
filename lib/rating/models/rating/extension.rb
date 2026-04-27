@@ -7,21 +7,21 @@ module Rating
     included do
       def rate(resource, value, author: self, extra_scopes: {}, metadata: {}, scope: nil)
         Rate.create(
-          author:       author,
-          extra_scopes: extra_scopes,
-          metadata:     metadata,
-          resource:     resource,
+          author:,
+          extra_scopes:,
+          metadata:,
+          resource:,
           scopeable:    scope,
-          value:        value
+          value:
         )
       end
 
       def rate_for(resource, extra_scopes: {}, scope: nil)
-        Rate.rate_for author: self, extra_scopes: extra_scopes, resource: resource, scopeable: scope
+        Rate.rate_for author: self, extra_scopes:, resource:, scopeable: scope
       end
 
       def rated?(resource, extra_scopes: {}, scope: nil)
-        Rate.exists?(extra_scopes.merge(author: self, resource: resource, scopeable: scope))
+        Rate.exists?(extra_scopes.merge(author: self, resource:, scopeable: scope))
       end
 
       def rates(extra_scopes: {}, scope: nil)
@@ -76,9 +76,10 @@ module Rating
           column = opts.fetch(:column, :estimate)
           direction = opts.fetch(:direction, :desc)
           scope = opts[:scope]
+          base_class = scope&.class&.base_class
 
           includes(:rating_records)
-            .where(Rating.table_name => { scopeable_id: scope&.id, scopeable_type: scope&.class&.base_class&.name })
+            .where(Rating.table_name => { scopeable_id: scope&.id, scopeable_type: base_class&.name })
             .order("#{Rating.table_name}.#{column} #{direction}")
         }
 

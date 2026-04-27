@@ -2,8 +2,8 @@
 
 require 'support/shared_context/with_database_records'
 
-RSpec.describe Rating::Extension, ':rates' do
-  include_context 'with_database_records'
+RSpec.describe Rating::Extension, '#rates' do
+  include_context 'with database records'
 
   context 'with no scope' do
     it 'returns rates that this resource received' do

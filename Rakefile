@@ -7,7 +7,7 @@ RSpec::Core::RakeTask.new
 task default: :spec
 
 desc 'Runs tests with config enabled for extra scopes'
-task spec_config_with_extra_scopes: :environment do
+task :spec_config_with_extra_scopes do
   directory_config = File.expand_path('config')
 
   `mkdir -p #{directory_config}`
@@ -35,7 +35,7 @@ rating:
 end
 
 desc 'Runs tests with config enabled'
-task spec_config: :environment do
+task :spec_config do
   directory_config = File.expand_path('config')
 
   `mkdir -p #{directory_config}`

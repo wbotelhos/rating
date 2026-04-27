@@ -10,7 +10,7 @@ when 'mysql'
 
   client = Mysql2::Client.new(host: conn_params[:host], username: :root)
 
-  conn_params[:adapter] = :mysql2
+  conn_params[:adapter] = 'mysql2'
   conn_params[:username] = :root
 when 'postgres'
   require 'pg'

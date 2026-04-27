@@ -2,8 +2,8 @@
 
 require 'support/shared_context/with_database_records'
 
-RSpec.describe Rating::Extension, ':rated' do
-  include_context 'with_database_records'
+RSpec.describe Rating::Extension, '#rated' do
+  include_context 'with database records'
 
   context 'with no scope' do
     it 'returns rates made by this author' do
@@ -11,7 +11,7 @@ RSpec.describe Rating::Extension, ':rated' do
     end
   end
 
-  context 'with no scope' do
+  context 'with scope' do
     it 'returns scoped rates made by this author' do
       expect(author_1.rated(scope: category)).to eq [rate_5]
     end

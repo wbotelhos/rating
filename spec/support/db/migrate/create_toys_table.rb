@@ -2,7 +2,6 @@
 
 class CreateToysTable < ActiveRecord::Migration[7.0]
   def change
-    create_table :toys do |t|
-    end
+    create_table :toys
   end
 end

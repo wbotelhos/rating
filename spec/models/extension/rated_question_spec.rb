@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Rating::Extension, ':rated?' do
+RSpec.describe Rating::Extension, '#rated?' do
   let!(:author) { create(:author) }
   let!(:resource) { create(:article) }
 

@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 
-class ReviewRating < ActiveRecord::Base # rubocop:disable Rails/ApplicationRecord
+class ReviewRating < ActiveRecord::Base
 end
