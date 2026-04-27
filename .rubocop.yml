@@ -1,7 +1,9 @@
 inherit_from:
-  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-factory_bot.yml
-  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-rails.yml
-  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-rake.yml
-  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop-rspec.yml
-  - https://raw.githubusercontent.com/wbotelhos/dotfiles/master/.rubocop.yml
   - .rubocop_todo.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-factory_bot.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-performance.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-rails.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-rake.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-rspec_rails.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-rspec.yml
+  - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop.yml
