@@ -33,7 +33,7 @@ RSpec.describe Rating::Rate, ':create' do
       before { described_class.create author: author_2, extra_scopes: {}, metadata: {}, resource: article, value: 4 }
 
       it 'creates one more rate entry' do
-        rates = described_class.where(author: [author, author_2]).order('created_at asc')
+        rates = described_class.where(author: [author, author_2]).order(:created_at)
 
         expect(rates.size).to eq 2
 
@@ -113,7 +113,7 @@ RSpec.describe Rating::Rate, ':create' do
       end
 
       it 'creates one more rate entry' do
-        rates = described_class.where(author: [author, author_2]).order('created_at asc')
+        rates = described_class.where(author: [author, author_2]).order(:created_at)
 
         expect(rates.size).to eq 2
 

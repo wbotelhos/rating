@@ -7,13 +7,12 @@ RSpec::Core::RakeTask.new
 task default: :spec
 
 desc 'Runs tests with config enabled for extra scopes'
-task :spec_config_with_extra_scopes do
+task spec_config_with_extra_scopes: :environment do
   directory_config = File.expand_path('config')
 
   `mkdir -p #{directory_config}`
 
-  File.open(File.expand_path('config/rating.yml'), 'w+') do |file|
-    file.write %(
+  File.write(File.expand_path('config/rating.yml'), %(
 rating:
   validations:
     rate:
@@ -26,7 +25,7 @@ rating:
         - scope_1
         - scope_2
     )
-  end
+  )
 
   ENV['CONFIG_ENABLED_WITH_EXTRA_SCOPES'] = 'true'
 
@@ -36,14 +35,14 @@ rating:
 end
 
 desc 'Runs tests with config enabled'
-task :spec_config do
+task spec_config: :environment do
   directory_config = File.expand_path('config')
 
   `mkdir -p #{directory_config}`
 
-  File.open(File.expand_path('config/rating.yml'), 'w+') do |file|
-    file.write "rating:\n  rate_table: 'reviews'\n  rating_table: 'review_ratings'"
-  end
+  File.write(File.expand_path('config/rating.yml'),
+    "rating:\n  rate_table: 'reviews'\n  rating_table: 'review_ratings'"
+  )
 
   ENV['CONFIG_ENABLED'] = 'true'
 

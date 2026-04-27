@@ -11,7 +11,7 @@ module Rating
     belongs_to :resource,  polymorphic: true
     belongs_to :scopeable, polymorphic: true
 
-    validates :author, :resource, :value, presence: true
+    validates :value, presence: true
 
     validates :value, numericality: {
       only_integer: true,

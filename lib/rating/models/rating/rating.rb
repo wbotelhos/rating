@@ -11,7 +11,7 @@ module Rating
     belongs_to :resource,  polymorphic: true
     belongs_to :scopeable, polymorphic: true
 
-    validates :average, :estimate, :resource, :sum, :total, presence: true
+    validates :average, :estimate, :sum, :total, presence: true
     validates :average, :estimate, :sum, :total, numericality: true
 
     validates :resource_id, uniqueness: {
@@ -37,8 +37,8 @@ module Rating
         values =  [sql, resource.class.base_class.name, resource.id]
         values += [scopeable.class.base_class.name, scopeable.id] unless scopeable.nil? || unscoped_rating?(resource)
 
-        Rate.find_by_sql(values).each_with_object({}) do |row, histogram|
-          histogram[row.value.to_i] = row.rating_count.to_i
+        Rate.find_by_sql(values).to_h do |row|
+          [row.value.to_i, row.rating_count.to_i]
         end
       end
 
@@ -106,9 +106,9 @@ module Rating
 
         smoothed_variance = (1..rating_levels).sum do |level|
           (level**2) * (histogram.fetch(level, 0) + 1).to_d / denominator
-        end - smoothed_mean**2
+        end - (smoothed_mean**2)
 
-        smoothed_mean - z_score.to_d * (smoothed_variance / (denominator + 1)).sqrt(16)
+        smoothed_mean - (z_score.to_d * (smoothed_variance / (denominator + 1)).sqrt(16))
       end
 
       def execute_sql(sql)

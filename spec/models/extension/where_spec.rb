@@ -15,7 +15,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
     author_4.rate resource, 4
     author_5.rate resource, 5
 
-    ratings = Rating::Rating.all.order('id')
+    ratings = Rating::Rating.order(:id)
 
     expect(ratings.size).to eq 1
 

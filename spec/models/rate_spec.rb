@@ -19,7 +19,7 @@ RSpec.describe Rating::Rate do
     expect(subject).to validate_numericality_of(:value)
       .only_integer
       .is_greater_than_or_equal_to(1)
-      .is_less_than_or_equal_to(::Rating::Config.rating_levels)
+      .is_less_than_or_equal_to(Rating::Config.rating_levels)
   end
 
   it do

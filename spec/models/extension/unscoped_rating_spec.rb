@@ -14,7 +14,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
       author_2.rate resource, 2, scope: scope
       author_2.rate resource, 5
 
-      ratings = Rating::Rating.all.order('id')
+      ratings = Rating::Rating.order(:id)
 
       expect(ratings.size).to eq 2
 
@@ -46,7 +46,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
       author_2.rate resource, 2, scope: scope
       author_2.rate resource, 5
 
-      ratings = Rating::Rating.all.order('id')
+      ratings = Rating::Rating.order(:id)
 
       expect(ratings.size).to eq 1
 
@@ -71,7 +71,7 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
       author_2.rate resource, 2, scope: scope
       author_3.rate resource, 5
 
-      ratings = Rating::Rating.all.order('id')
+      ratings = Rating::Rating.order(:id)
 
       expect(ratings.size).to eq 2
 
