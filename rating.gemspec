@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.metadata = { 'rubygems_mfa_required' => 'true' }
   spec.name = 'rating'
   spec.required_ruby_version = '>= 3.3'
-  spec.summary = 'A true Bayesian rating system with scope and cache enabled.'
+  spec.summary = 'A confidence-based rating system with scope and cache enabled.'
   spec.version = Rating::VERSION
 
   spec.add_dependency('activerecord')
