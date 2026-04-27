@@ -13,3 +13,10 @@ Metrics/ParameterLists:
 
 Rails/ApplicationRecord:
   Enabled: false
+
+Layout/ExtraSpacing:
+  AllowForAlignment: false
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: key
+  EnforcedColonStyle: key

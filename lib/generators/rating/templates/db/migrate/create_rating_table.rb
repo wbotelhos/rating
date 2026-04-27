@@ -3,18 +3,18 @@
 class CreateRatingTable < ActiveRecord::Migration[5.0]
   def change
     create_table :rating_ratings do |t|
-      t.decimal :average,  default: 0, null: false, precision: 12, scale: 8
+      t.decimal :average, default: 0, null: false, precision: 12, scale: 8
       t.decimal :estimate, default: 0, null: false, precision: 12, scale: 8
-      t.integer :sum,      default: 0, null: false
-      t.integer :total,    default: 0, null: false
+      t.integer :sum, default: 0, null: false
+      t.integer :total, default: 0, null: false
 
-      t.references :resource,  index: true, null: false, polymorphic: true
-      t.references :scopeable, index: true, null: true,  polymorphic: true
+      t.references :resource, index: true, null: false, polymorphic: true
+      t.references :scopeable, index: true, null: true, polymorphic: true
 
       t.timestamps null: false
     end
 
-    change_column :rating_ratings, :resource_type,  :string, limit: 10
+    change_column :rating_ratings, :resource_type, :string, limit: 10
     change_column :rating_ratings, :scopeable_type, :string, limit: 10
 
     add_index :rating_ratings, %i[resource_type resource_id scopeable_type scopeable_id],

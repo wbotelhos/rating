@@ -38,7 +38,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
     context 'when update is made' do
       let!(:category_1) { create(:category) }
       let!(:category_2) { create(:category) }
-      let!(:record)     { create(:article, categories: [category_1, category_2]) }
+      let!(:record) { create(:article, categories: [category_1, category_2]) }
 
       it 'creates the cache' do
         record.rating_warm_up scoping: :categories
@@ -46,7 +46,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
         ratings = Rating::Rating.all
 
         expect(ratings.map(&:scopeable)).to match_array [category_1, category_2]
-        expect(ratings.map(&:resource)).to  match_array [record, record]
+        expect(ratings.map(&:resource)).to match_array [record, record]
       end
 
       it 'returns the cached objects' do
@@ -57,7 +57,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
     context 'when record does not exist' do
       let!(:category_1) { create(:category) }
       let!(:category_2) { create(:category) }
-      let!(:record)     { create(:article, categories: [category_1, category_2]) }
+      let!(:record) { create(:article, categories: [category_1, category_2]) }
 
       before { Rating::Rating.destroy_all }
 
@@ -67,7 +67,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
         ratings = Rating::Rating.all
 
         expect(ratings.map(&:scopeable)).to match_array [category_1, category_2]
-        expect(ratings.map(&:resource)).to  match_array [record, record]
+        expect(ratings.map(&:resource)).to match_array [record, record]
       end
 
       it 'returns the cached objects' do
@@ -85,7 +85,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
 
     context 'when scoping is given inside array' do
       let!(:category) { create(:category) }
-      let!(:record)   { create(:article, categories: [category]) }
+      let!(:record) { create(:article, categories: [category]) }
 
       it 'returns the cache' do
         expect(record.rating_warm_up(scoping: [:categories])).to eq Rating::Rating.all
@@ -94,7 +94,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
 
     context 'when scoping is given inside multiple arrays' do
       let!(:category) { create(:category) }
-      let!(:record)   { create(:article, categories: [category]) }
+      let!(:record) { create(:article, categories: [category]) }
 
       it 'returns the cache' do
         expect(record.rating_warm_up(scoping: [[:categories]])).to eq Rating::Rating.all
@@ -103,7 +103,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
 
     context 'when scoping is given with nil value together' do
       let!(:category) { create(:category) }
-      let!(:record)   { create(:article, categories: [category]) }
+      let!(:record) { create(:article, categories: [category]) }
 
       it 'returns the cache' do
         expect(record.rating_warm_up(scoping: [[:categories, nil], nil])).to eq Rating::Rating.all

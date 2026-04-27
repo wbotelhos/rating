@@ -3,12 +3,12 @@
 module Rating
   class Rate < ActiveRecord::Base
     self.table_name_prefix = 'rating_'
-    self.table_name        = ::Rating::Config.rate_table
+    self.table_name = ::Rating::Config.rate_table
 
     after_save :update_rating
 
-    belongs_to :author,    polymorphic: true
-    belongs_to :resource,  polymorphic: true
+    belongs_to :author, polymorphic: true
+    belongs_to :resource, polymorphic: true
     belongs_to :scopeable, polymorphic: true
 
     validates :value, presence: true
@@ -26,7 +26,7 @@ module Rating
 
     def self.create(author:, extra_scopes:, metadata:, resource:, value:, scopeable: nil)
       attributes = { author:, resource:, scopeable: }.merge(extra_scopes)
-      record     = find_or_initialize_by(attributes)
+      record = find_or_initialize_by(attributes)
 
       metadata.each { |k, v| record[k] = v } if metadata.present?
 

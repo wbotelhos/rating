@@ -135,7 +135,7 @@ RSpec.describe Rating::Extension, '.order_by_rating' do
         result = Article.order_by_rating({ column: :total, direction: :asc })
 
         expect(result[0..1]).to match_array [article_2, article_3]
-        expect(result.last).to  eq article_1
+        expect(result.last).to eq article_1
       end
 
       context 'with scope' do

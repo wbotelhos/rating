@@ -9,10 +9,10 @@ RSpec.describe Rating::Rating, '.update_rating' do
     it 'updates the rating data of the given resource' do
       record = described_class.find_by(resource: article_1)
 
-      expect(record.average).to  eq(BigDecimal('4.5'))
+      expect(record.average).to eq(BigDecimal('4.5'))
       expect(record.estimate).to eq(BigDecimal('2.45862298'))
 
-      expect(record.sum).to   be(9)
+      expect(record.sum).to be(9)
       expect(record.total).to be(2)
     end
   end
@@ -23,10 +23,10 @@ RSpec.describe Rating::Rating, '.update_rating' do
     it 'updates the rating data of the given resource respecting the scope' do
       record = described_class.find_by(resource: article_1, scopeable: category)
 
-      expect(record.average).to  eq(BigDecimal('1.5'))
+      expect(record.average).to eq(BigDecimal('1.5'))
       expect(record.estimate).to eq(BigDecimal('1.60148012'))
-      expect(record.sum).to      be(3)
-      expect(record.total).to    be(2)
+      expect(record.sum).to be(3)
+      expect(record.total).to be(2)
     end
   end
 
@@ -39,10 +39,10 @@ RSpec.describe Rating::Rating, '.update_rating' do
 
       record = described_class.last
 
-      expect(record.average).to  eq(BigDecimal('0'))
+      expect(record.average).to eq(BigDecimal('0'))
       expect(record.estimate).to eq(BigDecimal('0'))
-      expect(record.sum).to      be(0)
-      expect(record.total).to    be(0)
+      expect(record.sum).to be(0)
+      expect(record.total).to be(0)
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe Rating::Rating, '.update_rating' do
     let!(:author_pool) { Array.new(100) { create(:author) } }
 
     let!(:consistent_resource) { create(:article) }
-    let!(:polarized_resource)  { create(:article) }
+    let!(:polarized_resource) { create(:article) }
 
     before do
       author_pool.each { |author| create(:rating_rate, author:, resource: consistent_resource, value: 4) }
@@ -79,7 +79,7 @@ RSpec.describe Rating::Rating, '.update_rating' do
 
     it 'ranks the consistent distribution above the polarized one despite same mean' do
       consistent = described_class.find_by(resource: consistent_resource)
-      polarized  = described_class.find_by(resource: polarized_resource)
+      polarized = described_class.find_by(resource: polarized_resource)
 
       expect(consistent.average).to eq(polarized.average)
       expect(consistent.estimate).to be > polarized.estimate

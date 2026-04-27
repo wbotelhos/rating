@@ -3,9 +3,9 @@
 module Rating
   class Rating < ActiveRecord::Base
     self.table_name_prefix = 'rating_'
-    self.table_name        = ::Rating::Config.rating_table
+    self.table_name = ::Rating::Config.rating_table
 
-    belongs_to :resource,  polymorphic: true
+    belongs_to :resource, polymorphic: true
     belongs_to :scopeable, polymorphic: true
 
     validates :average, :estimate, :sum, :total, presence: true
@@ -31,7 +31,7 @@ module Rating
           GROUP BY value
         ).squish
 
-        values =  [sql, resource.class.base_class.name, resource.id]
+        values = [sql, resource.class.base_class.name, resource.id]
         values += [scopeable.class.base_class.name, scopeable.id] unless scopeable.nil? || unscoped_rating?(resource)
 
         Rate.find_by_sql(values).to_h do |row|
@@ -41,7 +41,7 @@ module Rating
 
       def data(resource, scopeable)
         histogram = histogram_data(resource, scopeable)
-        values    = values_data(resource, scopeable)
+        values = values_data(resource, scopeable)
 
         {
           average:  values.rating_avg,
@@ -65,22 +65,22 @@ module Rating
             #{scope_where_query(resource)}
         ).squish
 
-        values =  [sql, resource.class.base_class.name, resource.id]
+        values = [sql, resource.class.base_class.name, resource.id]
         values += [scopeable.class.base_class.name, scopeable.id] unless scopeable.nil? || unscoped_rating?(resource)
 
         execute_sql values
       end
 
       def update_rating(resource, scopeable)
-        attributes             = { resource: }
+        attributes = { resource: }
         attributes[:scopeable] = unscoped_rating?(resource) ? nil : scopeable
 
         record = find_or_initialize_by(attributes)
         result = data(resource, scopeable)
 
-        record.average  = result[:average]
-        record.sum      = result[:sum]
-        record.total    = result[:total]
+        record.average = result[:average]
+        record.sum = result[:sum]
+        record.total = result[:total]
         record.estimate = result[:estimate]
 
         record.save

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe Rating::Rate, '.rate_for' do
-  let!(:author)  { create(:author) }
+  let!(:author) { create(:author) }
   let!(:article) { create(:article) }
 
   context 'with no scopeable' do
