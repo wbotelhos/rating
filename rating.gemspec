@@ -4,7 +4,7 @@ require_relative 'lib/rating/version'
 
 Gem::Specification.new do |spec|
   spec.author = 'Washington Botelho'
-  spec.description = 'A true Bayesian rating system with scope and cache enabled.'
+  spec.description = 'A confidence-based rating system with scope and cache enabled.'
   spec.email = 'wbotelhos@gmail.com'
   spec.extra_rdoc_files = Dir['CHANGELOG.md', 'LICENSE', 'README.md']
   spec.files = Dir['lib/**/*']

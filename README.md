@@ -6,7 +6,7 @@
 [![Coverage](https://codecov.io/gh/wbotelhos/rating/branch/master/graph/badge.svg?token=QJSHUOULEG)](https://codecov.io/gh/wbotelhos/rating)
 [![Sponsor](https://img.shields.io/badge/sponsor-%3C3-green)](https://github.com/sponsors/wbotelhos)
 
-A true Bayesian rating system with scope and cache enabled.
+A confidence-based rating system with scope and cache enabled.
 
 ## JS Rating?
 
@@ -14,35 +14,42 @@ This is **Raty**: https://github.com/wbotelhos/raty :star2:
 
 ## Description
 
-Rating uses the know as "True Bayesian Estimate" inspired on [IMDb rating](http://www.imdb.com/help/show_leaf?votestopfaq) with the following formula:
+Rating computes the `estimate` field using the **lower bound of the confidence interval** described
+by Evan Miller in [Ranking Items With Star Ratings](https://www.evanmiller.org/ranking-items-with-star-ratings.html).
+
+The formula uses the full distribution of votes — not just the mean — so it considers both the
+average rating and the confidence we have in that average:
 
 ```
-(WR) = (v ÷ (v + m)) × R + (m ÷ (v + m)) × C
+estimate = mean − z × √(variance / (N + K + 1))
 ```
 
-**IMDb Implementation:**
+Where:
 
-`WR`: weighted rating
+- `mean` and `variance` are computed over the smoothed vote distribution (Laplace prior of 1 vote per level);
+- `N` is the total number of votes for the resource;
+- `K` is the number of rating levels (e.g. 5 for a 1–5 star scale);
+- `z` is the normal distribution quantile (1.96 for 95% confidence).
 
-`R`:  average for the movie (mean) = (Rating)
+In practice, this means:
 
-`v`:  number of votes for the movie = (votes)
+- An item with consistent votes (e.g. all 4-stars) ranks **above** an item with the same mean but polarized votes (half 1-stars, half 5-stars), because the latter has higher variance and thus more uncertainty;
+- An item with 3 five-star votes ranks **below** an item with 200 votes averaging 4.7 stars, because the term `√(variance / (N + K + 1))` shrinks as `N` grows.
 
-`m`:  minimum votes required to be listed in the Top 250
+This is the same family of approach used by sites like Amazon and IMDb to avoid items with very few votes dominating top-rated lists.
 
-`C`:  the mean vote across the whole report
+### Configuration
 
-**Rating Implementation:**
+You can tune the formula via `Rating::Config`:
 
-`WR`: weighted rating
+- `rating_levels` (default `5`): the maximum value of your rating scale. Vote `value` must be an integer between `1` and `rating_levels`. Set this in `config/rating.yml`:
 
-`R`:  average for the resource
+```yaml
+rating:
+  rating_levels: 10
+```
 
-`v`:  number of votes for the resource
-
-`m`:  average of the number of votes
-
-`C`:  the average rating based on all resources
+- `rating_z_score` (default `1.96`): controls confidence level. Use `2.576` for 99% confidence (more conservative, penalizes low-vote items harder), `1.645` for 90% confidence (more permissive).
 
 ## Install
 
@@ -101,7 +108,7 @@ It will return a `Rating` object that keeps:
 
 `average`: the normal mean of votes;
 
-`estimate`: the true Bayesian estimate mean value (you should use this over average);
+`estimate`: the lower bound (95% confidence) of the rating, based on the vote distribution. Use this for ranking — it penalizes both polarized distributions and items with few votes;
 
 `sum`: the sum of votes for this resource;
 
@@ -296,7 +303,7 @@ article.rates_records
 ### As
 
 If you have a model that will only be able to rate but not to receive a rate, configure it as `author`.
-An author model still can be rated, but won't genarate a Rating record with all values as zero to warm up the cache.
+An author model still can be rated, but won't generate a Rating record with all values as zero to warm up the cache.
 
 ```ruby
 rating as: :author
