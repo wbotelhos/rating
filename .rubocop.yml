@@ -8,6 +8,11 @@ inherit_from:
   - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-rspec.yml
   - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop.yml
 
+AllCops:
+  Exclude:
+    - .bundle/**/*
+    - vendor/**/*
+
 Layout/ExtraSpacing:
   AllowForAlignment: false
 
