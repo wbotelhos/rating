@@ -9,11 +9,11 @@ RSpec.describe Rating::Rating, ':values_data' do
     subject(:result) { described_class.values_data article_1, nil }
 
     it 'returns the average of value for a resource' do
-      expect(result.as_json['rating_avg'].to_f.to_s).to eq '50.5'
+      expect(result.as_json['rating_avg'].to_f.to_s).to eq '4.5'
     end
 
     it 'returns the sum of values for a resource' do
-      expect(result.as_json['rating_sum'].to_f.to_s).to eq '101.0'
+      expect(result.as_json['rating_sum'].to_f.to_s).to eq '9.0'
     end
 
     it 'returns the count of votes for a resource' do

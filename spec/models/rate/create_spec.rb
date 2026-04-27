@@ -20,7 +20,7 @@ RSpec.describe Rating::Rate, ':create' do
         rating = Rating::Rating.last
 
         expect(rating.average).to  eq 3
-        expect(rating.estimate).to eq 3
+        expect(rating.estimate).to eq BigDecimal('2.04361793')
         expect(rating.resource).to eq article
         expect(rating.sum).to      eq 3
         expect(rating.total).to    eq 1
@@ -54,7 +54,7 @@ RSpec.describe Rating::Rate, ':create' do
         rating = Rating::Rating.find_by(resource: article)
 
         expect(rating.average).to  eq 3.5
-        expect(rating.estimate).to eq 3.5
+        expect(rating.estimate).to eq BigDecimal('2.27983918')
         expect(rating.resource).to eq article
         expect(rating.sum).to      eq 7
         expect(rating.total).to    eq 2
@@ -90,7 +90,7 @@ RSpec.describe Rating::Rate, ':create' do
         rating = Rating::Rating.last
 
         expect(rating.average).to   eq 3
-        expect(rating.estimate).to  eq 3
+        expect(rating.estimate).to  eq BigDecimal('2.04361793')
         expect(rating.resource).to  eq article
         expect(rating.scopeable).to eq category
         expect(rating.sum).to       eq 3
@@ -136,7 +136,7 @@ RSpec.describe Rating::Rate, ':create' do
         rating = Rating::Rating.find_by(resource: article, scopeable: category)
 
         expect(rating.average).to   eq 3.5
-        expect(rating.estimate).to  eq 3.5
+        expect(rating.estimate).to  eq BigDecimal('2.27983918')
         expect(rating.resource).to  eq article
         expect(rating.scopeable).to eq category
         expect(rating.sum).to       eq 7
@@ -287,7 +287,7 @@ RSpec.describe Rating::Rate, ':create' do
         rating = Rating::Rating.last
 
         expect(rating.average).to   eq 1
-        expect(rating.estimate).to  eq 1
+        expect(rating.estimate).to  eq BigDecimal('1.56233177')
         expect(rating.resource).to  eq article
         expect(rating.scopeable).to eq category
         expect(rating.sum).to       eq 1
@@ -347,7 +347,7 @@ RSpec.describe Rating::Rate, ':create' do
           rating = ratings[0]
 
           expect(rating.average).to   eq 2
-          expect(rating.estimate).to  eq 2
+          expect(rating.estimate).to  eq BigDecimal('1.83789931')
           expect(rating.resource).to  eq article
           expect(rating.scopeable).to eq category
           expect(rating.sum).to       eq 2
@@ -408,7 +408,7 @@ RSpec.describe Rating::Rate, ':create' do
           rating = ratings[0]
 
           expect(rating.average).to   eq 1.5
-          expect(rating.estimate).to  eq 1.5
+          expect(rating.estimate).to  eq BigDecimal('1.60148012')
           expect(rating.resource).to  eq article
           expect(rating.scopeable).to eq category
           expect(rating.sum).to       eq 3

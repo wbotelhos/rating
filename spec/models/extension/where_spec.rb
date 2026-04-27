@@ -21,11 +21,11 @@ RSpec.describe Rating::Extension, 'unscoped_rating' do
 
     rating = ratings[0]
 
-    expect(rating.average.to_s).to  eq '3.0'
-    expect(rating.estimate.to_s).to eq '3.0'
-    expect(rating.resource).to      eq resource
-    expect(rating.scopeable).to     be(nil)
-    expect(rating.sum).to           eq 9
-    expect(rating.total).to         eq 3
+    expect(rating.average).to   eq BigDecimal('3')
+    expect(rating.estimate).to  eq BigDecimal('2.19983335')
+    expect(rating.resource).to  eq resource
+    expect(rating.scopeable).to be(nil)
+    expect(rating.sum).to       eq 9
+    expect(rating.total).to     eq 3
   end
 end
