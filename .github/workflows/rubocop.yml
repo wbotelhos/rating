@@ -8,14 +8,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
 
       - name: Ruby and Bundle Install
         uses: ruby/setup-ruby@v1
 
         with:
           bundler-cache: true
-          ruby-version: '3.4'
+          ruby-version-file: .ruby-version
 
       - name: RuboCop
         run: bundle exec rubocop --parallel
