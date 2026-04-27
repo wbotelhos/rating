@@ -20,3 +20,6 @@ Metrics/ParameterLists:
 
 Rails/ApplicationRecord:
   Enabled: false
+
+Rails/RakeEnvironment:
+  Enabled: false
