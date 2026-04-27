@@ -7,33 +7,33 @@ RSpec.describe Rating::Extension, '.rating' do
 
   context 'with no scope' do
     it 'returns rating record' do
-      expect(article_1.rating).to eq Rating::Rating.find_by(resource: article_1, scopeable: nil)
+      expect(article_1.rating).to eq(Rating::Rating.find_by(resource: article_1, scopeable: nil))
     end
   end
 
   context 'with scope' do
     it 'returns scoped rating record' do
-      expect(article_1.rating(scope: category)).to eq Rating::Rating.find_by(resource: article_1, scopeable: category)
+      expect(article_1.rating(scope: category)).to eq(Rating::Rating.find_by(resource: article_1, scopeable: category))
     end
   end
 
   context 'when destroy author' do
     it 'does not destroy resource rating' do
-      expect(Rating::Rating.where(resource: article_1).count).to eq 2
+      expect(Rating::Rating.where(resource: article_1).count).to eq(2)
 
       author_1.destroy!
 
-      expect(Rating::Rating.where(resource: article_1).count).to eq 2
+      expect(Rating::Rating.where(resource: article_1).count).to eq(2)
     end
   end
 
   context 'when destroy resource' do
     it 'destroys resource rating too' do
-      expect(Rating::Rating.where(resource: article_1).count).to eq 2
+      expect(Rating::Rating.where(resource: article_1).count).to eq(2)
 
       article_1.destroy!
 
-      expect(Rating::Rating.where(resource: article_1).count).to eq 0
+      expect(Rating::Rating.where(resource: article_1).count).to eq(0)
     end
   end
 end

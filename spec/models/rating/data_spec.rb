@@ -9,15 +9,15 @@ RSpec.describe Rating::Rating, '.data' do
     subject(:result) { described_class.data article_1, nil }
 
     it 'returns the average of value for a resource' do
-      expect(result[:average]).to eq 4.5
+      expect(result[:average]).to eq(4.5)
     end
 
     it 'returns the sum of values for a resource' do
-      expect(result[:sum]).to eq 9
+      expect(result[:sum]).to eq(9)
     end
 
     it 'returns the count of votes for a resource' do
-      expect(result[:total]).to eq 2
+      expect(result[:total]).to eq(2)
     end
 
     it 'returns the estimate for a resource' do
@@ -29,15 +29,15 @@ RSpec.describe Rating::Rating, '.data' do
     subject(:result) { described_class.data article_1, category }
 
     it 'returns the average of value for a resource' do
-      expect(result[:average]).to eq 1.5
+      expect(result[:average]).to eq(1.5)
     end
 
     it 'returns the sum of values for a resource' do
-      expect(result[:sum]).to eq 3
+      expect(result[:sum]).to eq(3)
     end
 
     it 'returns the count of votes for a resource' do
-      expect(result[:total]).to eq 2
+      expect(result[:total]).to eq(2)
     end
 
     it 'returns the estimate for a resource' do

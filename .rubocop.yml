@@ -8,15 +8,15 @@ inherit_from:
   - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop-rspec.yml
   - https://raw.githubusercontent.com/wbotelhos/dotfiles/main/.rubocop.yml
 
-Metrics/ParameterLists:
-  Max: 6
-
-Rails/ApplicationRecord:
-  Enabled: false
-
 Layout/ExtraSpacing:
   AllowForAlignment: false
 
 Layout/HashAlignment:
   EnforcedHashRocketStyle: key
   EnforcedColonStyle: key
+
+Metrics/ParameterLists:
+  Max: 6
+
+Rails/ApplicationRecord:
+  Enabled: false

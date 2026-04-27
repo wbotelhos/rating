@@ -15,7 +15,7 @@ RSpec.describe Rating::Rate, '.rate_for' do
       end
 
       it 'returns the record' do
-        expect(described_class.rate_for(author:, resource: article)).to eq record
+        expect(described_class.rate_for(author:, resource: article)).to eq(record)
       end
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe Rating::Rate, '.rate_for' do
       it 'returns the record' do
         query = described_class.rate_for(author:, resource: article, scopeable: category)
 
-        expect(query).to eq record
+        expect(query).to eq(record)
       end
     end
   end
@@ -73,7 +73,7 @@ RSpec.describe Rating::Rate, '.rate_for' do
             scopeable:    category
           )
 
-          expect(result).to eq record
+          expect(result).to eq(record)
         end
       end
 

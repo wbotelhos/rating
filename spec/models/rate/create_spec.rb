@@ -11,19 +11,19 @@ RSpec.describe Rating::Rate, '.create' do
       it 'creates a rate entry' do
         rate = described_class.last
 
-        expect(rate.author).to eq author
-        expect(rate.resource).to eq article
-        expect(rate.value).to eq 3
+        expect(rate.author).to eq(author)
+        expect(rate.resource).to eq(article)
+        expect(rate.value).to eq(3)
       end
 
       it 'creates a rating entry' do
         rating = Rating::Rating.last
 
-        expect(rating.average).to eq 3
-        expect(rating.estimate).to eq BigDecimal('2.04361793')
-        expect(rating.resource).to eq article
-        expect(rating.sum).to eq 3
-        expect(rating.total).to eq 1
+        expect(rating.average).to eq(3)
+        expect(rating.estimate).to eq(BigDecimal('2.04361793'))
+        expect(rating.resource).to eq(article)
+        expect(rating.sum).to eq(3)
+        expect(rating.total).to eq(1)
       end
     end
 
@@ -35,29 +35,29 @@ RSpec.describe Rating::Rate, '.create' do
       it 'creates one more rate entry' do
         rates = described_class.where(author: [author, author_2]).order(:created_at)
 
-        expect(rates.size).to eq 2
+        expect(rates.size).to eq(2)
 
         rate = rates[0]
 
-        expect(rate.author).to eq author
-        expect(rate.resource).to eq article
-        expect(rate.value).to eq 3
+        expect(rate.author).to eq(author)
+        expect(rate.resource).to eq(article)
+        expect(rate.value).to eq(3)
 
         rate = rates[1]
 
-        expect(rate.author).to eq author_2
-        expect(rate.resource).to eq article
-        expect(rate.value).to eq 4
+        expect(rate.author).to eq(author_2)
+        expect(rate.resource).to eq(article)
+        expect(rate.value).to eq(4)
       end
 
       it 'updates the unique rating entry' do
         rating = Rating::Rating.find_by(resource: article)
 
-        expect(rating.average).to eq 3.5
-        expect(rating.estimate).to eq BigDecimal('2.27983918')
-        expect(rating.resource).to eq article
-        expect(rating.sum).to eq 7
-        expect(rating.total).to eq 2
+        expect(rating.average).to eq(3.5)
+        expect(rating.estimate).to eq(BigDecimal('2.27983918'))
+        expect(rating.resource).to eq(article)
+        expect(rating.sum).to eq(7)
+        expect(rating.total).to eq(2)
       end
     end
   end
@@ -80,21 +80,21 @@ RSpec.describe Rating::Rate, '.create' do
       it 'creates a rate entry' do
         rate = described_class.last
 
-        expect(rate.author).to eq author
-        expect(rate.resource).to eq article
-        expect(rate.scopeable).to eq category
-        expect(rate.value).to eq 3
+        expect(rate.author).to eq(author)
+        expect(rate.resource).to eq(article)
+        expect(rate.scopeable).to eq(category)
+        expect(rate.value).to eq(3)
       end
 
       it 'creates a rating entry' do
         rating = Rating::Rating.last
 
-        expect(rating.average).to eq 3
-        expect(rating.estimate).to eq BigDecimal('2.04361793')
-        expect(rating.resource).to eq article
-        expect(rating.scopeable).to eq category
-        expect(rating.sum).to eq 3
-        expect(rating.total).to eq 1
+        expect(rating.average).to eq(3)
+        expect(rating.estimate).to eq(BigDecimal('2.04361793'))
+        expect(rating.resource).to eq(article)
+        expect(rating.scopeable).to eq(category)
+        expect(rating.sum).to eq(3)
+        expect(rating.total).to eq(1)
       end
     end
 
@@ -115,32 +115,32 @@ RSpec.describe Rating::Rate, '.create' do
       it 'creates one more rate entry' do
         rates = described_class.where(author: [author, author_2]).order(:created_at)
 
-        expect(rates.size).to eq 2
+        expect(rates.size).to eq(2)
 
         rate = rates[0]
 
-        expect(rate.author).to eq author
-        expect(rate.resource).to eq article
-        expect(rate.scopeable).to eq category
-        expect(rate.value).to eq 3
+        expect(rate.author).to eq(author)
+        expect(rate.resource).to eq(article)
+        expect(rate.scopeable).to eq(category)
+        expect(rate.value).to eq(3)
 
         rate = rates[1]
 
-        expect(rate.author).to eq author_2
-        expect(rate.resource).to eq article
-        expect(rate.scopeable).to eq category
-        expect(rate.value).to eq 4
+        expect(rate.author).to eq(author_2)
+        expect(rate.resource).to eq(article)
+        expect(rate.scopeable).to eq(category)
+        expect(rate.value).to eq(4)
       end
 
       it 'updates the unique rating entry' do
         rating = Rating::Rating.find_by(resource: article, scopeable: category)
 
-        expect(rating.average).to eq 3.5
-        expect(rating.estimate).to eq BigDecimal('2.27983918')
-        expect(rating.resource).to eq article
-        expect(rating.scopeable).to eq category
-        expect(rating.sum).to eq 7
-        expect(rating.total).to eq 2
+        expect(rating.average).to eq(3.5)
+        expect(rating.estimate).to eq(BigDecimal('2.27983918'))
+        expect(rating.resource).to eq(article)
+        expect(rating.scopeable).to eq(category)
+        expect(rating.sum).to eq(7)
+        expect(rating.total).to eq(2)
       end
     end
   end
@@ -152,10 +152,10 @@ RSpec.describe Rating::Rate, '.create' do
 
         rate = described_class.last
 
-        expect(rate.author).to eq author
+        expect(rate.author).to eq(author)
         expect(rate.comment).to be(nil)
-        expect(rate.resource).to eq article
-        expect(rate.value).to eq 3
+        expect(rate.resource).to eq(article)
+        expect(rate.value).to eq(3)
       end
     end
 
@@ -165,10 +165,10 @@ RSpec.describe Rating::Rate, '.create' do
 
         rate = described_class.last
 
-        expect(rate.author).to eq author
+        expect(rate.author).to eq(author)
         expect(rate.comment).to be(nil)
-        expect(rate.resource).to eq article
-        expect(rate.value).to eq 3
+        expect(rate.resource).to eq(article)
+        expect(rate.value).to eq(3)
       end
     end
 
@@ -184,10 +184,10 @@ RSpec.describe Rating::Rate, '.create' do
 
         rate = described_class.last
 
-        expect(rate.author).to eq author
-        expect(rate.comment).to eq 'comment'
-        expect(rate.resource).to eq article
-        expect(rate.value).to eq 3
+        expect(rate.author).to eq(author)
+        expect(rate.comment).to eq('comment')
+        expect(rate.resource).to eq(article)
+        expect(rate.value).to eq(3)
       end
     end
 
@@ -214,14 +214,14 @@ RSpec.describe Rating::Rate, '.create' do
 
           rates = described_class.all
 
-          expect(rates.size).to eq 1
+          expect(rates.size).to eq(1)
 
           rate = rates[0]
 
-          expect(rate.author).to eq author
-          expect(rate.comment).to eq 'comment.updated'
-          expect(rate.resource).to eq article
-          expect(rate.value).to eq 1
+          expect(rate.author).to eq(author)
+          expect(rate.comment).to eq('comment.updated')
+          expect(rate.resource).to eq(article)
+          expect(rate.value).to eq(1)
         end
       end
 
@@ -237,14 +237,14 @@ RSpec.describe Rating::Rate, '.create' do
 
           rates = described_class.all
 
-          expect(rates.size).to eq 1
+          expect(rates.size).to eq(1)
 
           rate = rates[0]
 
-          expect(rate.author).to eq author
-          expect(rate.comment).to eq 'comment.updated'
-          expect(rate.resource).to eq article
-          expect(rate.value).to eq 2
+          expect(rate.author).to eq(author)
+          expect(rate.comment).to eq('comment.updated')
+          expect(rate.resource).to eq(article)
+          expect(rate.value).to eq(2)
         end
       end
     end
@@ -266,12 +266,12 @@ RSpec.describe Rating::Rate, '.create' do
 
         rate = described_class.last
 
-        expect(rate.author).to eq author
-        expect(rate.resource).to eq article
-        expect(rate.scope_1).to eq 'scope_1'
-        expect(rate.scope_2).to eq 'scope_2'
-        expect(rate.scopeable).to eq category
-        expect(rate.value).to eq 1
+        expect(rate.author).to eq(author)
+        expect(rate.resource).to eq(article)
+        expect(rate.scope_1).to eq('scope_1')
+        expect(rate.scope_2).to eq('scope_2')
+        expect(rate.scopeable).to eq(category)
+        expect(rate.value).to eq(1)
       end
 
       it 'creates a rating entry' do
@@ -286,12 +286,12 @@ RSpec.describe Rating::Rate, '.create' do
 
         rating = Rating::Rating.last
 
-        expect(rating.average).to eq 1
-        expect(rating.estimate).to eq BigDecimal('1.56233177')
-        expect(rating.resource).to eq article
-        expect(rating.scopeable).to eq category
-        expect(rating.sum).to eq 1
-        expect(rating.total).to eq 1
+        expect(rating.average).to eq(1)
+        expect(rating.estimate).to eq(BigDecimal('1.56233177'))
+        expect(rating.resource).to eq(article)
+        expect(rating.scopeable).to eq(category)
+        expect(rating.sum).to eq(1)
+        expect(rating.total).to eq(1)
       end
 
       context 'when rate already exists' do
@@ -318,16 +318,16 @@ RSpec.describe Rating::Rate, '.create' do
 
           rates = described_class.all
 
-          expect(rates.size).to eq 1
+          expect(rates.size).to eq(1)
 
           rate = rates[0]
 
-          expect(rate.author).to eq author
-          expect(rate.resource).to eq article
-          expect(rate.scope_1).to eq 'scope_1'
-          expect(rate.scope_2).to eq 'scope_2'
-          expect(rate.scopeable).to eq category
-          expect(rate.value).to eq 2
+          expect(rate.author).to eq(author)
+          expect(rate.resource).to eq(article)
+          expect(rate.scope_1).to eq('scope_1')
+          expect(rate.scope_2).to eq('scope_2')
+          expect(rate.scopeable).to eq(category)
+          expect(rate.value).to eq(2)
         end
 
         it 'updates the unique rating entry' do
@@ -342,16 +342,16 @@ RSpec.describe Rating::Rate, '.create' do
 
           ratings = Rating::Rating.all
 
-          expect(ratings.size).to eq 1
+          expect(ratings.size).to eq(1)
 
           rating = ratings[0]
 
-          expect(rating.average).to eq 2
-          expect(rating.estimate).to eq BigDecimal('1.83789931')
-          expect(rating.resource).to eq article
-          expect(rating.scopeable).to eq category
-          expect(rating.sum).to eq 2
-          expect(rating.total).to eq 1
+          expect(rating.average).to eq(2)
+          expect(rating.estimate).to eq(BigDecimal('1.83789931'))
+          expect(rating.resource).to eq(article)
+          expect(rating.scopeable).to eq(category)
+          expect(rating.sum).to eq(2)
+          expect(rating.total).to eq(1)
         end
       end
 
@@ -379,40 +379,40 @@ RSpec.describe Rating::Rate, '.create' do
         it 'creates a new rate entry' do
           rates = described_class.all
 
-          expect(rates.size).to eq 2
+          expect(rates.size).to eq(2)
 
           rate = rates[0]
 
-          expect(rate.author).to eq author
-          expect(rate.resource).to eq article
-          expect(rate.scope_1).to eq 'scope_1'
-          expect(rate.scope_2).to eq 'scope_2'
-          expect(rate.scopeable).to eq category
-          expect(rate.value).to eq 1
+          expect(rate.author).to eq(author)
+          expect(rate.resource).to eq(article)
+          expect(rate.scope_1).to eq('scope_1')
+          expect(rate.scope_2).to eq('scope_2')
+          expect(rate.scopeable).to eq(category)
+          expect(rate.value).to eq(1)
 
           rate = rates[1]
 
-          expect(rate.author).to eq author
-          expect(rate.resource).to eq article
-          expect(rate.scope_1).to eq 'scope_1'
-          expect(rate.scope_2).to eq 'scope_missing'
-          expect(rate.scopeable).to eq category
-          expect(rate.value).to eq 2
+          expect(rate.author).to eq(author)
+          expect(rate.resource).to eq(article)
+          expect(rate.scope_1).to eq('scope_1')
+          expect(rate.scope_2).to eq('scope_missing')
+          expect(rate.scopeable).to eq(category)
+          expect(rate.value).to eq(2)
         end
 
         it 'updates the unique rating entry' do
           ratings = Rating::Rating.all
 
-          expect(ratings.size).to eq 1
+          expect(ratings.size).to eq(1)
 
           rating = ratings[0]
 
-          expect(rating.average).to eq 1.5
-          expect(rating.estimate).to eq BigDecimal('1.60148012')
-          expect(rating.resource).to eq article
-          expect(rating.scopeable).to eq category
-          expect(rating.sum).to eq 3
-          expect(rating.total).to eq 2
+          expect(rating.average).to eq(1.5)
+          expect(rating.estimate).to eq(BigDecimal('1.60148012'))
+          expect(rating.resource).to eq(article)
+          expect(rating.scopeable).to eq(category)
+          expect(rating.sum).to eq(3)
+          expect(rating.total).to eq(2)
         end
       end
     end

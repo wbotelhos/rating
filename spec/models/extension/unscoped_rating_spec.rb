@@ -16,25 +16,25 @@ RSpec.describe Rating::Extension, '#rate' do
 
       ratings = Rating::Rating.order(:id)
 
-      expect(ratings.size).to eq 2
+      expect(ratings.size).to eq(2)
 
       rating = ratings[0]
 
-      expect(rating.average).to eq BigDecimal('1.5')
-      expect(rating.estimate).to eq BigDecimal('1.60148012')
-      expect(rating.resource).to eq resource
-      expect(rating.scopeable).to eq scope
-      expect(rating.sum).to eq 3
-      expect(rating.total).to eq 2
+      expect(rating.average).to eq(BigDecimal('1.5'))
+      expect(rating.estimate).to eq(BigDecimal('1.60148012'))
+      expect(rating.resource).to eq(resource)
+      expect(rating.scopeable).to eq(scope)
+      expect(rating.sum).to eq(3)
+      expect(rating.total).to eq(2)
 
       rating = ratings[1]
 
-      expect(rating.average).to eq BigDecimal('5')
-      expect(rating.estimate).to eq BigDecimal('2.22899844')
-      expect(rating.resource).to eq resource
+      expect(rating.average).to eq(BigDecimal('5'))
+      expect(rating.estimate).to eq(BigDecimal('2.22899844'))
+      expect(rating.resource).to eq(resource)
       expect(rating.scopeable).to be(nil)
-      expect(rating.sum).to eq 5
-      expect(rating.total).to eq 1
+      expect(rating.sum).to eq(5)
+      expect(rating.total).to eq(1)
     end
   end
 
@@ -48,16 +48,16 @@ RSpec.describe Rating::Extension, '#rate' do
 
       ratings = Rating::Rating.order(:id)
 
-      expect(ratings.size).to eq 1
+      expect(ratings.size).to eq(1)
 
       rating = ratings[0]
 
-      expect(rating.average.round(8)).to eq BigDecimal('2.66666667')
-      expect(rating.estimate).to eq BigDecimal('1.8714632')
-      expect(rating.resource).to eq resource
+      expect(rating.average.round(8)).to eq(BigDecimal('2.66666667'))
+      expect(rating.estimate).to eq(BigDecimal('1.8714632'))
+      expect(rating.resource).to eq(resource)
       expect(rating.scopeable).to be(nil)
-      expect(rating.sum).to eq 8
-      expect(rating.total).to eq 3
+      expect(rating.sum).to eq(8)
+      expect(rating.total).to eq(3)
     end
   end
 
@@ -73,25 +73,25 @@ RSpec.describe Rating::Extension, '#rate' do
 
       ratings = Rating::Rating.order(:id)
 
-      expect(ratings.size).to eq 2
+      expect(ratings.size).to eq(2)
 
       rating = ratings[0]
 
-      expect(rating.average).to eq BigDecimal('0')
-      expect(rating.estimate).to eq BigDecimal('0')
-      expect(rating.resource).to eq resource
-      expect(rating.scopeable).to eq scope
-      expect(rating.sum).to eq 0
-      expect(rating.total).to eq 0
+      expect(rating.average).to eq(BigDecimal('0'))
+      expect(rating.estimate).to eq(BigDecimal('0'))
+      expect(rating.resource).to eq(resource)
+      expect(rating.scopeable).to eq(scope)
+      expect(rating.sum).to eq(0)
+      expect(rating.total).to eq(0)
 
       rating = ratings[1]
 
-      expect(rating.average.round(8)).to eq BigDecimal('2.66666667')
-      expect(rating.estimate).to eq BigDecimal('1.8714632')
-      expect(rating.resource).to eq resource
+      expect(rating.average.round(8)).to eq(BigDecimal('2.66666667'))
+      expect(rating.estimate).to eq(BigDecimal('1.8714632'))
+      expect(rating.resource).to eq(resource)
       expect(rating.scopeable).to be(nil)
-      expect(rating.sum).to eq 8
-      expect(rating.total).to eq 3
+      expect(rating.sum).to eq(8)
+      expect(rating.total).to eq(3)
     end
   end
 end

@@ -9,11 +9,11 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       it 'creates the cache' do
         record.rating_warm_up scoping: nil
 
-        expect(Rating::Rating.all).to eq [rating]
+        expect(Rating::Rating.all).to eq([rating])
       end
 
       it 'returns the cached object' do
-        expect(record.rating_warm_up).to eq rating
+        expect(record.rating_warm_up).to eq(rating)
       end
     end
 
@@ -25,11 +25,11 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       it 'creates the cache' do
         record.rating_warm_up scoping: nil
 
-        expect(Rating::Rating.all.map(&:resource)).to eq [record]
+        expect(Rating::Rating.all.map(&:resource)).to eq([record])
       end
 
       it 'returns the cached object' do
-        expect(record.rating_warm_up).to eq Rating::Rating.last
+        expect(record.rating_warm_up).to eq(Rating::Rating.last)
       end
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       end
 
       it 'returns the cached objects' do
-        expect(record.rating_warm_up(scoping: :categories)).to eq Rating::Rating.all
+        expect(record.rating_warm_up(scoping: :categories)).to eq(Rating::Rating.all)
       end
     end
 
@@ -71,7 +71,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       end
 
       it 'returns the cached objects' do
-        expect(record.rating_warm_up(scoping: :categories)).to eq Rating::Rating.all
+        expect(record.rating_warm_up(scoping: :categories)).to eq(Rating::Rating.all)
       end
     end
 
@@ -79,7 +79,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       let!(:record) { create(:article) }
 
       it 'returns an empty array' do
-        expect(record.rating_warm_up(scoping: :missing)).to eq []
+        expect(record.rating_warm_up(scoping: :missing)).to eq([])
       end
     end
 
@@ -88,7 +88,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       let!(:record) { create(:article, categories: [category]) }
 
       it 'returns the cache' do
-        expect(record.rating_warm_up(scoping: [:categories])).to eq Rating::Rating.all
+        expect(record.rating_warm_up(scoping: [:categories])).to eq(Rating::Rating.all)
       end
     end
 
@@ -97,7 +97,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       let!(:record) { create(:article, categories: [category]) }
 
       it 'returns the cache' do
-        expect(record.rating_warm_up(scoping: [[:categories]])).to eq Rating::Rating.all
+        expect(record.rating_warm_up(scoping: [[:categories]])).to eq(Rating::Rating.all)
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe Rating::Extension, '.rating_warm_up' do
       let!(:record) { create(:article, categories: [category]) }
 
       it 'returns the cache' do
-        expect(record.rating_warm_up(scoping: [[:categories, nil], nil])).to eq Rating::Rating.all
+        expect(record.rating_warm_up(scoping: [[:categories, nil], nil])).to eq(Rating::Rating.all)
       end
     end
   end

@@ -17,15 +17,15 @@ RSpec.describe Rating::Extension, '#rate' do
 
     ratings = Rating::Rating.order(:id)
 
-    expect(ratings.size).to eq 1
+    expect(ratings.size).to eq(1)
 
     rating = ratings[0]
 
-    expect(rating.average).to eq BigDecimal('3')
-    expect(rating.estimate).to eq BigDecimal('2.19983335')
-    expect(rating.resource).to eq resource
+    expect(rating.average).to eq(BigDecimal('3'))
+    expect(rating.estimate).to eq(BigDecimal('2.19983335'))
+    expect(rating.resource).to eq(resource)
     expect(rating.scopeable).to be(nil)
-    expect(rating.sum).to eq 9
-    expect(rating.total).to eq 3
+    expect(rating.sum).to eq(9)
+    expect(rating.total).to eq(3)
   end
 end
