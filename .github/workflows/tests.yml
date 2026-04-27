@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   test:
     env:
+      BUNDLE_WITH: ${{ matrix.db }}
       DB: ${{ matrix.db }}
 
     runs-on: ubuntu-latest
