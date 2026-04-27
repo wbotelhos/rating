@@ -20,8 +20,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency('codecov') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('database_cleaner') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('factory_bot_rails') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('mysql2') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('pg') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('pry-byebug') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('rspec-rails') # rubocop:disable Gemspec/DevelopmentDependencies
   spec.add_development_dependency('rubocop-performance') # rubocop:disable Gemspec/DevelopmentDependencies
