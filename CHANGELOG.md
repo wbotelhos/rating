@@ -1,3 +1,49 @@
+## v2.0.0
+
+### Break Changes
+
+- Ruby 3.0, and 3.1 and 3.2 are no longer supported. The minimum Ruby version is now 3.3;
+- The `estimate` field is now computed via Evan Miller's lower bound of the confidence interval
+  (https://www.evanmiller.org/ranking-items-with-star-ratings.html) instead of the previous weighted
+  Bayesian average. The new formula uses the full vote distribution (not just the mean), so it ranks
+  consistent ratings above polarized ones with the same mean, and items with few votes below items
+  with many votes;
+- The `estimate` and `average` columns increased from `DECIMAL(11, 2)` to `DECIMAL(12, 8)`. Existing
+  apps must run a manual upgrade migration:
+
+  ```ruby
+  class UpgradeRatingPrecision < ActiveRecord::Migration[7.0]
+    def change
+      change_column :rating_ratings, :average,  :decimal, precision: 12, scale: 8, default: 0, null: false
+      change_column :rating_ratings, :estimate, :decimal, precision: 12, scale: 8, default: 0, null: false
+    end
+  end
+  ```
+
+  After running the migration, the new `estimate` values will be populated on the next vote per
+  resource. To force a recalculation now, iterate over your rated resources and call `Rating::Rating.update_rating(resource, scope)`;
+- The `.round(2)` previously applied to `estimate` and `average` is removed. Values are stored at
+  full column precision. Round at the view layer if needed for display;
+- The `Rating::Rate#value` validation changed from `1..100` to `1..Rating::Config.rating_levels`
+  (default 5) and now requires an integer. If your app uses a different scale, configure
+  `rating_levels` (see below);
+- New configuration: `Rating::Config.rating_levels` (default `5`) defines the maximum value of your
+  rating scale. `Rating::Config.rating_z_score` (default `1.96`, i.e. 95% confidence) tunes how
+  aggressively low-confidence items are penalized in the estimate.
+
+### Bug Fixes
+
+- Fixes #8: `PG::NumericValueOutOfRange` overflow that occurred when a `resource_type` accumulated
+  1000+ rates. The new formula does not compute the `total_count / distinct_count` ratio that
+  caused the overflow.
+
+### Updates
+
+- Fixes a typo in the migration generator template (`mull: false` → `null: false`);
+- The `mysql2` and `pg` gems are no longer transitive dev dependencies of the gem. Contributors
+  install only the adapter they need via the Gemfile groups (`bundle install --without mysql` or
+  `--without postgres`).
+
 ## v1.0.0
 
 ### Break Changes
