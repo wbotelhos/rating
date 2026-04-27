@@ -16,15 +16,4 @@ Gem::Specification.new do |spec|
   spec.version = Rating::VERSION
 
   spec.add_dependency('activerecord')
-
-  spec.add_development_dependency('codecov') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('database_cleaner') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('factory_bot_rails') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('pry-byebug') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('rspec-rails') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('rubocop-performance') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('rubocop-rails') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('rubocop-rake') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('rubocop-rspec') # rubocop:disable Gemspec/DevelopmentDependencies
-  spec.add_development_dependency('shoulda-matchers') # rubocop:disable Gemspec/DevelopmentDependencies
 end
