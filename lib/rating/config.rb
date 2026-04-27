@@ -22,6 +22,14 @@ module Rating
       @rating_table ||= config[__method__.to_s] || 'rating_ratings'
     end
 
+    def rating_levels
+      @rating_levels ||= config[__method__.to_s] || 5
+    end
+
+    def rating_z_score
+      @rating_z_score ||= config[__method__.to_s] || 1.96
+    end
+
     def validations
       @validations ||= begin
         default_scope = %w[author_type resource_id resource_type scopeable_id scopeable_type]

@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :rating_rating, class: 'Rating::Rating' do
-    average  { 100 }
-    estimate { 100 }
-    sum      { 100 }
+    average  { 5 }
+    estimate { 5 }
+    sum      { 5 }
     total    { 1 }
 
     resource { FactoryBot.build(:article) }
