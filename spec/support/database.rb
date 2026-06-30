@@ -1,21 +1,23 @@
 # frozen_string_literal: true
 
-ENV['DB'] ||= 'postgres'
+ENV['DATABASE_ADAPTER'] ||= 'postgres'
 
-conn_params = { database: :rating_test, host: '127.0.0.1' }
+password = ENV.fetch('DATABASE_PASSWORD', '')
 
-case ENV.fetch('DB')
+conn_params = { database: :rating_test, host: '127.0.0.1', password: }
+
+case ENV.fetch('DATABASE_ADAPTER')
 when 'mysql'
   require 'mysql2'
 
-  client = Mysql2::Client.new(host: conn_params[:host], username: :root)
+  client = Mysql2::Client.new(host: conn_params[:host], password:, username: :root)
 
   conn_params[:adapter] = 'mysql2'
   conn_params[:username] = :root
 when 'postgres'
   require 'pg'
 
-  client = PG::Connection.new(host: conn_params[:host], password: '', user: :postgres)
+  client = PG::Connection.new(host: conn_params[:host], password:, user: :postgres)
 
   conn_params[:adapter] = :postgresql
   conn_params[:username] = :postgres
