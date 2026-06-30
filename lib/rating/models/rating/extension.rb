@@ -37,7 +37,17 @@ module Rating
       end
 
       def rating(scope: nil)
-        rating_records.find_by scopeable: scope
+        if rating_records.loaded?
+          scopeable_id = scope&.id
+          clazz = scope&.class&.base_class
+          scopeable_type = clazz&.name
+
+          rating_records.detect do |record|
+            record.scopeable_id == scopeable_id && record.scopeable_type == scopeable_type
+          end
+        else
+          rating_records.find_by(scopeable: scope)
+        end
       end
 
       def rating_warm_up(scoping: nil)
