@@ -1,3 +1,9 @@
+## v2.1.0
+
+### Updates
+
+- `rating(scope:)` no longer triggers an N+1 when the `rating_records` association is already loaded.
+
 ## v2.0.0
 
 ### Break Changes
